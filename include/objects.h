@@ -1,0 +1,20 @@
+#include "callback.h"
+/*#include "objects/player.h"*/
+#include "objects/camera_o.h"
+/*#include "objects/zztoop.h"
+#include "objects/tank.h"
+#include "objects/rocket.h"
+#include "objects/bullet.h"*/
+#include "objects/goal.h"
+#include "objects/paddle.h"
+#include "objects/paddle_md2.h"
+#include "objects/ball.h"
+#include "objects/speedup.h"
+#include "objects/slowdown.h"
+#include "objects/bonusspawn.h"
+#include "objects/hyper.h"
+#include "objects/func_rotating.h"
+#include "objects/water.h"
+#include "objects/func_breakable.h"
+
+void objects_init();

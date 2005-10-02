@@ -1,0 +1,70 @@
+/* goal.cc - DCBlap goal object
+ * Copyright (c) 2001-2003 Sam Steele
+ *
+ * This file is part of DCBlap.
+ *
+ * DCBlap is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * DCBlap is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
+ */
+#include <stdlib.h>
+#include <string.h>
+#include "entity.h"
+#include "callback.h"
+#include "objects.h"
+#include "camera.h"
+#include "hud.h"
+#include "text.h"
+
+extern struct entity *wld;
+
+void goal_create(struct entity *me) {
+  me->arg2=atoi(get_prop(me,"num"));
+  me->arg3=100;
+}
+
+void goal_callback(struct entity *me) {
+  char txt[100];
+
+  if(me->paused==0&&wld->arg3>0&&me->arg1>=wld->arg3) {
+    broadcast_message(me,"win");
+    sprintf(txt,"Player %i wins!",me->arg2);
+    set_hud(0,320-(txt_width(txt)/2),240-16,txt,1,1,1);
+    set_hud(1,320-(txt_width("Press Start")/2),244,"Press Start",1,1,1);
+  }
+  if(me->paused==1) return;
+  sprintf(txt,"Player %i: %i",me->arg2,me->arg1);
+  switch(me->arg2) {
+  case 1:
+    set_hud(0,30,30,txt,1,1,1);
+    break;
+  case 2:
+    set_hud(1,440,30,txt,1,1,1);
+    break;
+  }
+  sprintf(txt,"Health: %i%%",me->arg3);
+  switch(me->arg2) {
+  case 1:
+    set_hud(5,30,55,txt,1,1,1);
+    break;
+  case 2:
+    set_hud(6,440,55,txt,1,1,1);
+    break;
+  }
+}
+
+void goal_message(struct entity *me, struct entity *them, char *message) {
+  if(!strcmp(message,"win")) {
+    pause_world(1);
+  }
+}

@@ -1,0 +1,1 @@
+void do_collide(struct entity *ent1);
