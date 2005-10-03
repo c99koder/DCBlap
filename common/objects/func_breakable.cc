@@ -49,19 +49,19 @@ void func_break_create(struct entity *me) {
 extern struct entity *g1;
 extern struct entity *g2;
 
-void func_break_update(struct entity *me) {
+void func_break_update(struct entity *me, float gt) {
 	struct entity *ent2=0;
   char txt[100];
   int num;
   if(me->arg4>0) {
-    switch(me->arg3) {
+    switch((int)me->arg3) {
     case 1: //fade in
-      me->alpha=(50.0f-(float)me->arg4)/50.0f;
-      me->arg4--;
+      me->alpha=(50.0f-(float)me->arg4)/50.0f * gt * 40;
+      me->arg4-= gt * 40;
       break;
     case 2: //drop from sky
-      me->y=me->arg5+(me->arg4*10);
-      me->arg4--;
+      me->y=me->arg5+(me->arg4*10) * gt * 40;
+      me->arg4-= gt * 40;
     }
   } else {
     me->alpha=1.0f;
@@ -117,7 +117,7 @@ void func_break_message(struct entity *me, struct entity *them, char *message) {
   //printf("Message %s recieved by a %s\n",message,them->type);
   if(!strcmp("thud",message)&&!strcmp("ball",them->type)) {
     me->arg1--;
-    switch(them->arg7) {
+    switch((int)them->arg7) {
     case 1:
       g1->arg1++;
       break;

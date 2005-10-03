@@ -38,13 +38,13 @@ void goal_callback(struct entity *me) {
 
   if(me->paused==0&&wld->arg3>0&&me->arg1>=wld->arg3) {
     broadcast_message(me,"win");
-    sprintf(txt,"Player %i wins!",me->arg2);
+    sprintf(txt,"Player %0.f wins!",me->arg2);
     set_hud(0,320-(txt_width(txt)/2),240-16,txt,1,1,1);
     set_hud(1,320-(txt_width("Press Start")/2),244,"Press Start",1,1,1);
   }
   if(me->paused==1) return;
-  sprintf(txt,"Player %i: %i",me->arg2,me->arg1);
-  switch(me->arg2) {
+  sprintf(txt,"Player %0.f: %0.f",me->arg2,me->arg1);
+  switch((int)me->arg2) {
   case 1:
     set_hud(0,30,30,txt,1,1,1);
     break;
@@ -52,15 +52,15 @@ void goal_callback(struct entity *me) {
     set_hud(1,440,30,txt,1,1,1);
     break;
   }
-  sprintf(txt,"Health: %i%%",me->arg3);
-  switch(me->arg2) {
+  /*sprintf(txt,"Health: %f%%",me->arg3);
+  switch((int)me->arg2) {
   case 1:
     set_hud(5,30,55,txt,1,1,1);
     break;
   case 2:
     set_hud(6,440,55,txt,1,1,1);
     break;
-  }
+  }*/
 }
 
 void goal_message(struct entity *me, struct entity *them, char *message) {

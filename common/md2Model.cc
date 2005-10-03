@@ -36,6 +36,23 @@
 #include <stdlib.h>
 #include "md2Model.h"
 
+#include <algorithm> //required for std::swap
+
+#define ByteSwap5(x) ByteSwap((unsigned char *) &x,sizeof(x))
+
+inline void ByteSwap(unsigned char * b, int n)
+{
+#ifdef MACOS
+	register int i = 0;
+	register int j = n-1;
+	while (i<j)
+	{
+		std::swap(b[i], b[j]);
+		i++, j--;
+	}
+#endif
+}
+
 extern char tex_theme_dir[100];
 
 md2Model::md2Model()
@@ -168,7 +185,28 @@ int md2Model::md2ReadHeader(byte *buffer,pmd2Header phead)
 {
 	memcpy(phead,buffer,sizeof(*phead));
 
-	if (phead->magic != MD2_MAGIC_NO)
+	ByteSwap5(phead->magic);
+	ByteSwap5(phead->version);
+	ByteSwap5(phead->skinWidth);
+	ByteSwap5(phead->skinHeight);
+	ByteSwap5(phead->frameSize);
+		
+	ByteSwap5(phead->numSkins);
+	ByteSwap5(phead->numVertices);
+	ByteSwap5(phead->numTexCoords);
+	ByteSwap5(phead->numTriangles);
+	ByteSwap5(phead->numGlCommands);
+	ByteSwap5(phead->numFrames);
+		
+	ByteSwap5(phead->offsetSkins);
+	ByteSwap5(phead->offsetTexCoord);
+	ByteSwap5(phead->offsetTriangles);
+	ByteSwap5(phead->offsetFrames);
+	ByteSwap5(phead->offsetGlCommands);
+	ByteSwap5(phead->offsetEnd);
+		
+		
+		if (phead->magic != MD2_MAGIC_NO)
 		return 1;
 
 	return 0;
@@ -235,6 +273,15 @@ void md2Model::md2LoadFrames()
 		buf_t+= FRAME_HEADER_SIZE;
 		memcpy(m_frameData[index].pvertices, buf_t, frameVertSize);
 		buf_t+=frameVertSize;
+		for(int index2=0; index2<3; index2++) {
+			ByteSwap5(m_frameData[index].scale[index2]);
+			ByteSwap5(m_frameData[index].translate[index2]);
+		}
+		for(int index2=0; index2<m_header.numVertices; index2++) {
+			for(int index3=0; index3<3; index3++) {
+				ByteSwap5(m_frameData[index].pvertices[index2].vertex[index3]);
+			}
+		}
 	}
 }
 
@@ -245,12 +292,19 @@ void md2Model::md2LoadTriangles()
 {
 	byte	*buf_t		= m_buffer+ m_header.offsetTriangles;
 	long	totalsize	= m_header.numTriangles * sizeof(md2Triangle);
-
+	
 	m_triData = (pmd2Triangle)md2Malloc(totalsize);
 	if (!m_triData)
 		return;
 
 	memcpy(m_triData, buf_t, totalsize);
+
+	for(int index=0; index<m_header.numTriangles; index++) {
+		for(int index2=0; index2<3; index2++) {
+			ByteSwap5(m_triData[index].vertexIndices[index2]);
+			ByteSwap5(m_triData[index].textureIndices[index2]);
+		}
+	}
 }
 
 /*
@@ -267,6 +321,11 @@ void md2Model::md2LoadTextureCoord()
 		return;
 
 	memcpy(m_texData,buf_t,totalsize);
+	
+	for(index=0; index<m_header.numTexCoords;index++) {
+		ByteSwap5(m_texData[index].s);
+		ByteSwap5(m_texData[index].t);
+	}
 }
 
 /*

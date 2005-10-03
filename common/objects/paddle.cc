@@ -67,9 +67,9 @@ void paddle_create(struct entity *me) {
 	}
   sprintf(tmp,"%f %f %f",me->x, me->z, me->y);
   set_prop(me,"origin",tmp);
-  if(thinker[me->arg1-1]==0) {
+  if(thinker[(int)me->arg1-1]==0) {
     me->arg2=1;
-    thinker[me->arg1-1]=1;
+    thinker[(int)me->arg1-1]=1;
   }
   if(get_prop(me,"intro_effect")!=NULL) {
     me->arg6=atoi(get_prop(me,"intro_effect"));
@@ -86,27 +86,28 @@ bool sys_render_begin();
 void sys_render_finish();
 void render_bg(float a);
 
-void paddle_update(struct entity *me) {
+void paddle_update(struct entity *me, float gt) {
   char buf[100];
   float x=0,y=0;
+	static float tt=0;
 	if(ball==NULL) ball=find_ent_by_type("ball");
   if(me->arg7>0) {
-    switch(me->arg6) {
+    switch((int)me->arg6) {
     case 1: //fade in
       me->alpha=(50.0f-(float)me->arg7)/50.0f;
-      me->arg7--;
+      me->arg7-=gt * 40;
       break;
     case 2: //drop from sky
       me->y=me->arg8+(me->arg7*10);
-      me->arg7--;
+      me->arg7-=gt * 40;
       break;
     case 3: //fade out
       me->alpha=(me->arg7)/50.0f;
-      me->arg7--;
+      me->arg7-=gt * 40;
       break;
     case 4: //fly into sky
       me->y=me->arg8+((50-me->arg7)*10);
-      me->arg7--;
+      me->arg7-=gt * 40;
       break;
     case 5: //winning spin
       me->anim_end=me->anim_start;
@@ -194,46 +195,48 @@ void paddle_update(struct entity *me) {
     }
 #endif
   } else {*/
-    if(me->arg2==1) {
-      switch(me->arg5) {
+		tt+=gt;
+    if(me->arg2==1 && tt > 0.1) {
+      switch((int)me->arg5) {
       case 0:
 				if((int)ball->z>(int)me->z) {
-					thinker[me->arg1-1]=me->arg4+(rand()%2);
+					thinker[(int)me->arg1-1]=me->arg4+(rand()%2);
 				}
 				if((int)ball->z<(int)me->z) {
-					thinker[me->arg1-1]=-(me->arg4+(rand()%2));
+					thinker[(int)me->arg1-1]=-(me->arg4+(rand()%2));
 				}
         break;
       case 1:
 				if((int)ball->y>(int)me->y) {
-					thinker[me->arg1-1]=me->arg4+(rand()%2);
+					thinker[(int)me->arg1-1]=me->arg4+(rand()%2);
 				}
 				if((int)ball->y<(int)me->y) {
-					thinker[me->arg1-1]=-(me->arg4+(rand()%2));
+					thinker[(int)me->arg1-1]=-(me->arg4+(rand()%2));
 				}
         break;
       case 2:
         if((int)ball->x>(int)me->x) {
-					thinker[me->arg1-1]=me->arg4+(rand()%2);
+					thinker[(int)me->arg1-1]=me->arg4+(rand()%2);
 				}
 				if((int)ball->x<(int)me->x) {
-					thinker[me->arg1-1]=-(me->arg4+(rand()%2));
+					thinker[(int)me->arg1-1]=-(me->arg4+(rand()%2));
 				}
         break;
 			}
+			tt=0;
 		}
   //}
   if(me->paused==1) return;
   me->alpha=1.0f;
-	switch(me->arg5) {
+	switch((int)me->arg5) {
   case 0:
-		me->z+=thinker[me->arg1-1];
+		me->z+=thinker[(int)me->arg1-1] * gt * 40;
     break;
   case 1:
-		me->y+=thinker[me->arg1-1];
+		me->y+=thinker[(int)me->arg1-1] * gt * 40;
     break;
   case 2:
-    me->x+=thinker[me->arg1-1];
+    me->x+=thinker[(int)me->arg1-1] * gt * 40;
     break;
 	}
   //if(me->arg1==1) put_camera(me->x,me->y+5,me->z,me->xrot,me->yrot-90,me->zrot);

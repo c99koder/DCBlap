@@ -72,9 +72,9 @@ void paddlemd2_create(struct entity *me) {
 	}
   sprintf(tmp,"%f %f %f",me->x, me->z, me->y);
   set_prop(me,"origin",tmp);
-  if(thinker[me->arg1-1]==0) {
+  if(thinker[(int)me->arg1-1]==0) {
     me->arg2=1;
-    thinker[me->arg1-1]=1;
+    thinker[(int)me->arg1-1]=1;
   }
   if(get_prop(me,"intro_effect")!=NULL) {
     me->arg6=atoi(get_prop(me,"intro_effect"));
@@ -95,7 +95,7 @@ void paddlemd2_update(struct entity *me) {
   float x=0,y=0;
 	if(ball==NULL) ball=find_ent_by_type("ball");
   if(me->arg7>0) {
-    switch(me->arg6) {
+    switch((int)me->arg6) {
     case 1: //fade in
       me->alpha=(50.0f-(float)me->arg7)/50.0f;
       me->arg7--;
@@ -204,29 +204,29 @@ void paddlemd2_update(struct entity *me) {
 #endif
   } else {*/
     if(me->arg2==1) {
-      switch(me->arg5) {
+      switch((int)me->arg5) {
       case 0:
 				if((int)ball->z>(int)me->z) {
-					thinker[me->arg1-1]=me->arg4+(rand()%2);
+					thinker[(int)me->arg1-1]=me->arg4+(rand()%2);
 				}
 				if((int)ball->z<(int)me->z) {
-					thinker[me->arg1-1]=-(me->arg4+(rand()%2));
+					thinker[(int)me->arg1-1]=-(me->arg4+(rand()%2));
 				}
         break;
       case 1:
 				if((int)ball->y>(int)me->y) {
-					thinker[me->arg1-1]=me->arg4+(rand()%2);
+					thinker[(int)me->arg1-1]=me->arg4+(rand()%2);
 				}
 				if((int)ball->y<(int)me->y) {
-					thinker[me->arg1-1]=-(me->arg4+(rand()%2));
+					thinker[(int)me->arg1-1]=-(me->arg4+(rand()%2));
 				}
         break;
       case 2:
         if((int)ball->x>(int)me->x) {
-					thinker[me->arg1-1]=me->arg4+(rand()%2);
+					thinker[(int)me->arg1-1]=me->arg4+(rand()%2);
 				}
 				if((int)ball->x<(int)me->x) {
-					thinker[me->arg1-1]=-(me->arg4+(rand()%2));
+					thinker[(int)me->arg1-1]=-(me->arg4+(rand()%2));
 				}
         break;
 			}
@@ -234,15 +234,15 @@ void paddlemd2_update(struct entity *me) {
   //}
   if(me->paused==1) return;
   me->alpha=1.0f;
-	switch(me->arg5) {
+	switch((int)me->arg5) {
   case 0:
-		me->z+=thinker[me->arg1-1];
+		me->z+=thinker[(int)me->arg1-1];
     break;
   case 1:
-		me->y+=thinker[me->arg1-1];
+		me->y+=thinker[(int)me->arg1-1];
     break;
   case 2:
-    me->x+=thinker[me->arg1-1];
+    me->x+=thinker[(int)me->arg1-1];
     break;
 	}
   //if(me->arg1==1) put_camera(me->x,me->y+5,me->z,me->xrot,me->yrot-90,me->zrot);

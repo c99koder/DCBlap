@@ -3,7 +3,7 @@
 #include "entity.h"
 
 typedef void (*create_callback)(struct entity *me);
-typedef void (*update_callback)(struct entity *);
+typedef void (*update_callback)(struct entity *, float gt);
 typedef void (*message_callback)(struct entity *to, struct entity *from, char *msg);
 typedef void (*reset_callback)(void);
 

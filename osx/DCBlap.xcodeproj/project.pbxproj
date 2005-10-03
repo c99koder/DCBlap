@@ -19,7 +19,6 @@
 		22752C8C08F02BC400DCB98C /* ball.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C6808F02BC400DCB98C /* ball.cc */; };
 		22752C8D08F02BC400DCB98C /* bonusspawn.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C6A08F02BC400DCB98C /* bonusspawn.cc */; };
 		22752C8F08F02BC400DCB98C /* camera_o.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C6E08F02BC400DCB98C /* camera_o.cc */; };
-		22752C9008F02BC400DCB98C /* func_breakable.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C7008F02BC400DCB98C /* func_breakable.cc */; };
 		22752C9108F02BC400DCB98C /* func_rotating.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C7208F02BC400DCB98C /* func_rotating.cc */; };
 		22752C9208F02BC400DCB98C /* goal.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C7408F02BC400DCB98C /* goal.cc */; };
 		22752C9308F02BC400DCB98C /* hyper.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C7608F02BC400DCB98C /* hyper.cc */; };
@@ -32,6 +31,7 @@
 		22752CDC08F0316100DCB98C /* texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 22752CDB08F0316100DCB98C /* texture.mm */; };
 		22752CFB08F0336500DCB98C /* game.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752CFA08F0336500DCB98C /* game.cc */; };
 		22752F4208F0364B00DCB98C /* data in Resources */ = {isa = PBXBuildFile; fileRef = 22752D6208F0364A00DCB98C /* data */; };
+		22C6219C08F06BCE008BCA18 /* func_breakable.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22C6219B08F06BCE008BCA18 /* func_breakable.cc */; };
 		565FEC4F07B179CA00C4E23A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565FEC3907B179A100C4E23A /* Cocoa.framework */; };
 		565FEC5007B179CE00C4E23A /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 565FEC3307B1797000C4E23A /* main.mm */; };
 		565FEC5107B179D300C4E23A /* MyOpenGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 565FEC3107B1796900C4E23A /* MyOpenGLView.mm */; };
@@ -73,7 +73,6 @@
 		22752C6B08F02BC400DCB98C /* bonusspawn.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = bonusspawn.h; path = ../common/objects/bonusspawn.h; sourceTree = SOURCE_ROOT; };
 		22752C6E08F02BC400DCB98C /* camera_o.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = camera_o.cc; path = ../common/objects/camera_o.cc; sourceTree = SOURCE_ROOT; };
 		22752C6F08F02BC400DCB98C /* camera_o.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = camera_o.h; path = ../common/objects/camera_o.h; sourceTree = SOURCE_ROOT; };
-		22752C7008F02BC400DCB98C /* func_breakable.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = func_breakable.cc; path = ../common/objects/func_breakable.cc; sourceTree = SOURCE_ROOT; };
 		22752C7108F02BC400DCB98C /* func_breakable.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = func_breakable.h; path = ../common/objects/func_breakable.h; sourceTree = SOURCE_ROOT; };
 		22752C7208F02BC400DCB98C /* func_rotating.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = func_rotating.cc; path = ../common/objects/func_rotating.cc; sourceTree = SOURCE_ROOT; };
 		22752C7308F02BC400DCB98C /* func_rotating.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = func_rotating.h; path = ../common/objects/func_rotating.h; sourceTree = SOURCE_ROOT; };
@@ -108,9 +107,10 @@
 		22752CF208F032AE00DCB98C /* texture.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = texture.h; path = ../include/texture.h; sourceTree = SOURCE_ROOT; };
 		22752CF308F032AE00DCB98C /* utils.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = utils.h; path = ../include/utils.h; sourceTree = SOURCE_ROOT; };
 		22752CF408F032AE00DCB98C /* word.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = word.h; path = ../include/word.h; sourceTree = SOURCE_ROOT; };
-		22752CF908F0336500DCB98C /* game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = game.h; path = ../common/game.h; sourceTree = SOURCE_ROOT; };
 		22752CFA08F0336500DCB98C /* game.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = game.cc; path = ../common/game.cc; sourceTree = SOURCE_ROOT; };
 		22752D6208F0364A00DCB98C /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../data; sourceTree = SOURCE_ROOT; };
+		22C6211808F0608B008BCA18 /* game.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = game.h; path = ../include/game.h; sourceTree = SOURCE_ROOT; };
+		22C6219B08F06BCE008BCA18 /* func_breakable.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = func_breakable.cc; path = ../common/objects/func_breakable.cc; sourceTree = SOURCE_ROOT; };
 		565FEC3107B1796900C4E23A /* MyOpenGLView.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = MyOpenGLView.mm; sourceTree = "<group>"; };
 		565FEC3207B1796900C4E23A /* MyOpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MyOpenGLView.h; sourceTree = SOURCE_ROOT; };
 		565FEC3307B1797000C4E23A /* main.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
@@ -157,6 +157,7 @@
 		22752C5008F02B8200DCB98C /* Include */ = {
 			isa = PBXGroup;
 			children = (
+				22C6211808F0608B008BCA18 /* game.h */,
 				22752CE508F032AE00DCB98C /* callback.h */,
 				22752CE608F032AE00DCB98C /* camera.h */,
 				22752CE708F032AE00DCB98C /* collide.h */,
@@ -172,7 +173,6 @@
 				22752CF208F032AE00DCB98C /* texture.h */,
 				22752CF308F032AE00DCB98C /* utils.h */,
 				22752CF408F032AE00DCB98C /* word.h */,
-				22752CF908F0336500DCB98C /* game.h */,
 			);
 			name = Include;
 			sourceTree = "<group>";
@@ -186,7 +186,7 @@
 				22752C6B08F02BC400DCB98C /* bonusspawn.h */,
 				22752C6E08F02BC400DCB98C /* camera_o.cc */,
 				22752C6F08F02BC400DCB98C /* camera_o.h */,
-				22752C7008F02BC400DCB98C /* func_breakable.cc */,
+				22C6219B08F06BCE008BCA18 /* func_breakable.cc */,
 				22752C7108F02BC400DCB98C /* func_breakable.h */,
 				22752C7208F02BC400DCB98C /* func_rotating.cc */,
 				22752C7308F02BC400DCB98C /* func_rotating.h */,
@@ -390,7 +390,6 @@
 				22752C8C08F02BC400DCB98C /* ball.cc in Sources */,
 				22752C8D08F02BC400DCB98C /* bonusspawn.cc in Sources */,
 				22752C8F08F02BC400DCB98C /* camera_o.cc in Sources */,
-				22752C9008F02BC400DCB98C /* func_breakable.cc in Sources */,
 				22752C9108F02BC400DCB98C /* func_rotating.cc in Sources */,
 				22752C9208F02BC400DCB98C /* goal.cc in Sources */,
 				22752C9308F02BC400DCB98C /* hyper.cc in Sources */,
@@ -402,6 +401,7 @@
 				22752C9D08F02BC400DCB98C /* water.cc in Sources */,
 				22752CDC08F0316100DCB98C /* texture.mm in Sources */,
 				22752CFB08F0336500DCB98C /* game.cc in Sources */,
+				22C6219C08F06BCE008BCA18 /* func_breakable.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

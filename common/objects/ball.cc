@@ -61,7 +61,7 @@ void ball_create(struct entity *me) {
 #ifdef WIN32
   HRESULT hr;
 #endif
-  /*me->model=new md2Model;
+  me->model=new md2Model;
   if(get_prop(me,"model")!=NULL) {
     if(find_tex(get_prop(me,"texture"))==-1) load_texture(get_prop(me,"texture"),next_tex_id());
     me->model->Load(get_prop(me,"model"));
@@ -82,16 +82,16 @@ void ball_create(struct entity *me) {
 	} else {
 		me->arg3=3;
 		me->arg6=1;
-	}*/
+	}
 	if(get_prop(me,"orientation")) {
 		me->arg5=atoi(get_prop(me,"orientation"));
 	}
-  /*if(get_prop(me,"spin")) {
+  if(get_prop(me,"spin")) {
     ball_spin=atoi(get_prop(me,"spin"));
   } else {
     ball_spin=1;
-  }*/
-  ball_spin=0;
+  }
+  //ball_spin=0;
   switch((int)me->yrot) {
   case 0:
     me->arg1=me->arg3;
@@ -135,23 +135,23 @@ extern SOCKET net_socket;
 extern bool net_host;
 #endif
 
-void ball_update(struct entity *me) {
+void ball_update(struct entity *me, float gt) {
   static int cnt=0;
   char buf[100];
   if(ball_spin) {
-    me->yrot+=2;
-    me->xrot+=2;
+    me->yrot+=6 * gt * 40;
+    me->xrot+=6 * gt * 40;
     if(me->yrot>360) me->yrot=0;
     if(me->xrot>360) me->xrot=0;
   }
 
   if(me->paused==1) return;
 
-  me->x+=me->arg1;
+  me->x+=me->arg1 * gt * 40;
   if(me->arg5==0) {
-    me->z+=me->arg2;
+    me->z+=me->arg2 * gt * 40;
   } else {
-    me->y+=me->arg2;
+    me->y+=me->arg2 * gt * 40;
   }
 #ifdef WIN32
   cnt++;
@@ -174,8 +174,8 @@ void ball_message(struct entity *me, struct entity *them, char *message) {
 		if(me->arg6==1) me->deleted=1;
     make_coordinates(get_prop(me,"origin"),&me->x,&me->y,&me->z); //reset position
     make_coordinates(get_prop(me,"angles"),&me->xrot,&me->zrot,&me->yrot); //reset position
-    //me->anim_start=me->model->anim_start("stand");
-    //me->anim_end=me->model->anim_end("stand");
+    me->anim_start=me->model->anim_start("stand");
+    me->anim_end=me->model->anim_end("stand");
     me->blendpos=0;
     switch((int)me->yrot) {
     case 0:

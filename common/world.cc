@@ -56,7 +56,7 @@
 
 #define ByteSwap5(x) ByteSwap((unsigned char *) &x,sizeof(x))
 
-void ByteSwap(unsigned char * b, int n)
+inline void ByteSwap(unsigned char * b, int n)
 {
 #ifdef MACOS
 	register int i = 0;
@@ -605,7 +605,7 @@ void update_net() {
 #endif
 }
 
-void update_world() {
+void update_world(float gt) {
   struct entity *cur_ent=entity_list;
   struct entity *ent2;
   char buf[100];
@@ -645,7 +645,7 @@ void update_world() {
 		oy=cur_ent->y;
 		oz=cur_ent->z;
 		//printf("Running update callback for %s\n",cur_ent->type);
-    if(cur_ent->update) cur_ent->update(cur_ent);
+    if(cur_ent->update) cur_ent->update(cur_ent, gt);
     //if(net_socket==-1||net_host==1) {
 		if(ox!=cur_ent->x || oy!=cur_ent->y || oz!=cur_ent->z) {
 			//printf("Doing collision tests..\n");

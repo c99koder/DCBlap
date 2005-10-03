@@ -49,9 +49,9 @@
 {
 	texture_init();
 	objects_init();
-	text_init("helvetica_bold.txf",16);
-	game_init("Traditional/classic.wld");
-	update_world();
+	text_init("helvetica_bold.txf",20);
+	game_init("BlapOut/classic.wld");
+	update_world(0);
 	
 	glEnable(GL_TEXTURE_2D);
 	// Enable Texture Mapping
@@ -80,7 +80,12 @@
 
 - (void) awakeFromNib
 {
-	color_index = alphaIndex;
+	timer = [[NSTimer
+                scheduledTimerWithTimeInterval: (1.0f / 120.0f)
+                                        target: self
+																			selector: @selector( updateGame )
+																			userInfo: nil
+																			 repeats: YES] retain];
 }
 
 /*
@@ -100,13 +105,9 @@
 	[[self openGLContext] flushBuffer];
 }
 
-/*
-	The UI buttons are targetted to call this action method:
-*/
-
-- (IBAction) setClearColor: (id) sender
+- (void) updateGame
 {
-	color_index = [sender tag];
+	update_world([timer timeInterval]);
 	
 	[self setNeedsDisplay: YES];
 }

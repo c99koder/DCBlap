@@ -30,13 +30,13 @@ void camera_create(struct entity *me) {
   set_status_text("Ready?",1.0f,1.0f,1.0f);
 }
 
-void camera_callback(struct entity *me) {
-  if(me->arg1>0) me->arg1--;
+void camera_callback(struct entity *me, float gt) {
+  if(me->arg1>0) me->arg1-=gt * 40;
   if(!cam_no_move) {
     if(me->arg1>0) {
       camera_x=me->x;
-      camera_y=me->y+(((float)me->arg1/60.0f)*200.0f);
-      camera_z=me->z-(((float)me->arg1/60.0f)*200.0f);
+      camera_y=me->y+(((float)me->arg1/60.0f)*200.0f) * gt * 40;
+      camera_z=me->z-(((float)me->arg1/60.0f)*200.0f) * gt * 40;
       camera_xrot=me->xrot;//-me->arg1*((float)me->xrot/60.0f);
       camera_yrot=me->yrot-90;
       camera_zrot=me->zrot;

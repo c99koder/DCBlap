@@ -76,10 +76,10 @@ void bonus_create(struct entity *me) {
 #endif
 }
 
-void bonus_update(struct entity *me) {
+void bonus_update(struct entity *me, float gt) {
 	struct entity *ent2=0;
   if(me->paused==1) return;
-	if(enable_powerups && (rand()%300==0)) {
+	if(enable_powerups && (rand()%800==0)) {
 		switch(rand()%5) {
 			case 0:
 			case 3:
