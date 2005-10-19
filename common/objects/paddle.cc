@@ -23,6 +23,13 @@
 #ifdef DREAMCAST
 #include <kos.h>
 #endif
+#ifdef TIKI
+#include <Tiki/tiki.h>
+#include <Tiki/texture.h>
+
+using namespace Tiki;
+using namespace Tiki::GL;
+#endif
 #include <string.h>
 #include <stdlib.h>
 #include "entity.h"

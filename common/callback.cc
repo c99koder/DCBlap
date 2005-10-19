@@ -17,10 +17,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
-#include "entity.h"
-#include "callback.h"
+#ifdef TIKI
+#include <Tiki/tiki.h>
+#include <Tiki/texture.h>
+
+using namespace Tiki;
+using namespace Tiki::GL;
+#endif
 #include <string.h>
 #include <stdlib.h>
+#include "entity.h"
+#include "callback.h"
 
 struct callback_list_node {
   char *type;

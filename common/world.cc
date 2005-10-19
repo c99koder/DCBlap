@@ -41,10 +41,16 @@
 #ifdef LINUX
 #include <SDL/SDL.h>
 #endif
+#ifdef TIKI
+#include <Tiki/tiki.h>
+#include <Tiki/texture.h>
+
+using namespace Tiki;
+using namespace Tiki::GL;
+#endif
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
-#include "texture.h"
 #include "camera.h"
 #include "entity.h"
 #include "callback.h"
@@ -53,12 +59,16 @@
 #include "utils.h"
 
 #include <algorithm> //required for std::swap
+#include <vector>
 
 #define ByteSwap5(x) ByteSwap((unsigned char *) &x,sizeof(x))
 
 inline void ByteSwap(unsigned char * b, int n)
 {
 #ifdef MACOS
+#ifdef __i386__
+#warning X86 not swapping
+#else
 	register int i = 0;
 	register int j = n-1;
 	while (i<j)
@@ -67,7 +77,20 @@ inline void ByteSwap(unsigned char * b, int n)
 		i++, j--;
 	}
 #endif
+#endif
 }
+
+//std::vector<Texture> texture_list;
+Texture *texture_list[20];
+
+void free_world_textures() {
+/*	std::vector<Texture>::iterator tex_iter;
+	for(tex_iter = texture_list.begin(); tex_iter != texture_list.end(); tex_iter++) {
+		(*tex_iter).destroy();
+		tex_iter=texture_list.erase(tex_iter);
+	}*/
+}
+
 
 void draw_md2(char *filename, int texid, float mx, float my, float mz, float rx, float ry, float rz, int frame1, int frame2, int blendpos, int blendcount);
 int ent_cnt=0;
@@ -123,7 +146,7 @@ void destroy_world() {
     //printf("Free ent..\n");
     free(prev);
   }
-  clear_texture_cache();
+  free_world_textures();
   run_reset_callbacks();
   entity_list=NULL;
   //printf("--end world free--\n");
@@ -160,6 +183,7 @@ struct entity *create_new_entity(char *type, float x, float y, float z, float xr
   cur_ent->poly_list=NULL;
   cur_ent->param_list=NULL;
   cur_ent->model=NULL;
+	cur_ent->tex=NULL;
   cur_ent->x=x;
   cur_ent->y=y;
   cur_ent->z=z;
@@ -218,7 +242,8 @@ void load_world(char *filename) {
   struct param *prev_param=NULL;
   struct poly *cur_poly=NULL;
   struct poly *prev_poly=NULL;
-  unsigned int ent,pol,vert;
+  unsigned int ent,pol,vert,tex_id;
+	Texture *tex;
   
   //fd=open(filename,O_RDONLY);
 	//if(fd==-1) {
@@ -233,16 +258,21 @@ void load_world(char *filename) {
   for(i=0;i<texcount;i++) {
     k=0;
     do {
-      fs_read(fd,&texname[k],sizeof(char));
+      read(fd,&texname[k],sizeof(char));
+			if(texname[k] >= 'A' && texname[k] <= 'Z') texname[k] += 32;
       k++;
     } while(texname[k-1]!='\0');
-    load_texture(texname,i);
+    //load_texture(texname,i);
+		strcat(texname,".png");
+		tex=new Texture;
+		tex->loadFromFile(texname,0);
+		texture_list[i]=tex;
   }
   fs_read(fd,&entcount,sizeof(unsigned int));
 	ByteSwap5(entcount);
 	printf("Entities: %i\n",entcount);
   for(ent=0;ent<entcount;ent++) {
-    printf("Loading entity %i...\n",ent);
+    //printf("Loading entity %i...\n",ent);
     cur_ent=(struct entity *)malloc(sizeof(struct entity));
     if(prev_ent==NULL) {
       entity_list=cur_ent;
@@ -265,7 +295,7 @@ void load_world(char *filename) {
     } while(texname[k-1]!='\0');
     cur_ent->type=(char *)malloc(strlen(texname)+1);
     strcpy(cur_ent->type,texname);
-    printf("Type: %s\n",texname);
+    //printf("Type: %s\n",texname);
     fs_read(fd,&paramcount,sizeof(unsigned int));
 		ByteSwap5(paramcount);
     cur_ent->param_list=NULL;
@@ -292,7 +322,7 @@ void load_world(char *filename) {
       cur_param->value=(char *)malloc(strlen(texname)+1);
       strcpy(cur_param->value,texname);
       cur_param->next=NULL;
-      printf("%s = %s\n",cur_param->name,cur_param->value);
+      //printf("%s = %s\n",cur_param->name,cur_param->value);
       prev_param=cur_param;
       cur_param=cur_param->next;
     }
@@ -321,11 +351,12 @@ void load_world(char *filename) {
       } else {
 	prev_poly->next=cur_poly;
       }
-      fs_read(fd,&cur_poly->tex_id,sizeof(unsigned int));
-			ByteSwap5(cur_poly->tex_id);
+      fs_read(fd,&tex_id,sizeof(unsigned int));
+			ByteSwap5(tex_id);
+			cur_poly->tex=texture_list[tex_id];
       fs_read(fd,&cur_poly->vert_count,sizeof(unsigned int));
 			ByteSwap5(cur_poly->vert_count);
-printf("Polygon %i: texid: %i vert_count: %i\n",pol,cur_poly->tex_id,cur_poly->vert_count);
+//printf("Polygon %i: texid: %i vert_count: %i\n",pol,cur_poly->tex_id,cur_poly->vert_count);
       for(vert=0;vert<cur_poly->vert_count;vert++) {
 	fs_read(fd,(char *)&cur_poly->point[vert].x,sizeof(float));
 	ByteSwap5(cur_poly->point[vert].x);
@@ -364,7 +395,7 @@ printf("Polygon %i: texid: %i vert_count: %i\n",pol,cur_poly->tex_id,cur_poly->v
       //printf("PointClass detected\n");
       cur_ent->poly_list=NULL;
     } else {
-      printf("Adjusting SolidClass size\n");
+      //printf("Adjusting SolidClass size\n");
       cur_ent->x=xmin+((xmax-xmin)/2);
       cur_ent->y=ymin+((ymax-ymin)/2);
       cur_ent->z=zmin+((zmax-zmin)/2);
@@ -374,7 +405,7 @@ printf("Polygon %i: texid: %i vert_count: %i\n",pol,cur_poly->tex_id,cur_poly->v
       zmin-=cur_ent->z; zmax-=cur_ent->z;
       cur_poly=cur_ent->poly_list;
       while(cur_poly!=NULL) {
-        printf("Poly has %i verts\n",cur_poly->vert_count);
+        //printf("Poly has %i verts\n",cur_poly->vert_count);
         for(vert=0;vert<cur_poly->vert_count;vert++) {
           cur_poly->point[vert].x-=cur_ent->x;
           cur_poly->point[vert].y-=cur_ent->y;
@@ -382,7 +413,7 @@ printf("Polygon %i: texid: %i vert_count: %i\n",pol,cur_poly->tex_id,cur_poly->v
         }
         cur_poly=cur_poly->next;
       }
-      printf("Done!\n");
+      //printf("Done!\n");
     }
     cur_ent->id=ent_cnt++;
     cur_ent->alpha=1.0f;
@@ -636,6 +667,7 @@ void update_world(float gt) {
 			free(ent2->type);
 			if(ent2->prog) free(ent2->prog);
       if(ent2->model!=NULL) delete ent2->model;
+			if(ent2->tex!=NULL) delete ent2->tex;
 			free(ent2);
 			ent2=NULL;
 			cur_ent=entity_list;
@@ -666,6 +698,7 @@ void render_world_solid() {
   struct entity *cur_ent=entity_list;
   struct entity *other_ent=NULL;
   struct poly *cur_pol=NULL;
+
 	//printf("+++render_world()\n");
   
   //glPushMatrix();
@@ -686,27 +719,28 @@ void render_world_solid() {
       i=0;
       while(cur_pol!=NULL) {
         i++;
-        switch_tex(cur_pol->tex_id);
+        cur_pol->tex->select();
         switch(cur_pol->vert_count) {
-        case 3:
-          glBegin(GL_TRIANGLES);
-          break;
-        case 4:
-          glBegin(GL_QUADS);
-          break;
-        default:
-	        glBegin(GL_POLYGON);
-          break;
-      }
-	for(j=0;j<cur_pol->vert_count;j++) {
-#ifndef WIN32
-		glTexCoord2f(cur_pol->point[j].s,cur_pol->point[j].t);
-#else
-		glTexCoord2f(cur_pol->point[j].s,cur_pol->point[j].t*-1);
-#endif
-		glVertex3f(cur_pol->point[j].x/100.0f, cur_pol->point[j].y/100.0f, -cur_pol->point[j].z/100.0f);
-	}
-	glEnd();
+					case 3:
+						glBegin(GL_TRIANGLES);
+						break;
+					case 4:
+						glBegin(GL_QUADS);
+						break;
+					default:
+						glBegin(GL_POLYGON);
+						break;
+				}
+
+				for(j=0;j<cur_pol->vert_count;j++) {
+			#ifndef WIN32
+					glTexCoord2f(cur_pol->point[j].s,cur_pol->point[j].t);
+			#else
+					glTexCoord2f(cur_pol->point[j].s,cur_pol->point[j].t*-1);
+			#endif
+					glVertex3f(cur_pol->point[j].x/100.0f, cur_pol->point[j].y/100.0f, -cur_pol->point[j].z/100.0f);
+				}
+				glEnd();
         cur_pol=cur_pol->next;
       }
     } else {
@@ -737,7 +771,7 @@ void render_world_solid() {
       glRotatef(cur_ent->yrot,0.0f,1.0f,0.0f);
       glRotatef(-90,1.0f,0.0f,0.0f);
       //printf("Texid: %i\n",cur_ent->tex_id);
-      switch_tex(cur_ent->tex_id);
+      cur_ent->tex->select();
 			//printf("Setting frame..\n");
       if(cur_ent->anim_start!=cur_ent->anim_end)
         cur_ent->model->SetFrame(frame1,frame2,cur_ent->blendpos,cur_ent->blendcount);
@@ -785,7 +819,7 @@ void render_world_trans() {
 
       while(cur_pol!=NULL) {
         i++;
-        switch_tex(cur_pol->tex_id);
+        cur_pol->tex->select();
         switch(cur_pol->vert_count) {
         case 3:
           glBegin(GL_TRIANGLES);
@@ -836,7 +870,7 @@ void render_world_trans() {
       glRotatef(cur_ent->yrot,0.0f,1.0f,0.0f);
       glRotatef(-90,1.0f,0.0f,0.0f);
       //printf("Texid: %i\n",cur_ent->tex_id);
-      switch_tex(cur_ent->tex_id);
+      cur_ent->tex->select();
 			//printf("Setting frame..\n");
       if(cur_ent->anim_start!=cur_ent->anim_end)
         cur_ent->model->SetFrame(frame1,frame2,cur_ent->blendpos,cur_ent->blendcount);

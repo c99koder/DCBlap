@@ -1,5 +1,4 @@
-#include <string.h>
-#include "entity.h"
+
 /* hud.cc - Heads Up Display functions
  * Copyright (c) 2001-2003 Sam Steele
  *
@@ -19,8 +18,22 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
+#ifdef TIKI
+#include <Tiki/tiki.h>
+#include <Tiki/font.h>
+
+using namespace Tiki;
+using namespace Tiki::GL;
+#endif
+#ifdef DREAMCAST
+#include <kos.h>
+#include <tsu/font.h>
+#endif
+#include <string.h>
+#include "entity.h"
 #include "objects.h"
-#include "text.h"
+
+RefPtr<Font> fnt;
 
 int inout=0;
 char status_text[256];
@@ -34,11 +47,23 @@ struct hud_display {
   int x,y;
 } hud[7];
 
+float txt_width(char *text) {
+  float top,bot,left,right;
+  fnt->getTextSize(text,right,bot);
+  return right;
+}
+
 void reset_HUD() {
   int i;
   for(i=0;i<7;i++) {
     hud[i].label[0]='\0';
   }
+}
+
+void hud_init() {
+	fnt=new Font("Helvetica_bold.txf");
+	
+	fnt->setSize(24);
 }
 
 void set_hud(int num, int x, int y, char *label, float r, float g, float b) {
@@ -55,8 +80,12 @@ void render_HUD() {
 
   for(i=0;i<7;i++) {
     if(hud[i].label[0]!='\0') {
-      draw_txt(hud[i].x+3,hud[i].y+3,hud[i].label,0,0,0,0.4f);
-      draw_txt(hud[i].x,hud[i].y,hud[i].label,hud[i].r,hud[i].g,hud[i].b,1);
+			fnt->setAlpha(0.4);
+			fnt->setColor(Color(0,0,0));
+			fnt->draw(Vector(hud[i].x+3,hud[i].y+3,0),hud[i].label);
+			fnt->setAlpha(1.0);
+			fnt->setColor(Color(hud[i].r,hud[i].g,hud[i].b));
+			fnt->draw(Vector(hud[i].x,hud[i].y,0),hud[i].label);
     }
   }
 
@@ -68,8 +97,12 @@ void render_HUD() {
 		if(status_alpha>1) inout=3;
     if(viscount>10) { inout=2; viscount=0; }
 		if(status_alpha<0) inout=0;
-		draw_txt(320-(txt_width(status_text)/2)+2,228+2,status_text,0,0,0,status_alpha-.2f);
-		draw_txt(320-(txt_width(status_text)/2),228,status_text,status_r,status_g,status_b,status_alpha);
+		fnt->setAlpha(status_alpha-.2f);
+		fnt->setColor(Color(0,0,0));
+		fnt->draw(Vector(320-(txt_width(status_text)/2)+2,228+2,0),status_text);
+		fnt->setAlpha(status_alpha);
+		fnt->setColor(Color(status_r,status_g,status_b));
+		fnt->draw(Vector(320-(txt_width(status_text)/2),228,0),status_text);
   }
 	//printf("---render_HUD()\n");
 }

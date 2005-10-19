@@ -17,6 +17,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
+#ifdef TIKI
+#include <Tiki/tiki.h>
+#include <Tiki/texture.h>
+
+using namespace Tiki;
+using namespace Tiki::GL;
+#endif
 #include "objects.h"
 #include "callback.h"
 #define NULL 0
@@ -24,7 +31,7 @@
 void objects_init() {
   register_callbacks("camera",camera_create,camera_callback,NULL,NULL);
   register_callbacks("paddle",paddle_create,paddle_update,paddle_message,paddle_reset);
-  register_callbacks("paddle_md2",paddlemd2_create,paddlemd2_update,paddlemd2_message,paddlemd2_reset);
+  //register_callbacks("paddle_md2",paddlemd2_create,paddlemd2_update,paddlemd2_message,paddlemd2_reset);
   register_callbacks("ball",ball_create,ball_update,ball_message,NULL);
   register_callbacks("goal",goal_create,goal_callback,goal_message,NULL);
   register_callbacks("speedup",speedup_create,speedup_update,speedup_message,NULL);

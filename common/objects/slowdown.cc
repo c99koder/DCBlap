@@ -27,6 +27,13 @@
 #ifdef LINUX
 #include <SDL/SDL_mixer.h>
 #endif
+#ifdef TIKI
+#include <Tiki/tiki.h>
+#include <Tiki/texture.h>
+
+using namespace Tiki;
+using namespace Tiki::GL;
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include "entity.h"
@@ -55,10 +62,9 @@ void slowdown_create(struct entity *me) {
   int fd;
   struct entity *ent;
   char tmp[100];
-  if(find_tex("slowdown")==-1) load_texture("slowdown",next_tex_id());
   me->model=new md2Model;
   me->model->Load("slowdown.md2");
-  me->tex_id=find_tex("slowdown");
+  me->tex=new Texture("slowdown.png",0);
   me->anim_start=me->model->anim_start("stand");
   me->anim_end=me->model->anim_end("stand");
   me->arg3=2;
@@ -80,7 +86,7 @@ void slowdown_create(struct entity *me) {
 
 #define M_PI 3.141592653589793238
 
-void slowdown_update(struct entity *me) {
+void slowdown_update(struct entity *me, float gt) {
   me->yrot++;
   me->zrot++;
   me->xrot++;

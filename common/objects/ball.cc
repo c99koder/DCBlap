@@ -29,6 +29,15 @@
 #ifdef LINUX
 #include <SDL/SDL_mixer.h>
 #endif
+#ifdef TIKI
+#include <Tiki/tiki.h>
+#include <Tiki/texture.h>
+#include <Tiki/sound.h>
+
+using namespace Tiki;
+using namespace Tiki::GL;
+using namespace Tiki::Audio;
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include "entity.h"
@@ -52,6 +61,9 @@ extern CSoundManager *g_pSoundManager;
 CSound*        sfx_bounce=NULL;
 CSound*        sfx_score=NULL;
 #endif
+#ifdef TIKI
+Sound *sfx_bounce=NULL;
+#endif
 extern bool enable_sound;
 extern struct entity *wld;
 extern bool lose_flag;
@@ -62,17 +74,9 @@ void ball_create(struct entity *me) {
   HRESULT hr;
 #endif
   me->model=new md2Model;
-  if(get_prop(me,"model")!=NULL) {
-    if(find_tex(get_prop(me,"texture"))==-1) load_texture(get_prop(me,"texture"),next_tex_id());
-    me->model->Load(get_prop(me,"model"));
-    me->tex_id=find_tex(get_prop(me,"texture"));
-    me->blendcount=atoi(get_prop(me,"animspeed"));
-  } else {
-    if(find_tex("ball")==-1) load_texture("ball",next_tex_id());
-    me->model->Load("ball.md2");
-    me->tex_id=find_tex("ball");
-    me->blendcount=1;
-  }
+	me->model->Load("ball.md2");
+	me->tex=new Texture("ball.png",0);
+	me->blendcount=1;
   me->anim_start=me->model->anim_start("stand");
   me->anim_end=me->model->anim_end("stand");
   me->blendpos=0;
@@ -125,6 +129,9 @@ void ball_create(struct entity *me) {
 #ifdef LINUX
   if(sfx_bounce==NULL) sfx_bounce=Mix_LoadWAV("bounce.wav");
   if(sfx_score==NULL) sfx_score=Mix_LoadWAV("score.wav");
+#endif
+#ifdef TIKI
+	if(sfx_bounce==NULL) sfx_bounce = new Sound("bounce.wav");
 #endif
 }
 
@@ -235,6 +242,9 @@ void ball_message(struct entity *me, struct entity *them, char *message) {
 #endif
 #ifdef LINUX
 	  if(enable_sound) Mix_PlayChannel(-1,sfx_bounce,0);
+#endif
+#ifdef TIKI
+		sfx_bounce->play();
 #endif
 #ifdef WIN32
     if(net_host==1&&net_socket!=-1) {

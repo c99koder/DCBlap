@@ -17,6 +17,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
+#ifdef TIKI
+#include <Tiki/tiki.h>
+#include <Tiki/texture.h>
+
+using namespace Tiki;
+using namespace Tiki::GL;
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include "entity.h"
@@ -33,7 +40,7 @@ void goal_create(struct entity *me) {
   me->arg3=100;
 }
 
-void goal_callback(struct entity *me) {
+void goal_callback(struct entity *me, float gt) {
   char txt[100];
 
   if(me->paused==0&&wld->arg3>0&&me->arg1>=wld->arg3) {

@@ -23,6 +23,13 @@
 #ifdef DREAMCAST
 #include <kos.h>
 #endif
+#ifdef TIKI
+#include <Tiki/tiki.h>
+#include <Tiki/texture.h>
+
+using namespace Tiki;
+using namespace Tiki::GL;
+#endif
 #include <stdlib.h>
 #include "entity.h"
 #include "objects.h"
@@ -32,7 +39,7 @@ void func_rotate_create(struct entity *me) {
   me->arg1=atoi(get_prop(me,"speed"));
 }
 
-void func_rotate_update(struct entity *me) {
+void func_rotate_update(struct entity *me, float gt) {
   me->yrot+=me->arg1;
 }
 

@@ -27,6 +27,13 @@
 #ifdef LINUX
 #include <SDL/SDL_mixer.h>
 #endif
+#ifdef TIKI
+#include <Tiki/tiki.h>
+#include <Tiki/texture.h>
+
+using namespace Tiki;
+using namespace Tiki::GL;
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include "entity.h"

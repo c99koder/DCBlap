@@ -27,6 +27,13 @@
 #ifdef LINUX
 #include <SDL/SDL_mixer.h>
 #endif
+#ifdef TIKI
+#include <Tiki/tiki.h>
+#include <Tiki/texture.h>
+
+using namespace Tiki;
+using namespace Tiki::GL;
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include "entity.h"
@@ -53,10 +60,9 @@ extern CSound *sfx_hyper;
 extern bool enable_sound;
 
 void hyper_create(struct entity *me) {
-  if(find_tex("hyper")==-1) load_texture("hyper",next_tex_id());
   me->model=new md2Model;
   me->model->Load("hyper.md2");
-  me->tex_id=find_tex("hyper");
+  me->tex=new Texture("hyper.png",0);
   me->anim_start=me->model->anim_start("stand");
   me->anim_end=me->model->anim_end("stand");
   me->arg3=2;
@@ -77,7 +83,7 @@ void hyper_create(struct entity *me) {
 
 #define M_PI 3.141592653589793238
 
-void hyper_update(struct entity *me) {
+void hyper_update(struct entity *me, float gt) {
   me->yrot++;
   me->zrot++;
   me->xrot++;

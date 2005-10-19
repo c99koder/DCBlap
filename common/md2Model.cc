@@ -1,6 +1,6 @@
 /* md2Model.cc - MD2 model rendering functions
- * based on MD2 Loader for Sega Dreamcast by KamKa
  * Copyright (c) 2001-2003 Sam Steele
+ * based on MD2 Loader for Sega Dreamcast by KamKa
  *
  * This file is part of DCBlap.
  *
@@ -43,6 +43,9 @@
 inline void ByteSwap(unsigned char * b, int n)
 {
 #ifdef MACOS
+#ifdef __i386__
+#warning X86 not swapping
+#else
 	register int i = 0;
 	register int j = n-1;
 	while (i<j)
@@ -51,9 +54,8 @@ inline void ByteSwap(unsigned char * b, int n)
 		i++, j--;
 	}
 #endif
+#endif
 }
-
-extern char tex_theme_dir[100];
 
 md2Model::md2Model()
 {
@@ -135,12 +137,12 @@ int md2Model::md2ReadFile(const char* fileName)
 	FILE	*fp=NULL;
 	char fn2[200];
 
-	if(tex_theme_dir[0]!='\0') {
+	/*if(tex_theme_dir[0]!='\0') {
 		strcpy(fn2,tex_theme_dir);
 		strcat(fn2,fileName);
 		printf("Theme alternative: %s\n",fn2);
 		fp=fopen(fn2,"rb");
-	}
+	}*/
 	if(!fp) fp=fopen(fileName,"rb");
 	if (!fp) {
 		return -1;

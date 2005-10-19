@@ -23,6 +23,13 @@
 #ifdef DREAMCAST
 #include <kos.h>
 #endif
+#ifdef TIKI
+#include <Tiki/tiki.h>
+#include <Tiki/texture.h>
+
+using namespace Tiki;
+using namespace Tiki::GL;
+#endif
 #include <string.h>
 #include <stdlib.h>
 #include "entity.h"
@@ -56,10 +63,9 @@ void no_move_camera(int mode);
 
 void paddlemd2_create(struct entity *me) {
   char tmp[40];
-  if(find_tex(get_prop(me,"skin"))==-1) load_texture(get_prop(me,"skin"),next_tex_id());
   me->model=new md2Model;
   me->model->Load(get_prop(me,"model"));
-  me->tex_id=find_tex(get_prop(me,"skin"));
+  me->tex=new Texture(get_prop(me,"skin"),0);
   me->anim_start=me->model->anim_start("stand");
   me->anim_end=me->model->anim_end("stand");
   me->blendcount=8;
