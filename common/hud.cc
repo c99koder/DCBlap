@@ -78,6 +78,8 @@ void set_hud(int num, int x, int y, char *label, float r, float g, float b) {
 void render_HUD() {
   int i;
 
+	glLoadIdentity();
+	
   for(i=0;i<7;i++) {
     if(hud[i].label[0]!='\0') {
 			fnt->setAlpha(0.4);

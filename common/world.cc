@@ -469,7 +469,6 @@ void pause_world(bool mode) {
 
 char *get_prop(struct entity *ent, char *prop_name) {
   struct param *cur_prop=ent->param_list;
-  printf("get_prop(%s,%s);\n",ent->type,prop_name);
   while(cur_prop!=NULL) {
     if(!strcmp(cur_prop->name,prop_name)) {
       return cur_prop->value;
@@ -512,7 +511,6 @@ void set_prop(struct entity *ent, char *prop_name, char *value) {
 int ent_count(char *type) {
   struct entity *cur_ent=entity_list;
   int cnt=0;
-  //printf("ent_count(%s)\n",type);
   while(cur_ent!=NULL) {
     if(!strcmp(cur_ent->type,type)) {
       cnt++;
@@ -524,7 +522,6 @@ int ent_count(char *type) {
 
 struct entity *find_ent_by_type(char *type) {
   struct entity *cur_ent=entity_list;
-  printf("find_ent_by_type(%s)\n",type);
   while(cur_ent!=NULL) {
     if(!strcmp(cur_ent->type,type)) {
       return cur_ent;
@@ -537,7 +534,6 @@ struct entity *find_ent_by_type(char *type) {
 
 struct entity *find_ent_by_prop(char *type, char *propname, char *value) {
   struct entity *cur_ent=entity_list;
-  printf("find_ent_by_prop(%s,%s,%s)\n",type,propname,value);
   while(cur_ent!=NULL) {
     if(!strcmp(cur_ent->type,type) && !strcmp(get_prop(cur_ent,propname),value)) {
       return cur_ent;
@@ -776,7 +772,7 @@ void render_world_solid() {
       if(cur_ent->anim_start!=cur_ent->anim_end)
         cur_ent->model->SetFrame(frame1,frame2,cur_ent->blendpos,cur_ent->blendcount);
 				//printf("md2model->draw()!\n");
-        cur_ent->model->Draw();
+        //cur_ent->model->Draw();
 				//printf("inc blendpos\n");
         cur_ent->blendpos++;
         if(cur_ent->blendpos>cur_ent->blendcount) {

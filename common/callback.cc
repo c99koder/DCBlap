@@ -91,7 +91,6 @@ update_callback get_update_callback(struct entity *ent) {
   struct callback_list_node *current=callback_list;
     while(current!=NULL) {
       if(!strcmp(current->type,ent->type)) {
-	      printf("Returning update callback for %s\n",current->type);
 	      return current->update;
         break;
       }
