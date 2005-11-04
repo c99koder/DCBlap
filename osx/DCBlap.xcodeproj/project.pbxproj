@@ -12,6 +12,10 @@
 		22171EB50902C792001663B0 /* Tiki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22171EB40902C792001663B0 /* Tiki.framework */; };
 		22171EBB0902C7B1001663B0 /* Tiki.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22171EB40902C792001663B0 /* Tiki.framework */; };
 		22171F320902C9C1001663B0 /* main.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22171F310902C9C1001663B0 /* main.cc */; };
+		22343EA4091A84CA00245FC3 /* menuList.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22343EA2091A84CA00245FC3 /* menuList.h */; };
+		22343EA5091A84CA00245FC3 /* menuList.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22343EA3091A84CA00245FC3 /* menuList.cc */; };
+		22690B860911210C0026D5BC /* imageSet.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22690B840911210C0026D5BC /* imageSet.h */; };
+		22690B870911210C0026D5BC /* imageSet.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22690B850911210C0026D5BC /* imageSet.cc */; };
 		22752C5D08F02BA800DCB98C /* callback.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C5208F02BA800DCB98C /* callback.cc */; };
 		22752C5E08F02BA800DCB98C /* camera.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C5308F02BA800DCB98C /* camera.cc */; };
 		22752C5F08F02BA800DCB98C /* collide.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C5408F02BA800DCB98C /* collide.cc */; };
@@ -34,8 +38,8 @@
 		22752C9D08F02BC400DCB98C /* water.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C8808F02BC400DCB98C /* water.cc */; };
 		22752CFB08F0336500DCB98C /* game.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752CFA08F0336500DCB98C /* game.cc */; };
 		22752F4208F0364B00DCB98C /* data in Resources */ = {isa = PBXBuildFile; fileRef = 22752D6208F0364A00DCB98C /* data */; };
-		2292735409047D3100462849 /* menus.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2292735209047D3100462849 /* menus.h */; };
-		2292735509047D3100462849 /* menus.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2292735309047D3100462849 /* menus.cc */; };
+		2292735409047D3100462849 /* TitleScreen.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2292735209047D3100462849 /* TitleScreen.h */; };
+		2292735509047D3100462849 /* TitleScreen.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2292735309047D3100462849 /* TitleScreen.cc */; };
 		22C6219C08F06BCE008BCA18 /* func_breakable.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22C6219B08F06BCE008BCA18 /* func_breakable.cc */; };
 		565FEC4F07B179CA00C4E23A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565FEC3907B179A100C4E23A /* Cocoa.framework */; };
 		565FEC5207B179D400C4E23A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565FEC3B07B179A100C4E23A /* OpenGL.framework */; };
@@ -67,7 +71,9 @@
 			dstSubfolderSpec = 10;
 			files = (
 				22171EBB0902C7B1001663B0 /* Tiki.framework in CopyFiles */,
-				2292735409047D3100462849 /* menus.h in CopyFiles */,
+				2292735409047D3100462849 /* TitleScreen.h in CopyFiles */,
+				22690B860911210C0026D5BC /* imageSet.h in CopyFiles */,
+				22343EA4091A84CA00245FC3 /* menuList.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +85,10 @@
 		22171EAC0902C77E001663B0 /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = Controller.m; path = src/Controller.m; sourceTree = "<group>"; };
 		22171EB40902C792001663B0 /* Tiki.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Tiki.framework; path = ../../../tiki/osx/build/Default/Tiki.framework; sourceTree = SOURCE_ROOT; };
 		22171F310902C9C1001663B0 /* main.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cc; path = ../common/main.cc; sourceTree = SOURCE_ROOT; };
+		22343EA2091A84CA00245FC3 /* menuList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = menuList.h; path = ../common/drawables/menuList.h; sourceTree = SOURCE_ROOT; };
+		22343EA3091A84CA00245FC3 /* menuList.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = menuList.cc; path = ../common/drawables/menuList.cc; sourceTree = SOURCE_ROOT; };
+		22690B840911210C0026D5BC /* imageSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imageSet.h; path = ../common/drawables/imageSet.h; sourceTree = SOURCE_ROOT; };
+		22690B850911210C0026D5BC /* imageSet.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imageSet.cc; path = ../common/drawables/imageSet.cc; sourceTree = SOURCE_ROOT; };
 		22752C5208F02BA800DCB98C /* callback.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = callback.cc; path = ../common/callback.cc; sourceTree = SOURCE_ROOT; };
 		22752C5308F02BA800DCB98C /* camera.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = camera.cc; path = ../common/camera.cc; sourceTree = SOURCE_ROOT; };
 		22752C5408F02BA800DCB98C /* collide.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = collide.cc; path = ../common/collide.cc; sourceTree = SOURCE_ROOT; };
@@ -114,22 +124,18 @@
 		22752CE508F032AE00DCB98C /* callback.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = callback.h; path = ../include/callback.h; sourceTree = SOURCE_ROOT; };
 		22752CE608F032AE00DCB98C /* camera.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = camera.h; path = ../include/camera.h; sourceTree = SOURCE_ROOT; };
 		22752CE708F032AE00DCB98C /* collide.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = collide.h; path = ../include/collide.h; sourceTree = SOURCE_ROOT; };
-		22752CE808F032AE00DCB98C /* direction.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = direction.h; path = ../include/direction.h; sourceTree = SOURCE_ROOT; };
 		22752CE908F032AE00DCB98C /* dirwin32.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = dirwin32.h; path = ../include/dirwin32.h; sourceTree = SOURCE_ROOT; };
 		22752CEA08F032AE00DCB98C /* entity.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = entity.h; path = ../include/entity.h; sourceTree = SOURCE_ROOT; };
 		22752CEB08F032AE00DCB98C /* hud.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = hud.h; path = ../include/hud.h; sourceTree = SOURCE_ROOT; };
 		22752CEC08F032AE00DCB98C /* kos_w32.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = kos_w32.h; path = ../include/kos_w32.h; sourceTree = SOURCE_ROOT; };
 		22752CED08F032AE00DCB98C /* md2Model.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = md2Model.h; path = ../include/md2Model.h; sourceTree = SOURCE_ROOT; };
 		22752CEE08F032AE00DCB98C /* objects.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = objects.h; path = ../include/objects.h; sourceTree = SOURCE_ROOT; };
-		22752CEF08F032AE00DCB98C /* resource.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = resource.h; path = ../include/resource.h; sourceTree = SOURCE_ROOT; };
-		22752CF008F032AE00DCB98C /* text.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = text.h; path = ../include/text.h; sourceTree = SOURCE_ROOT; };
-		22752CF208F032AE00DCB98C /* texture.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = texture.h; path = ../include/texture.h; sourceTree = SOURCE_ROOT; };
 		22752CF308F032AE00DCB98C /* utils.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = utils.h; path = ../include/utils.h; sourceTree = SOURCE_ROOT; };
 		22752CF408F032AE00DCB98C /* word.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = word.h; path = ../include/word.h; sourceTree = SOURCE_ROOT; };
 		22752CFA08F0336500DCB98C /* game.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = game.cc; path = ../common/game.cc; sourceTree = SOURCE_ROOT; };
 		22752D6208F0364A00DCB98C /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../data; sourceTree = SOURCE_ROOT; };
-		2292735209047D3100462849 /* menus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = menus.h; path = ../common/menus.h; sourceTree = SOURCE_ROOT; };
-		2292735309047D3100462849 /* menus.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = menus.cc; path = ../common/menus.cc; sourceTree = SOURCE_ROOT; };
+		2292735209047D3100462849 /* TitleScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TitleScreen.h; path = ../common/TitleScreen.h; sourceTree = SOURCE_ROOT; };
+		2292735309047D3100462849 /* TitleScreen.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TitleScreen.cc; path = ../common/TitleScreen.cc; sourceTree = SOURCE_ROOT; };
 		22C6211808F0608B008BCA18 /* game.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = game.h; path = ../include/game.h; sourceTree = SOURCE_ROOT; };
 		22C6219B08F06BCE008BCA18 /* func_breakable.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = func_breakable.cc; path = ../common/objects/func_breakable.cc; sourceTree = SOURCE_ROOT; };
 		565FEC3507B1797F00C4E23A /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
@@ -153,9 +159,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		22690B830911206A0026D5BC /* Drawables */ = {
+			isa = PBXGroup;
+			children = (
+				22690B840911210C0026D5BC /* imageSet.h */,
+				22690B850911210C0026D5BC /* imageSet.cc */,
+				22343EA2091A84CA00245FC3 /* menuList.h */,
+				22343EA3091A84CA00245FC3 /* menuList.cc */,
+			);
+			name = Drawables;
+			sourceTree = "<group>";
+		};
 		22752C4F08F02B7A00DCB98C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				22690B830911206A0026D5BC /* Drawables */,
 				22171F310902C9C1001663B0 /* main.cc */,
 				22752C5208F02BA800DCB98C /* callback.cc */,
 				22752C5308F02BA800DCB98C /* camera.cc */,
@@ -167,8 +185,8 @@
 				22752C5C08F02BA800DCB98C /* world.cc */,
 				22752CFA08F0336500DCB98C /* game.cc */,
 				22752C5108F02B8A00DCB98C /* Objects */,
-				2292735209047D3100462849 /* menus.h */,
-				2292735309047D3100462849 /* menus.cc */,
+				2292735209047D3100462849 /* TitleScreen.h */,
+				2292735309047D3100462849 /* TitleScreen.cc */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -180,16 +198,12 @@
 				22752CE508F032AE00DCB98C /* callback.h */,
 				22752CE608F032AE00DCB98C /* camera.h */,
 				22752CE708F032AE00DCB98C /* collide.h */,
-				22752CE808F032AE00DCB98C /* direction.h */,
 				22752CE908F032AE00DCB98C /* dirwin32.h */,
 				22752CEA08F032AE00DCB98C /* entity.h */,
 				22752CEB08F032AE00DCB98C /* hud.h */,
 				22752CEC08F032AE00DCB98C /* kos_w32.h */,
 				22752CED08F032AE00DCB98C /* md2Model.h */,
 				22752CEE08F032AE00DCB98C /* objects.h */,
-				22752CEF08F032AE00DCB98C /* resource.h */,
-				22752CF008F032AE00DCB98C /* text.h */,
-				22752CF208F032AE00DCB98C /* texture.h */,
 				22752CF308F032AE00DCB98C /* utils.h */,
 				22752CF408F032AE00DCB98C /* word.h */,
 			);
@@ -420,7 +434,9 @@
 				22171EAA0902C763001663B0 /* main.m in Sources */,
 				22171EAE0902C77E001663B0 /* Controller.m in Sources */,
 				22171F320902C9C1001663B0 /* main.cc in Sources */,
-				2292735509047D3100462849 /* menus.cc in Sources */,
+				2292735509047D3100462849 /* TitleScreen.cc in Sources */,
+				22690B870911210C0026D5BC /* imageSet.cc in Sources */,
+				22343EA5091A84CA00245FC3 /* menuList.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

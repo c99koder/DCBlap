@@ -38,9 +38,8 @@ using namespace Tiki::GL;
 #include <string.h>
 #include "entity.h"
 #include "objects.h"
-#include "texture.h"
 #include "camera.h"
-#include "text.h"
+#include "hud.h"
 
 #ifdef DREAMCAST
 extern sfxhnd_t sfx_bounce;

@@ -42,11 +42,9 @@ using namespace Tiki::Audio;
 #include <string.h>
 #include "entity.h"
 #include "objects.h"
-#include "texture.h"
 #include "camera.h"
 #include "utils.h"
 #include "hud.h"
-#include "text.h"
 
 #ifdef DREAMCAST
 sfxhnd_t sfx_bounce=-1;

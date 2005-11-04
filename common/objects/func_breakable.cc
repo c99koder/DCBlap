@@ -34,9 +34,7 @@ using namespace Tiki::GL;
 #include <string.h>
 #include "entity.h"
 #include "objects.h"
-#include "texture.h"
 #include "hud.h"
-#include "text.h"
 
 extern bool enable_powerups;
 extern bool win_flag;

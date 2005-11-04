@@ -36,21 +36,38 @@ using namespace Tiki::Audio;
 #endif
 
 #include "entity.h"
-#include "texture.h"
 #include "game.h"
 #include "hud.h"
 #include "objects.h"
-#include "menus.h"
+#include "TitleScreen.h"
 
 volatile bool quitting = false;
+
+int player_axis_x[4];
+
 void tkCallback(const Hid::Event & evt, void * data) {
 	if (evt.type == Hid::Event::EvtQuit) {
 		quitting = true;
 	}
+	if (evt.type == Hid::Event::EvtKeyDown) {
+		switch(evt.key) {
+			case Hid::Event::KeyLeft:
+				player_axis_x[0]=-1;
+				break;
+			case Hid::Event::KeyRight:
+				player_axis_x[0]=1;
+				break;
+		}
+	}
+	if(evt.type == Hid::Event::EvtKeyUp) {
+		if(evt.key == Hid::Event::KeyLeft || evt.key == Hid::Event::KeyRight) {
+			player_axis_x[0]=0;
+		}
+	}
 }
-
+		
 extern "C" int tiki_main(int argc, char **argv) {
-	TitleScreen t;
+	TitleScreen *t;
 	// Init Tiki
 	Tiki::init(argc, argv);
 	Hid::callbackReg(tkCallback, NULL);
@@ -61,10 +78,12 @@ extern "C" int tiki_main(int argc, char **argv) {
 	bgm.start();
 	
 	objects_init();
-
-	t.doMenu();
-	
 	hud_init();
+	player_axis_x[0]=0;
+
+	t=new TitleScreen;
+	t->doMenu();
+	
 	game_init("BlapOut/classic.wld");
 	update_world(0);
 	

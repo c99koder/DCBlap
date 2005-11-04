@@ -34,7 +34,6 @@ using namespace Tiki::GL;
 #include <string.h>
 #include "entity.h"
 #include "objects.h"
-#include "texture.h"
 #include "camera.h"
 
 void water_create(struct entity *me) {

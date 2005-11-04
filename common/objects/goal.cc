@@ -31,7 +31,6 @@ using namespace Tiki::GL;
 #include "objects.h"
 #include "camera.h"
 #include "hud.h"
-#include "text.h"
 
 extern struct entity *wld;
 

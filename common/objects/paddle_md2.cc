@@ -34,9 +34,7 @@ using namespace Tiki::GL;
 #include <stdlib.h>
 #include "entity.h"
 #include "objects.h"
-#include "texture.h"
 #include "direction.h"
-#include "text.h"
 #include "hud.h"
 #include "utils.h"
 #include "camera.h"

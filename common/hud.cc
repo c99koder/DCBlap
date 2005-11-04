@@ -33,7 +33,7 @@ using namespace Tiki::GL;
 #include "entity.h"
 #include "objects.h"
 
-RefPtr<Font> fnt;
+Font *fnt;
 
 int inout=0;
 char status_text[256];

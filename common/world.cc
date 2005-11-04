@@ -772,7 +772,7 @@ void render_world_solid() {
       if(cur_ent->anim_start!=cur_ent->anim_end)
         cur_ent->model->SetFrame(frame1,frame2,cur_ent->blendpos,cur_ent->blendcount);
 				//printf("md2model->draw()!\n");
-        //cur_ent->model->Draw();
+        cur_ent->model->Draw();
 				//printf("inc blendpos\n");
         cur_ent->blendpos++;
         if(cur_ent->blendpos>cur_ent->blendcount) {

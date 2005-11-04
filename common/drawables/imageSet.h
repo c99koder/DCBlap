@@ -21,7 +21,7 @@ public:
 	void nextFrame(uint64 tm);
 	
 private:
-	std::vector<Texture *> m_textureList;
+	std::vector< RefPtr<Texture> > m_textureList;
 	int m_currentTexture;
 	int m_nextTexture;
 	float m_blend;

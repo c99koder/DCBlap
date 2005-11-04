@@ -34,9 +34,6 @@ using namespace Tiki::GL;
 #include <stdlib.h>
 #include "entity.h"
 #include "objects.h"
-#include "texture.h"
-#include "direction.h"
-#include "text.h"
 #include "hud.h"
 #include "utils.h"
 #include "camera.h"
@@ -67,6 +64,7 @@ void no_move_camera(int mode);
 
 void paddle_create(struct entity *me) {
   char tmp[40];
+	paddle_reset();
   me->arg1=atoi(get_prop(me,"num"));
   me->arg4=atoi(get_prop(me,"speed"));
 	if(get_prop(me,"orientation")) {
@@ -92,6 +90,8 @@ void paddle_create(struct entity *me) {
 bool sys_render_begin();
 void sys_render_finish();
 void render_bg(float a);
+
+extern int player_axis_x[];
 
 void paddle_update(struct entity *me, float gt) {
   char buf[100];
@@ -131,26 +131,13 @@ void paddle_update(struct entity *me, float gt) {
   /*read_analog(&x,&y);
   if(me->arg5==2) me->xvel+=x;
   if(me->arg5==0) me->zvel-=y;
-
-	if(playermap[me->arg1-1]!=-1 && me->arg2==1) {
-    switch(get_controls(me->arg1-1)) {
-    case FIRE_BTN:
-      //broadcast_message(ball,"thud");
-      break;
-      case MOVE_RIGHT:
-        if(me->arg5==2&&me->arg9==0) me->xvel+=me->arg4/3;
-        break;
-      case MOVE_UP:
-        if(me->arg5==0&&me->arg9==0) me->zvel+=me->arg4/3;
-        break;
-      case MOVE_LEFT:
-        if(me->arg5==2&&me->arg9==0) me->xvel-=me->arg4/3;
-        break;
-      case MOVE_DOWN:
-        if(me->arg5==0&&me->arg9==0) me->zvel-=me->arg4/3;
-        me->zrot--;
-        break;
-      case START_BTN:
+	*/
+	
+	if(playermap[(int)me->arg1-1]!=-1 && me->arg2==1) {
+		thinker[(int)me->arg1-1]=0;
+		if(me->arg5==2&&me->arg9==0) me->xvel+=(me->arg4/3) * player_axis_x[(int)me->arg1-1];
+    //if(me->arg5==0&&me->arg9==0) me->zvel+=me->arg4/3;
+/*      case START_BTN:
         if(me->arg9==1) {
           if(me->arg5==10) {
             win_flag=1;
@@ -167,8 +154,8 @@ void paddle_update(struct entity *me, float gt) {
         delay(.1);
         break;
       default:
-        thinker[me->arg1-1]=0;
-    }
+        thinker[me->arg1-1]=0;*/
+    
     if(me->xvel>me->arg4*1.5) me->xvel=me->arg4*1.5;
     if(me->xvel<-me->arg4*1.5) me->xvel=-me->arg4*1.5;
     if(me->zvel>me->arg4*1.5) me->zvel=me->arg4*1.5;
@@ -201,7 +188,7 @@ void paddle_update(struct entity *me, float gt) {
       socket_write_line(net_socket,buf);
     }
 #endif
-  } else {*/
+  } else {
 		tt+=gt;
     if(me->arg2==1 && tt > 0.1) {
       switch((int)me->arg5) {
@@ -232,7 +219,7 @@ void paddle_update(struct entity *me, float gt) {
 			}
 			tt=0;
 		}
-  //}
+  }
   if(me->paused==1) return;
   me->alpha=1.0f;
 	switch((int)me->arg5) {

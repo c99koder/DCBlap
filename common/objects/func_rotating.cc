@@ -33,7 +33,6 @@ using namespace Tiki::GL;
 #include <stdlib.h>
 #include "entity.h"
 #include "objects.h"
-#include "texture.h"
 
 void func_rotate_create(struct entity *me) {
   me->arg1=atoi(get_prop(me,"speed"));
