@@ -57,7 +57,6 @@ using namespace Tiki::GL;
 #include "word.h"
 #include "utils.h"
 
-#include <algorithm> //required for std::swap
 #include <vector>
 
 std::vector< RefPtr<Texture> > texture_list;
