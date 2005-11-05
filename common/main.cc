@@ -39,6 +39,7 @@ using namespace Tiki::Audio;
 #include "hud.h"
 #include "objects.h"
 #include "TitleScreen.h"
+#include "GameSelect.h"
 
 volatile bool quitting = false;
 
@@ -66,19 +67,47 @@ void tkCallback(const Hid::Event & evt, void * data) {
 }
 		
 extern "C" int tiki_main(int argc, char **argv) {
-	TitleScreen *t;
+	TitleScreen *ts;
+	GameSelect *gs;
+	Banner *loading;
+	
 	// Init Tiki
 	Tiki::init(argc, argv);
 	Hid::callbackReg(tkCallback, NULL);
+	
+	loading = new Banner(Drawable::Opaque,new Texture("loading.png",0));
+	loading->setSize(640,480);
+	loading->setTranslate(Vector(320,240,0));
+	
+	Frame::begin();
+	loading->draw(Drawable::Opaque);
+	Frame::finish();
 	
 	objects_init();
 	hud_init();
 	player_axis_x[0]=0;
 
-	t=new TitleScreen;
-	t->doMenu();
+	srand(time(0));
 	
-	game_init("BlapOut/classic.wld");
+	ts=new TitleScreen;
+	gs=new GameSelect;
+
+	while(quitting==false) {
+		ts->FadeIn();
+		ts->doMenu();
+		if(quitting) break;
+		switch(ts->getSelection()) {
+			case 0:
+				gs->FadeIn();
+				gs->doMenu();
+				break;
+			case 3:
+				quitting=true;
+				break;
+		}
+	}
+	
+	/*game_init("BlapOut/classic.wld");
 	update_world(0);
 	
 	while (!quitting) {
@@ -95,7 +124,7 @@ extern "C" int tiki_main(int argc, char **argv) {
 		Frame::set2d();
 		render_HUD();
 		Frame::finish();
-	}
+	}*/
 
 	// Shut down Tiki
 	Tiki::shutdown();
