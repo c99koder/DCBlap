@@ -1,4 +1,4 @@
-/* hyper.h - DCBlap hyperspeed powerup object
+/* GameSelect.h - Game Selection menu
  * Copyright (c) 2001-2005 Sam Steele
  *
  * This file is part of DCBlap.
@@ -16,6 +16,19 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
-void hyper_create(struct entity *me);
-void hyper_update(struct entity *me, float gt);
-void hyper_message(struct entity *me, struct entity *them, char *message);
+
+#include "imageSet.h"
+#include "menuList.h"
+
+class GameSelect : public GenericMenu {
+public:
+	GameSelect();
+protected:
+	void inputEvent(const Event & evt);
+private:
+	imageSet *is;
+	menuList *ml;
+	int m_selection;
+	int m_menuItems;
+	int m_repeatDelay;
+};

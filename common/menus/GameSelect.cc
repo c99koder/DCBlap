@@ -1,4 +1,4 @@
-/* TitleScreen.h - Title Screen menu
+/* GameSelect.cc - Game Selection menu
  * Copyright (c) 2001-2005 Sam Steele
  *
  * This file is part of DCBlap.
@@ -29,7 +29,7 @@ using namespace Tiki::GL;
 
 extern Font *fnt;
 
-TitleScreen::TitleScreen() {
+GameSelect::GameSelect() {
 	Texture *tex;
 	Banner *ban;
 	GenericMenu::GenericMenu();
@@ -62,7 +62,7 @@ TitleScreen::TitleScreen() {
 	m_repeatDelay=0;
 }
 
-void TitleScreen::inputEvent(const Event & evt) {
+void GameSelect::inputEvent(const Event & evt) {
 	switch(evt.type) {
 		case Event::EvtQuit:
 			quitNow();
@@ -103,8 +103,6 @@ void TitleScreen::inputEvent(const Event & evt) {
 						m_repeatDelay--;
 					}
 					break;
-				default:
-					printf("Key: %c\n",evt.key);
 			}
 			break;
 	}

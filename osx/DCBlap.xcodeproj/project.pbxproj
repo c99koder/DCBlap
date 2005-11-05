@@ -38,9 +38,11 @@
 		22752C9D08F02BC400DCB98C /* water.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C8808F02BC400DCB98C /* water.cc */; };
 		22752CFB08F0336500DCB98C /* game.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752CFA08F0336500DCB98C /* game.cc */; };
 		22752F4208F0364B00DCB98C /* data in Resources */ = {isa = PBXBuildFile; fileRef = 22752D6208F0364A00DCB98C /* data */; };
-		2292735409047D3100462849 /* TitleScreen.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2292735209047D3100462849 /* TitleScreen.h */; };
-		2292735509047D3100462849 /* TitleScreen.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2292735309047D3100462849 /* TitleScreen.cc */; };
 		22C6219C08F06BCE008BCA18 /* func_breakable.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22C6219B08F06BCE008BCA18 /* func_breakable.cc */; };
+		22DDC2E7091D1875008067D8 /* GameSelect.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22DDC2E3091D1875008067D8 /* GameSelect.cc */; };
+		22DDC2E8091D1875008067D8 /* GameSelect.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22DDC2E4091D1875008067D8 /* GameSelect.h */; };
+		22DDC2E9091D1875008067D8 /* TitleScreen.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22DDC2E5091D1875008067D8 /* TitleScreen.cc */; };
+		22DDC2EA091D1875008067D8 /* TitleScreen.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22DDC2E6091D1875008067D8 /* TitleScreen.h */; };
 		565FEC4F07B179CA00C4E23A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565FEC3907B179A100C4E23A /* Cocoa.framework */; };
 		565FEC5207B179D400C4E23A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565FEC3B07B179A100C4E23A /* OpenGL.framework */; };
 		565FEC6407B17BE200C4E23A /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 565FEC3407B1797F00C4E23A /* MainMenu.nib */; };
@@ -71,9 +73,10 @@
 			dstSubfolderSpec = 10;
 			files = (
 				22171EBB0902C7B1001663B0 /* Tiki.framework in CopyFiles */,
-				2292735409047D3100462849 /* TitleScreen.h in CopyFiles */,
 				22690B860911210C0026D5BC /* imageSet.h in CopyFiles */,
 				22343EA4091A84CA00245FC3 /* menuList.h in CopyFiles */,
+				22DDC2E8091D1875008067D8 /* GameSelect.h in CopyFiles */,
+				22DDC2EA091D1875008067D8 /* TitleScreen.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,17 +130,18 @@
 		22752CE908F032AE00DCB98C /* dirwin32.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = dirwin32.h; path = ../include/dirwin32.h; sourceTree = SOURCE_ROOT; };
 		22752CEA08F032AE00DCB98C /* entity.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = entity.h; path = ../include/entity.h; sourceTree = SOURCE_ROOT; };
 		22752CEB08F032AE00DCB98C /* hud.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = hud.h; path = ../include/hud.h; sourceTree = SOURCE_ROOT; };
-		22752CEC08F032AE00DCB98C /* kos_w32.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = kos_w32.h; path = ../include/kos_w32.h; sourceTree = SOURCE_ROOT; };
 		22752CED08F032AE00DCB98C /* md2Model.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = md2Model.h; path = ../include/md2Model.h; sourceTree = SOURCE_ROOT; };
 		22752CEE08F032AE00DCB98C /* objects.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = objects.h; path = ../include/objects.h; sourceTree = SOURCE_ROOT; };
 		22752CF308F032AE00DCB98C /* utils.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = utils.h; path = ../include/utils.h; sourceTree = SOURCE_ROOT; };
 		22752CF408F032AE00DCB98C /* word.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = word.h; path = ../include/word.h; sourceTree = SOURCE_ROOT; };
 		22752CFA08F0336500DCB98C /* game.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = game.cc; path = ../common/game.cc; sourceTree = SOURCE_ROOT; };
 		22752D6208F0364A00DCB98C /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../data; sourceTree = SOURCE_ROOT; };
-		2292735209047D3100462849 /* TitleScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TitleScreen.h; path = ../common/TitleScreen.h; sourceTree = SOURCE_ROOT; };
-		2292735309047D3100462849 /* TitleScreen.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TitleScreen.cc; path = ../common/TitleScreen.cc; sourceTree = SOURCE_ROOT; };
 		22C6211808F0608B008BCA18 /* game.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = game.h; path = ../include/game.h; sourceTree = SOURCE_ROOT; };
 		22C6219B08F06BCE008BCA18 /* func_breakable.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = func_breakable.cc; path = ../common/objects/func_breakable.cc; sourceTree = SOURCE_ROOT; };
+		22DDC2E3091D1875008067D8 /* GameSelect.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = GameSelect.cc; path = ../common/menus/GameSelect.cc; sourceTree = SOURCE_ROOT; };
+		22DDC2E4091D1875008067D8 /* GameSelect.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = GameSelect.h; path = ../common/menus/GameSelect.h; sourceTree = SOURCE_ROOT; };
+		22DDC2E5091D1875008067D8 /* TitleScreen.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = TitleScreen.cc; path = ../common/menus/TitleScreen.cc; sourceTree = SOURCE_ROOT; };
+		22DDC2E6091D1875008067D8 /* TitleScreen.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = TitleScreen.h; path = ../common/menus/TitleScreen.h; sourceTree = SOURCE_ROOT; };
 		565FEC3507B1797F00C4E23A /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		565FEC3907B179A100C4E23A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		565FEC3B07B179A100C4E23A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
@@ -162,9 +166,7 @@
 		22690B830911206A0026D5BC /* Drawables */ = {
 			isa = PBXGroup;
 			children = (
-				22690B840911210C0026D5BC /* imageSet.h */,
 				22690B850911210C0026D5BC /* imageSet.cc */,
-				22343EA2091A84CA00245FC3 /* menuList.h */,
 				22343EA3091A84CA00245FC3 /* menuList.cc */,
 			);
 			name = Drawables;
@@ -173,6 +175,7 @@
 		22752C4F08F02B7A00DCB98C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				22DDC2E2091D185B008067D8 /* Menus */,
 				22690B830911206A0026D5BC /* Drawables */,
 				22171F310902C9C1001663B0 /* main.cc */,
 				22752C5208F02BA800DCB98C /* callback.cc */,
@@ -185,8 +188,6 @@
 				22752C5C08F02BA800DCB98C /* world.cc */,
 				22752CFA08F0336500DCB98C /* game.cc */,
 				22752C5108F02B8A00DCB98C /* Objects */,
-				2292735209047D3100462849 /* TitleScreen.h */,
-				2292735309047D3100462849 /* TitleScreen.cc */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -194,6 +195,9 @@
 		22752C5008F02B8200DCB98C /* Include */ = {
 			isa = PBXGroup;
 			children = (
+				22DDC345091D1C8C008067D8 /* Objects */,
+				22DDC33E091D1C77008067D8 /* Drawables */,
+				22DDC33D091D1C71008067D8 /* Menus */,
 				22C6211808F0608B008BCA18 /* game.h */,
 				22752CE508F032AE00DCB98C /* callback.h */,
 				22752CE608F032AE00DCB98C /* camera.h */,
@@ -201,7 +205,6 @@
 				22752CE908F032AE00DCB98C /* dirwin32.h */,
 				22752CEA08F032AE00DCB98C /* entity.h */,
 				22752CEB08F032AE00DCB98C /* hud.h */,
-				22752CEC08F032AE00DCB98C /* kos_w32.h */,
 				22752CED08F032AE00DCB98C /* md2Model.h */,
 				22752CEE08F032AE00DCB98C /* objects.h */,
 				22752CF308F032AE00DCB98C /* utils.h */,
@@ -214,29 +217,63 @@
 			isa = PBXGroup;
 			children = (
 				22752C6808F02BC400DCB98C /* ball.cc */,
-				22752C6908F02BC400DCB98C /* ball.h */,
 				22752C6A08F02BC400DCB98C /* bonusspawn.cc */,
-				22752C6B08F02BC400DCB98C /* bonusspawn.h */,
 				22752C6E08F02BC400DCB98C /* camera_o.cc */,
-				22752C6F08F02BC400DCB98C /* camera_o.h */,
 				22C6219B08F06BCE008BCA18 /* func_breakable.cc */,
-				22752C7108F02BC400DCB98C /* func_breakable.h */,
 				22752C7208F02BC400DCB98C /* func_rotating.cc */,
-				22752C7308F02BC400DCB98C /* func_rotating.h */,
 				22752C7408F02BC400DCB98C /* goal.cc */,
-				22752C7508F02BC400DCB98C /* goal.h */,
 				22752C7608F02BC400DCB98C /* hyper.cc */,
-				22752C7708F02BC400DCB98C /* hyper.h */,
 				22752C7808F02BC400DCB98C /* init.cc */,
 				22752C7908F02BC400DCB98C /* paddle_md2.cc */,
-				22752C7A08F02BC400DCB98C /* paddle_md2.h */,
 				22752C7B08F02BC400DCB98C /* paddle.cc */,
-				22752C7C08F02BC400DCB98C /* paddle.h */,
 				22752C8208F02BC400DCB98C /* slowdown.cc */,
-				22752C8308F02BC400DCB98C /* slowdown.h */,
 				22752C8408F02BC400DCB98C /* speedup.cc */,
-				22752C8508F02BC400DCB98C /* speedup.h */,
 				22752C8808F02BC400DCB98C /* water.cc */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
+		22DDC2E2091D185B008067D8 /* Menus */ = {
+			isa = PBXGroup;
+			children = (
+				22DDC2E3091D1875008067D8 /* GameSelect.cc */,
+				22DDC2E5091D1875008067D8 /* TitleScreen.cc */,
+			);
+			name = Menus;
+			sourceTree = "<group>";
+		};
+		22DDC33D091D1C71008067D8 /* Menus */ = {
+			isa = PBXGroup;
+			children = (
+				22DDC2E4091D1875008067D8 /* GameSelect.h */,
+				22DDC2E6091D1875008067D8 /* TitleScreen.h */,
+			);
+			name = Menus;
+			sourceTree = "<group>";
+		};
+		22DDC33E091D1C77008067D8 /* Drawables */ = {
+			isa = PBXGroup;
+			children = (
+				22690B840911210C0026D5BC /* imageSet.h */,
+				22343EA2091A84CA00245FC3 /* menuList.h */,
+			);
+			name = Drawables;
+			sourceTree = "<group>";
+		};
+		22DDC345091D1C8C008067D8 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				22752C6908F02BC400DCB98C /* ball.h */,
+				22752C6B08F02BC400DCB98C /* bonusspawn.h */,
+				22752C6F08F02BC400DCB98C /* camera_o.h */,
+				22752C7108F02BC400DCB98C /* func_breakable.h */,
+				22752C7308F02BC400DCB98C /* func_rotating.h */,
+				22752C7508F02BC400DCB98C /* goal.h */,
+				22752C7708F02BC400DCB98C /* hyper.h */,
+				22752C7A08F02BC400DCB98C /* paddle_md2.h */,
+				22752C7C08F02BC400DCB98C /* paddle.h */,
+				22752C8308F02BC400DCB98C /* slowdown.h */,
+				22752C8508F02BC400DCB98C /* speedup.h */,
 				22752C8908F02BC400DCB98C /* water.h */,
 			);
 			name = Objects;
@@ -434,9 +471,10 @@
 				22171EAA0902C763001663B0 /* main.m in Sources */,
 				22171EAE0902C77E001663B0 /* Controller.m in Sources */,
 				22171F320902C9C1001663B0 /* main.cc in Sources */,
-				2292735509047D3100462849 /* TitleScreen.cc in Sources */,
 				22690B870911210C0026D5BC /* imageSet.cc in Sources */,
 				22343EA5091A84CA00245FC3 /* menuList.cc in Sources */,
+				22DDC2E7091D1875008067D8 /* GameSelect.cc in Sources */,
+				22DDC2E9091D1875008067D8 /* TitleScreen.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
