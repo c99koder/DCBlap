@@ -25,7 +25,7 @@
 using namespace Tiki;
 using namespace Tiki::GL;
 
-#include "TitleScreen.h"
+#include "GameSelect.h"
 
 extern Font *fnt;
 

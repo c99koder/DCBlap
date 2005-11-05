@@ -43,7 +43,6 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/time.h>
-#include <kos_w32.h>
 #include <stdio.h>
 #endif
 #include <ctype.h>
@@ -143,7 +142,7 @@ void string_tolower(char *in) {
 
 char file_read_byte(int fd) {
 	char buf[2];
-	fs_read(fd,buf,1);
+	read(fd,buf,1);
 	return buf[0];
 }
 

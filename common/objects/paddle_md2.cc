@@ -33,7 +33,6 @@ using namespace Tiki::GL;
 #include <stdlib.h>
 #include "entity.h"
 #include "objects.h"
-#include "direction.h"
 #include "hud.h"
 #include "utils.h"
 #include "camera.h"
