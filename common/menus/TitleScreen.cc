@@ -21,6 +21,7 @@
 #include "Tiki/genmenu.h"
 #include "Tiki/texture.h"
 #include "Tiki/drawables/banner.h"
+#include "Tiki/anims/tintfader.h"
 
 using namespace Tiki;
 using namespace Tiki::GL;
@@ -30,35 +31,31 @@ using namespace Tiki::GL;
 extern Font *fnt;
 
 TitleScreen::TitleScreen() {
-	Texture *tex;
-	Banner *ban;
 	GenericMenu::GenericMenu();
 	
-	tex = new Texture("game_bg.png",1);
-	ban = new Banner(Drawable::Trans,tex);
-	is = new imageSet;
-	ml = new menuList(new Texture("game_box.png",1), new Texture("game_bar.png",1), fnt);
-	ban->setSize(640,480);
-	ban->setTranslate(Vector(320,240,0));
-	m_scene->subAdd(ban);
+	setBgm("menu.ogg",0);
+
+	bg = new Banner(Drawable::Opaque,new Texture("title.png",0));
+	bg->setSize(640,480);
+	bg->setTranslate(Vector(320,240,0));
+	bg->setTint(Color(0,0,0));
+	bg->animAdd(new TintFader(Color(1,1,1),Color(1.0f/60.0f,1.0f/60.0f,1.0f/60.0f)));
+	m_scene->subAdd(bg);
 	
-	is->setSize(240,200);
-	ml->setSize(240,240);
-	is->setTranslate(Vector(160,200,0));
-	ml->setTranslate(Vector(480,220,0));
-	is->addTexture(new Texture("maps/BlapOut/classic.png",1));
-	ml->addItem("Classic");
-	is->addTexture(new Texture("maps/BlapOut/buggy.png",1));
-	ml->addItem("Buggy");
-	is->addTexture(new Texture("maps/BlapOut/blapberry.png",1));
-	ml->addItem("Blapberry Pie");
-	is->selectTexture(0);
+	ml = new menuList(new Texture("title_box.png",0), new Texture("title_bar.png",0), fnt);
+	ml->setSize(120,86);
+	ml->setTranslate(Vector(320,240,-0.1));
+	ml->addItem("New Game");
+	ml->addItem("Addons");
+	ml->addItem("Options");
+	ml->addItem("Quit");
 	ml->selectItem(0);
-	m_scene->subAdd(is);
+	ml->setTint(Color(0,0,0,0));
+	ml->animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/60.0f,1.0f/60.0f,1.0f/60.0f,1.0f/60.0f)));
 	m_scene->subAdd(ml);
 	
 	m_selection=0;
-	m_menuItems=3;
+	m_menuItems=4;
 	m_repeatDelay=0;
 }
 
@@ -73,6 +70,8 @@ void TitleScreen::inputEvent(const Event & evt) {
 		case Event::EvtKeypress:
 			switch(evt.key) {
 				case Event::KeySelect:
+					bg->animAdd(new TintFader(Color(0,0,0),Color(-1.0f/60.0f,-1.0f/60.0f,-1.0f/60.0f)));
+					ml->animAdd(new TintFader(Color(0,0,0,0),Color(-1.0f/60.0f,-1.0f/60.0f,-1.0f/60.0f,-1.0f/60.0f)));
 					startExit();
 					break;
 				case Event::KeyUp:
@@ -81,7 +80,6 @@ void TitleScreen::inputEvent(const Event & evt) {
 						if(m_selection<0) {
 							m_selection=0;
 						} else {
-							is->selectTexture(m_selection);
 							ml->selectItem(m_selection);
 							m_repeatDelay=2;
 						}
@@ -95,7 +93,6 @@ void TitleScreen::inputEvent(const Event & evt) {
 						if(m_selection>=m_menuItems) {
 							m_selection=m_menuItems-1;
 						} else {
-							is->selectTexture(m_selection);
 							ml->selectItem(m_selection);
 							m_repeatDelay=2;
 						}

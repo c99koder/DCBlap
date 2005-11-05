@@ -71,11 +71,6 @@ extern "C" int tiki_main(int argc, char **argv) {
 	Tiki::init(argc, argv);
 	Hid::callbackReg(tkCallback, NULL);
 	
-	//Music
-	Tiki::Audio::VorbisStream bgm;
-	bgm.load("game.ogg", false);
-	bgm.start();
-	
 	objects_init();
 	hud_init();
 	player_axis_x[0]=0;
@@ -103,8 +98,6 @@ extern "C" int tiki_main(int argc, char **argv) {
 	}
 
 	// Shut down Tiki
-	bgm.stop();
-
 	Tiki::shutdown();
 	
 	return 0;

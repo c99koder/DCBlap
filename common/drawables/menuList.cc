@@ -28,10 +28,10 @@ using namespace Tiki::GL;
 
 menuList::menuList(Texture *bg, Texture *bar, Font *fnt) {
 	m_bg=new Banner(Banner::Trans,bg);
-	m_bg->setAlpha(0.4);
+	m_bg->setAlpha(0.4f);
 	subAdd(m_bg);
 	m_bar=new Banner(Banner::Trans,bar);
-	m_bar->setAlpha(0.4);
+	m_bar->setAlpha(0.4f);
 	subAdd(m_bar);
 	m_fnt=fnt;
 }
@@ -40,6 +40,7 @@ void menuList::setSize(float w, float h) {
 	m_w=w;
 	m_h=h;
 	m_bg->setSize(m_w,m_h);
+	m_bar->setSize(m_w,22);
 }
 
 void menuList::addItem(char *text) {
@@ -59,11 +60,10 @@ void menuList::draw(ObjType list) {
 	
 	if(list==Trans) {
 		m_fnt->setSize(20);
-		m_fnt->setAlpha(1.0);
-		m_fnt->setColor(Color(1,1,1));
+		m_fnt->setColor(getTint());
 		if(m_itemList.size() > 0) {
 			for(item_iter = m_itemList.begin(); item_iter != m_itemList.end(); item_iter++) {
-				m_fnt->draw(getTranslate() + Vector(-m_w/2,-m_h/2 - 4 + ((i+1)*22),1),*(item_iter));
+				m_fnt->draw(getTranslate() + Vector(-m_w/2,-m_h/2 - 4 + ((i+1)*22),-0.2),*(item_iter));
 				i++;
 			}
 		}
@@ -71,6 +71,6 @@ void menuList::draw(ObjType list) {
 }
 
 void menuList::nextFrame(uint64 tm) {
-	m_bar->setSize(m_w,22);
 	m_bar->setTranslate(Vector(0,-m_h/2 - 11 + ((m_currentItem+1)*22),0));
+	Drawable::nextFrame(tm);
 }

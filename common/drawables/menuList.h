@@ -17,6 +17,9 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
+#ifndef _MENULIST_H
+#define _MENULIST_H
+
 #include <Tiki/font.h>
 #include "Tiki/drawables/banner.h"
 #include <vector>
@@ -41,3 +44,5 @@ private:
 	Font *m_fnt;										//Font to draw with
 	float	m_w, m_h;									//Width and height of menu
 };
+
+#endif

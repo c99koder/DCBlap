@@ -19,6 +19,7 @@
 
 #include "imageSet.h"
 #include "menuList.h"
+#include "GameSelect.h"
 
 class TitleScreen : public GenericMenu {
 public:
@@ -26,8 +27,10 @@ public:
 protected:
 	void inputEvent(const Event & evt);
 private:
-	imageSet *is;
-	menuList *ml;
+	GameSelect gs;
+	RefPtr<menuList> ml;
+	RefPtr<Banner> bg;
+	
 	int m_selection;
 	int m_menuItems;
 	int m_repeatDelay;
