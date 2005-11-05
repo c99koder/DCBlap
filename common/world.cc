@@ -32,7 +32,6 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <time.h>
-#include <kos_w32.h>
 #endif
 #ifdef DREAMCAST
 #include <kos.h>
@@ -43,6 +42,7 @@
 #ifdef TIKI
 #include <Tiki/tiki.h>
 #include <Tiki/texture.h>
+#include <Tiki/file.h>
 
 using namespace Tiki;
 using namespace Tiki::GL;
@@ -60,38 +60,17 @@ using namespace Tiki::GL;
 #include <algorithm> //required for std::swap
 #include <vector>
 
-#define ByteSwap5(x) ByteSwap((unsigned char *) &x,sizeof(x))
-
-inline void ByteSwap(unsigned char * b, int n)
-{
-#ifdef MACOS
-#ifdef __i386__
-#warning X86 not swapping
-#else
-	register int i = 0;
-	register int j = n-1;
-	while (i<j)
-	{
-		std::swap(b[i], b[j]);
-		i++, j--;
-	}
-#endif
-#endif
-}
-
-//std::vector<Texture> texture_list;
-Texture *texture_list[20];
+std::vector< RefPtr<Texture> > texture_list;
 
 void free_world_textures() {
-/*	std::vector<Texture>::iterator tex_iter;
+	std::vector< RefPtr<Texture> >::iterator tex_iter;
 	for(tex_iter = texture_list.begin(); tex_iter != texture_list.end(); tex_iter++) {
-		(*tex_iter).destroy();
+		(*tex_iter)->destroy();
 		tex_iter=texture_list.erase(tex_iter);
-	}*/
+	}
 }
 
 
-void draw_md2(char *filename, int texid, float mx, float my, float mz, float rx, float ry, float rz, int frame1, int frame2, int blendpos, int blendcount);
 int ent_cnt=0;
 
 struct entity *entity_list=NULL;
@@ -99,62 +78,53 @@ struct entity *entity_list=NULL;
 void destroy_param_list(struct param *p) {
   struct param *cur=p;
   struct param *prev=NULL;
-  //printf("==begin param free==\n");
+
   while(cur!=NULL) {
     prev=cur;
     cur=cur->next;
-    //printf("Freeing: %s = %s\n",prev->name,prev->value);
     free(prev->name);
     free(prev->value);
     free(prev);
   }
-  //printf("--end param free--\n");
 }
 
 void destroy_poly_list(struct poly *p) {
   struct poly *cur=p;
   struct poly *prev=NULL;
 
-  //printf("==begin poly free==\n");
   while(cur!=NULL) {
     prev=cur;
     cur=cur->next;
     free(prev);
   }
-  //printf("--end poly free--\n");
 }
 
 void destroy_world() {
   struct entity *ent=entity_list;
   struct entity *prev=NULL;
 
-  //printf("==begin world free==\n");
-
   while(ent!=NULL) {
-    //printf("Destroying a %s\n",ent->type);
     destroy_param_list(ent->param_list);
     destroy_poly_list(ent->poly_list);
-    //printf("Free model..\n");
     if(ent->model!=NULL) delete ent->model;
-    //printf("Free program..\n");
     if(ent->prog!=NULL) free(ent->prog);
     free(ent->type);
+		/*
+		 * TODO: Free the textures!
+		 */
     
     prev=ent;
     ent=ent->next;
-    //printf("Free ent..\n");
     free(prev);
   }
   free_world_textures();
   run_reset_callbacks();
   entity_list=NULL;
-  //printf("--end world free--\n");
 }
 
 void broadcast_message(struct entity *from, char *message) {
   struct entity *current=entity_list;
   while(current!=NULL) {
-    //send_message(current,from,message);
     if(current->message) current->message(current,from,message);
     current=current->next;
   }
@@ -242,33 +212,34 @@ void load_world(char *filename) {
   struct poly *cur_poly=NULL;
   struct poly *prev_poly=NULL;
   unsigned int ent,pol,vert,tex_id;
-	Texture *tex;
+	RefPtr<Texture> tex;
+	File worldFile;
   
-  //fd=open(filename,O_RDONLY);
-	//if(fd==-1) {
-		sprintf(texname,"maps/%s",filename);
-		printf("Loading: %s\n",texname);
-		fd=open(texname,O_RDONLY);
-	//}
-  fs_read(fd,&texcount,sizeof(unsigned int));
-		ByteSwap5(texcount);
-		printf("Textures: %i\n",texcount);
+	sprintf(texname,"maps/%s",filename);
+	printf("Loading: %s\n",texname);
+	worldFile.open(texname,"rb");
+	/*
+	 * TODO: Check isValid plzkthx!
+	 */
 
+	//Load textures
+	worldFile.readle32(&texcount,1);
+	printf("Textures: %i\n",texcount);
   for(i=0;i<texcount;i++) {
     k=0;
     do {
-      read(fd,&texname[k],sizeof(char));
+			worldFile.read(&texname[k],1);
+			//Convert to lowercase
 			if(texname[k] >= 'A' && texname[k] <= 'Z') texname[k] += 32;
       k++;
     } while(texname[k-1]!='\0');
-    //load_texture(texname,i);
 		strcat(texname,".png");
-		tex=new Texture;
-		tex->loadFromFile(texname,0);
-		texture_list[i]=tex;
+		tex=new Texture(texname,0);
+		texture_list.push_back(tex);
   }
-  fs_read(fd,&entcount,sizeof(unsigned int));
-	ByteSwap5(entcount);
+	
+	//Load entities
+	worldFile.readle32(&entcount,1);
 	printf("Entities: %i\n",entcount);
   for(ent=0;ent<entcount;ent++) {
     //printf("Loading entity %i...\n",ent);
@@ -285,38 +256,41 @@ void load_world(char *filename) {
     cur_ent->xmax=0;
     cur_ent->ymax=0;
     cur_ent->zmax=0;
-	cur_ent->deleted=0;
+		cur_ent->deleted=0;
     cur_ent->prog=NULL;
+		
+		//Load type
     k=0;
     do {
-      fs_read(fd,&texname[k],sizeof(char));
+      worldFile.read(&texname[k],1);
       k++;
     } while(texname[k-1]!='\0');
     cur_ent->type=(char *)malloc(strlen(texname)+1);
     strcpy(cur_ent->type,texname);
     //printf("Type: %s\n",texname);
-    fs_read(fd,&paramcount,sizeof(unsigned int));
-		ByteSwap5(paramcount);
+		
+		//Load parameters
+		worldFile.readle32(&paramcount,1);
     cur_ent->param_list=NULL;
     prev_param=NULL;
     for(i=0;i<paramcount;i++) {
       cur_param=(struct param *)malloc(sizeof(struct param));
       if(prev_param==NULL) {
-	cur_ent->param_list=cur_param;
+				cur_ent->param_list=cur_param;
       } else {
-	prev_param->next=cur_param;
+				prev_param->next=cur_param;
       }
       k=0;
       do {
-	fs_read(fd,&texname[k],sizeof(char));
-	k++;
+				worldFile.read(&texname[k],1);
+				k++;
       } while(texname[k-1]!='\0');
       cur_param->name=(char *)malloc(strlen(texname)+1);
       strcpy(cur_param->name,texname);
       k=0;
       do {
-	fs_read(fd,&texname[k],sizeof(char));
-	k++;
+				worldFile.read(&texname[k],1);
+				k++;
       } while(texname[k-1]!='\0');
       cur_param->value=(char *)malloc(strlen(texname)+1);
       strcpy(cur_param->value,texname);
@@ -339,53 +313,48 @@ void load_world(char *filename) {
       cur_ent->yrot=0;
       cur_ent->zrot=0;
     }
-    fs_read(fd,&polycount,sizeof(unsigned int));
-		ByteSwap5(polycount);
+		
+		//Load polygons
+		worldFile.readle32(&polycount,1);
     prev_poly=NULL;
     for(pol=0;pol<polycount;pol++) {
       cur_poly=(struct poly *)malloc(sizeof(struct poly));
       if(cur_poly==NULL) { printf("Out of memory!\n"); return; }
       if(prev_poly==NULL) {
-	cur_ent->poly_list=cur_poly;
+				cur_ent->poly_list=cur_poly;
       } else {
-	prev_poly->next=cur_poly;
+				prev_poly->next=cur_poly;
       }
-      fs_read(fd,&tex_id,sizeof(unsigned int));
-			ByteSwap5(tex_id);
+			worldFile.readle32(&tex_id,1);
 			cur_poly->tex=texture_list[tex_id];
-      fs_read(fd,&cur_poly->vert_count,sizeof(unsigned int));
-			ByteSwap5(cur_poly->vert_count);
+			worldFile.readle32(&cur_poly->vert_count,1);
+
 //printf("Polygon %i: texid: %i vert_count: %i\n",pol,cur_poly->tex_id,cur_poly->vert_count);
       for(vert=0;vert<cur_poly->vert_count;vert++) {
-	fs_read(fd,(char *)&cur_poly->point[vert].x,sizeof(float));
-	ByteSwap5(cur_poly->point[vert].x);
-	fs_read(fd,(char *)&cur_poly->point[vert].y,sizeof(float));
-	ByteSwap5(cur_poly->point[vert].y);
-	fs_read(fd,(char *)&cur_poly->point[vert].z,sizeof(float));
-	ByteSwap5(cur_poly->point[vert].z);
-	fs_read(fd,(char *)&cur_poly->point[vert].s,sizeof(float));
-	ByteSwap5(cur_poly->point[vert].s);
-	fs_read(fd,(char *)&cur_poly->point[vert].t,sizeof(float));
-	ByteSwap5(cur_poly->point[vert].t);
-	cur_poly->point[vert].x-=cur_ent->x;
-	cur_poly->point[vert].y-=cur_ent->y;
-	cur_poly->point[vert].z-=cur_ent->z;
-	if(pol==0&&vert==0) {
-	  xmax=cur_poly->point[vert].x;
-	  ymax=cur_poly->point[vert].y;
-	  zmax=cur_poly->point[vert].z;
+				worldFile.readle32(&cur_poly->point[vert].x,1);
+				worldFile.readle32(&cur_poly->point[vert].y,1);
+				worldFile.readle32(&cur_poly->point[vert].z,1);
+				worldFile.readle32(&cur_poly->point[vert].s,1);
+				worldFile.readle32(&cur_poly->point[vert].t,1);
+				cur_poly->point[vert].x-=cur_ent->x;
+				cur_poly->point[vert].y-=cur_ent->y;
+				cur_poly->point[vert].z-=cur_ent->z;
+				if(pol==0&&vert==0) {
+					xmax=cur_poly->point[vert].x;
+					ymax=cur_poly->point[vert].y;
+					zmax=cur_poly->point[vert].z;
           xmin=cur_poly->point[vert].x;
           ymin=cur_poly->point[vert].y;
           zmin=cur_poly->point[vert].z;
-	} else {
-	  if(cur_poly->point[vert].x>xmax) xmax=cur_poly->point[vert].x;
-          if(cur_poly->point[vert].y>ymax) ymax=cur_poly->point[vert].y;
-          if(cur_poly->point[vert].z>zmax) zmax=cur_poly->point[vert].z;
-          if(cur_poly->point[vert].x<xmin) xmin=cur_poly->point[vert].x;
-          if(cur_poly->point[vert].y<ymin) ymin=cur_poly->point[vert].y;
-          if(cur_poly->point[vert].z<zmin) zmin=cur_poly->point[vert].z;
-	}  
-      }
+				} else {
+					if(cur_poly->point[vert].x>xmax) xmax=cur_poly->point[vert].x;
+					if(cur_poly->point[vert].y>ymax) ymax=cur_poly->point[vert].y;
+					if(cur_poly->point[vert].z>zmax) zmax=cur_poly->point[vert].z;
+					if(cur_poly->point[vert].x<xmin) xmin=cur_poly->point[vert].x;
+					if(cur_poly->point[vert].y<ymin) ymin=cur_poly->point[vert].y;
+					if(cur_poly->point[vert].z<zmin) zmin=cur_poly->point[vert].z;
+				}  
+			}
       cur_poly->next=NULL;
       prev_poly=cur_poly;
       cur_poly=cur_poly->next;
@@ -454,7 +423,7 @@ void load_world(char *filename) {
     cur_ent=cur_ent->next;
   }
   printf("World load complete.\n");
-  fs_close(fd);
+	worldFile.close();
 }
 
 void pause_world(bool mode) {
