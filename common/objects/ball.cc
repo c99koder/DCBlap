@@ -229,6 +229,7 @@ void ball_message(struct entity *me, struct entity *them, char *message) {
           set_hud(2,320-(txt_width("Press Start")/2),244,"Press Start",1,1,1);
           set_prop(wld,"next_map","none");
           broadcast_message(me,"win");
+					lose_flag=1;
         }
       } else {
         them->arg1++; //give the goal a point

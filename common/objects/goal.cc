@@ -32,6 +32,7 @@ using namespace Tiki::GL;
 #include "hud.h"
 
 extern struct entity *wld;
+extern bool win_flag;
 
 void goal_create(struct entity *me) {
   me->arg2=atoi(get_prop(me,"num"));
@@ -46,6 +47,7 @@ void goal_callback(struct entity *me, float gt) {
     sprintf(txt,"Player %0.f wins!",me->arg2);
     set_hud(0,320-(txt_width(txt)/2),240-16,txt,1,1,1);
     set_hud(1,320-(txt_width("Press Start")/2),244,"Press Start",1,1,1);
+		win_flag=1;
   }
   if(me->paused==1) return;
   sprintf(txt,"Player %0.f: %0.f",me->arg2,me->arg1);

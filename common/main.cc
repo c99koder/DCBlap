@@ -76,7 +76,6 @@ void tkCallback(const Hid::Event & evt, void * data) {
 		}
 	}
 	if(evt.type == Hid::Event::EvtKeypress) {
-		printf("Key:%i\n",evt.key);
 		if(evt.key == 13) {
 			if(win_flag || lose_flag) {
 				playing = false;
