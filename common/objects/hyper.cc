@@ -58,7 +58,7 @@ extern CSound *sfx_hyper;
 #endif
 #ifdef TIKI
 extern Sound *sfx_bounce;
-Sound *sfx_hyper=NULL
+Sound *sfx_hyper=NULL;
 #endif
 
 extern bool enable_sound;

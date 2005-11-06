@@ -72,9 +72,6 @@ void slowdown_reset() {
 }
 
 void slowdown_create(struct entity *me) {
-  int fd;
-  struct entity *ent;
-  char tmp[100];
   me->model=new md2Model;
   me->model->Load("slowdown.md2");
   if(slowdown_tex==NULL) slowdown_tex = new Texture("slowdown.png",0);
@@ -98,6 +95,7 @@ void slowdown_create(struct entity *me) {
 #endif
 #ifdef TIKI
 	if(sfx_slowdown==NULL) sfx_slowdown = new Sound("slowdown.wav");
+#endif
 }
 
 #ifndef M_PI

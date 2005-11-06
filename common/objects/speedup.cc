@@ -71,9 +71,6 @@ void speedup_reset() {
 }
 
 void speedup_create(struct entity *me) {
-  int fd;
-  struct entity *ent;
-  char tmp[100];
   me->model=new md2Model;
   me->model->Load("speedup.md2");
 	if(speedup_tex==NULL) speedup_tex=new Texture("speedup.png",0);
