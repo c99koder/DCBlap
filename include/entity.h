@@ -102,7 +102,7 @@ struct entity *create_new_entity(char *type, float x, float y, float z, float xr
 int ent_count(char *type);
 
 //Load a world file
-void load_world(char *filename);
+void load_world(const char *filename);
 
 //Free a world
 void destroy_world();

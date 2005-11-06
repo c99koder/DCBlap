@@ -18,4 +18,4 @@
  */
 
 //Load a map and initialize the global object pointers
-void game_init(char *filename);
+void game_init(const char *filename);

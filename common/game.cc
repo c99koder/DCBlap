@@ -45,7 +45,7 @@ int ballmax=0;
 
 void set_doublespeed(int speed) { doublespeed=speed; }
 
-void game_init(char *filename) {
+void game_init(const char *filename) {
 	load_world(filename);
 	
 	g1=find_ent_by_prop("goal","num","1");

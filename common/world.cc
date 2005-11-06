@@ -189,7 +189,7 @@ void set_world_path(char *path) {
 }
 
 
-void load_world(char *filename) {
+void load_world(const char *filename) {
   int i,k,fd;
   float tmp;
   float xmin=0,ymin=0,zmin=0;
