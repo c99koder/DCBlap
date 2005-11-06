@@ -149,7 +149,7 @@ void speedup_message(struct entity *me, struct entity *them, char *message) {
 	if(enable_sound) Mix_PlayChannel(-1,sfx_bounce,0);
 #endif
 #ifdef TIKI
-	if(enable_sound) sfx_speedup->play();
+	if(enable_sound) sfx_bounce->play();
 #endif
       me->x-=me->arg1;
 	  	if(me->arg5==0) {
