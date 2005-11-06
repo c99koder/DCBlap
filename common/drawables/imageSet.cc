@@ -34,6 +34,9 @@ imageSet::imageSet() {
 }
 
 imageSet::~imageSet() {
+	while(!m_textureList.empty()) {
+		m_textureList.pop_back();
+	}
 }
 
 void imageSet::addTexture(Texture * tex) {
