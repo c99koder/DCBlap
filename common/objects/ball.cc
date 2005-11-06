@@ -82,7 +82,11 @@ void ball_create(struct entity *me) {
   HRESULT hr;
 #endif
   me->model=new md2Model;
-	me->model->Load("ball.md2");
+	if(get_prop(me,"model")!=NULL) {
+		me->model->Load(get_prop(me,"model"));
+	} else {
+		me->model->Load("ball.md2");
+	}
 	if(ball_tex==NULL) ball_tex= new Texture("ball.png",0);
 	me->tex=ball_tex;
 	me->blendcount=1;
@@ -91,7 +95,7 @@ void ball_create(struct entity *me) {
   me->blendpos=0;
   me->model->SetFrame(0,0,0,1);
 	if(get_prop(me,"speed")) {
-		me->arg3=atoi(get_prop(me,"speed"));
+		me->arg3=atoi(get_prop(me,"speed"))+4;
 	} else {
 		me->arg3=3;
 		me->arg6=1;
@@ -159,9 +163,9 @@ void ball_update(struct entity *me, float gt) {
   char buf[100];
   if(ball_spin) {
     me->yrot+=6 * gt * 40;
-    me->xrot+=6 * gt * 40;
+    //me->xrot+=6 * gt * 40;
     if(me->yrot>360) me->yrot=0;
-    if(me->xrot>360) me->xrot=0;
+    //if(me->xrot>360) me->xrot=0;
   }
 
   if(me->paused==1) return;
