@@ -115,7 +115,7 @@ void run_reset_callbacks() {
   struct callback_list_node *current=callback_list;
   while(current!=NULL) {
 	  if(current->reset!=NULL) {
-			printf("Running reset for %s\n",current->type);
+			//printf("Running reset for %s\n",current->type);
 			current->reset();
 		}
 	  current=current->next;
