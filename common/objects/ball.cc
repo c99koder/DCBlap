@@ -82,7 +82,7 @@ void ball_create(struct entity *me) {
 #endif
   me->model=new md2Model;
 	me->model->Load("ball.md2");
-	if(ball_tex==NULL) new Texture("ball.png",0);
+	if(ball_tex==NULL) ball_tex= new Texture("ball.png",0);
 	me->tex=ball_tex;
 	me->blendcount=1;
   me->anim_start=me->model->anim_start("stand");
