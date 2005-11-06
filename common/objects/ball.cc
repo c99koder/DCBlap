@@ -60,6 +60,7 @@ CSound*        sfx_score=NULL;
 #endif
 #ifdef TIKI
 Sound *sfx_bounce=NULL;
+Sound *sfx_score=NULL;
 #endif
 extern bool enable_sound;
 extern struct entity *wld;
@@ -140,10 +141,13 @@ void ball_create(struct entity *me) {
 #endif
 #ifdef TIKI
 	if(sfx_bounce==NULL) sfx_bounce = new Sound("bounce.wav");
+	if(sfx_score==NULL) sfx_score = new Sound("score.wav");
 #endif
 }
 
+#ifndef M_PI
 #define M_PI 3.141592653589793238
+#endif
 
 #ifdef WIN32
 extern SOCKET net_socket;
@@ -238,6 +242,9 @@ void ball_message(struct entity *me, struct entity *them, char *message) {
 #endif
 #ifdef LINUX
 	    if(enable_sound) Mix_PlayChannel(-1,sfx_score,0);
+#endif
+#ifdef TIKI
+	    if(enable_sound) sfx_score->play();
 #endif
       me->arg2=0;
       broadcast_message(me,"reset");
