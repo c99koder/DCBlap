@@ -80,8 +80,7 @@ void render_HUD() {
 	
   for(i=0;i<7;i++) {
     if(hud[i].label[0]!='\0') {
-			fnt->setAlpha(0.4);
-			fnt->setColor(Color(0,0,0));
+			fnt->setColor(Color(0,0,0,0.4));
 			fnt->draw(Vector(hud[i].x+3,hud[i].y+3,0),hud[i].label);
 			fnt->setAlpha(1.0);
 			fnt->setColor(Color(hud[i].r,hud[i].g,hud[i].b));
@@ -97,11 +96,11 @@ void render_HUD() {
 		if(status_alpha>1) inout=3;
     if(viscount>10) { inout=2; viscount=0; }
 		if(status_alpha<0) inout=0;
-		fnt->setAlpha(status_alpha-.2f);
 		fnt->setColor(Color(0,0,0));
+		fnt->setAlpha(status_alpha-.2f);
 		fnt->draw(Vector(320-(txt_width(status_text)/2)+2,228+2,0),status_text);
-		fnt->setAlpha(status_alpha);
 		fnt->setColor(Color(status_r,status_g,status_b));
+		fnt->setAlpha(status_alpha);
 		fnt->draw(Vector(320-(txt_width(status_text)/2),228,0),status_text);
   }
 	//printf("---render_HUD()\n");
