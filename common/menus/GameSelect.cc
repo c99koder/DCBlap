@@ -47,17 +47,35 @@ GameSelect::GameSelect() {
 	ml->setTranslate(Vector(480,220,-0.1));
 	is->addTexture(new Texture("maps/BlapOut/classic.png",0));
 	ml->addItem("Classic");
-	is->addTexture(new Texture("maps/BlapOut/buggy.png",0));
-	ml->addItem("Buggy");
-	is->addTexture(new Texture("maps/BlapOut/blapberry.png",0));
-	ml->addItem("Blapberry Pie");
+	m_levelList.push_back(*new string("BlapOut/classic.wld"));
+	is->addTexture(new Texture("maps/BlapOut/swirl.png",0));
+	ml->addItem("Swirl");
+	m_levelList.push_back(*new string("BlapOut/swirl.wld"));
+	is->addTexture(new Texture("maps/MultiBlapOut/m1.png",0));
+	ml->addItem("m1");
+	m_levelList.push_back(*new string("MultiBlapOut/m1.wld"));
+	is->addTexture(new Texture("maps/Traditional/classic.png",0));
+	ml->addItem("Classic");
+	m_levelList.push_back(*new string("Traditional/classic.wld"));
+	is->addTexture(new Texture("maps/Traditional/beamride.png",0));
+	ml->addItem("BeamRide");
+	m_levelList.push_back(*new string("Traditional/beamride.wld"));
+	is->addTexture(new Texture("maps/Traditional/beamride.png",0));
+	ml->addItem("Plasma");
+	m_levelList.push_back(*new string("Traditional/beamride.wld"));
+	is->addTexture(new Texture("maps/Traditional/lake.png",0));
+	ml->addItem("Lake");
+	m_levelList.push_back(*new string("Traditional/lake.wld"));
+	is->addTexture(new Texture("maps/Other/airhockey1.png",0));
+	ml->addItem("AirHockey1");
+	m_levelList.push_back(*new string("Other/airhockey1.wld"));
 	is->selectTexture(0);
 	ml->selectItem(0);
 	m_scene->subAdd(is);
 	m_scene->subAdd(ml);
 	
 	m_selection=0;
-	m_menuItems=3;
+	m_menuItems=8;
 	m_repeatDelay=0;
 }
 

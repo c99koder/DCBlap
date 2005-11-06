@@ -17,6 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
+#include <vector> 
 #include "imageSet.h"
 #include "menuList.h"
 
@@ -24,10 +25,11 @@ class GameSelect : public GenericMenu {
 public:
 	GameSelect();
 	void FadeIn();
-	int getSelection() { return m_selection; }
+	string getSelection() { return m_levelList[m_selection]; }
 protected:
 	void inputEvent(const Event & evt);
 private:
+	std::vector<string> m_levelList;
 	RefPtr<Banner> bg;
 	RefPtr<imageSet> is;
 	RefPtr<menuList> ml;
