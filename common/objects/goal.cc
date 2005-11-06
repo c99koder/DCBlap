@@ -57,6 +57,10 @@ void goal_callback(struct entity *me, float gt) {
     set_hud(1,440,30,txt,1,1,1);
     break;
   }
+	if(wld->arg2>0) {
+		sprintf(txt,"Balls: %i",(int)wld->arg1);
+		set_hud(1,440,30,txt,1,(float)wld->arg1/((float)wld->arg2/1.2f),(float)wld->arg1/(float)wld->arg2);
+	}
   /*sprintf(txt,"Health: %f%%",me->arg3);
   switch((int)me->arg2) {
   case 1:
