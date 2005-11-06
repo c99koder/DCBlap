@@ -108,9 +108,6 @@ void destroy_world() {
     if(ent->model!=NULL) delete ent->model;
     if(ent->prog!=NULL) free(ent->prog);
     free(ent->type);
-		/*
-		 * TODO: Free the textures!
-		 */
     
     prev=ent;
     ent=ent->next;
@@ -630,7 +627,6 @@ void update_world(float gt) {
 			free(ent2->type);
 			if(ent2->prog) free(ent2->prog);
       if(ent2->model!=NULL) delete ent2->model;
-			if(ent2->tex!=NULL) delete ent2->tex;
 			free(ent2);
 			ent2=NULL;
 			cur_ent=entity_list;

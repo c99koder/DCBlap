@@ -26,6 +26,7 @@
 class imageSet : public Banner {
 public:
 	imageSet();
+	~imageSet();
 	void addTexture(Texture * tex); //Add a texture
 	void selectTexture(int num); //Select the active texture
 	

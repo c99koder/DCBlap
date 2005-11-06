@@ -31,7 +31,7 @@ using namespace Tiki::GL;
 #include "entity.h"
 #include "objects.h"
 
-Font *fnt;
+RefPtr<Font> fnt;
 
 int inout=0;
 char status_text[256];

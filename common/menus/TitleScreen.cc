@@ -28,35 +28,53 @@ using namespace Tiki::GL;
 
 #include "TitleScreen.h"
 
-extern Font *fnt;
+extern RefPtr<Font> fnt;
 
 TitleScreen::TitleScreen() {
 	GenericMenu::GenericMenu();
-	
-	setBgm("menu.ogg",0);
 
-	bg = new Banner(Drawable::Opaque,new Texture("title.png",0));
+	bg = new imageSet;
+	bg->addTexture(new Texture("title.png",0));
+	bg->addTexture(new Texture("rt/1.png",0));
+	bg->addTexture(new Texture("rt/2.png",0));
+	bg->addTexture(new Texture("rt/3.png",0));
+	bg->addTexture(new Texture("rt/4.png",0));
+	bg->addTexture(new Texture("rt/5.png",0));
+	bg->addTexture(new Texture("rt/6.png",0));
+	bg->addTexture(new Texture("rt/7.png",0));
+	bg->addTexture(new Texture("rt/8.png",0));
+	bg->addTexture(new Texture("rt/9.png",0));
+	bg->addTexture(new Texture("rt/10.png",0));
+	bg->addTexture(new Texture("rt/11.png",0));
+	bg->addTexture(new Texture("rt/12.png",0));
+	bg->addTexture(new Texture("rt/13.png",0));
+	bg->selectTexture(rand()%14);
 	bg->setSize(640,480);
 	bg->setTranslate(Vector(320,240,0));
-	bg->setTint(Color(0,0,0));
-	bg->animAdd(new TintFader(Color(1,1,1),Color(1.0f/60.0f,1.0f/60.0f,1.0f/60.0f)));
 	m_scene->subAdd(bg);
 	
 	ml = new menuList(new Texture("title_box.png",0), new Texture("title_bar.png",0), fnt);
-	ml->setSize(120,86);
-	ml->setTranslate(Vector(320,240,-0.1));
+	ml->setSize(120,88);
+	ml->setTranslate(Vector(320,240,0));
 	ml->addItem("New Game");
 	ml->addItem("Addons");
 	ml->addItem("Options");
 	ml->addItem("Quit");
 	ml->selectItem(0);
-	ml->setTint(Color(0,0,0,0));
-	ml->animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/60.0f,1.0f/60.0f,1.0f/60.0f,1.0f/60.0f)));
 	m_scene->subAdd(ml);
 	
 	m_selection=0;
 	m_menuItems=4;
 	m_repeatDelay=0;
+}
+
+void TitleScreen::FadeIn() {
+	bg->setTint(Color(0,0,0));
+	bg->animAdd(new TintFader(Color(1,1,1),Color(1.0f/60.0f,1.0f/60.0f,1.0f/60.0f)));
+	ml->setTint(Color(0,0,0,0));
+	ml->animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/60.0f,1.0f/60.0f,1.0f/60.0f,1.0f/60.0f)));
+	
+	bg->selectTexture(rand()%14);
 }
 
 void TitleScreen::inputEvent(const Event & evt) {
@@ -100,8 +118,6 @@ void TitleScreen::inputEvent(const Event & evt) {
 						m_repeatDelay--;
 					}
 					break;
-				default:
-					printf("Key: %c\n",evt.key);
 			}
 			break;
 	}

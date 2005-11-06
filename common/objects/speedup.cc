@@ -56,13 +56,21 @@ extern CSound *sfx_speedup;
 
 extern bool enable_sound;
 
+Texture *speedup_tex=NULL;
+
+void speedup_reset() {
+	delete speedup_tex;
+	speedup_tex=NULL;
+}
+
 void speedup_create(struct entity *me) {
   int fd;
   struct entity *ent;
   char tmp[100];
   me->model=new md2Model;
   me->model->Load("speedup.md2");
-  me->tex=new Texture("speedup.png",0);
+	if(speedup_tex==NULL) speedup_tex=new Texture("speedup.png",0);
+  me->tex=speedup_tex;
   me->anim_start=me->model->anim_start("stand");
   me->anim_end=me->model->anim_end("stand");
   me->arg3=2;

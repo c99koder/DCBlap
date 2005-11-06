@@ -28,20 +28,20 @@
 class menuList : public Drawable {
 public:
 	menuList(Texture *bg, Texture *bar, Font *fnt);
+	~menuList();
 	void addItem(char *text);        //Add an item to the list
 	void selectItem(int num);        //Select an item
 	void setSize(float w, float h);  //Set the size of the menu
 	
 	//Overloaded functions
 	void draw(ObjType list);
-	void nextFrame(uint64 tm);
 	
 private:
 	std::vector<string> m_itemList; //List of menh items
 	int m_currentItem;							//Currently selected item
-	Banner *m_bg;										//Background banner
-	Banner *m_bar;									//Highlight bar banner
-	Font *m_fnt;										//Font to draw with
+	RefPtr<Banner> m_bg;						//Background banner
+	RefPtr<Banner> m_bar;						//Highlight bar banner
+	RefPtr<Font> m_fnt;							//Font to draw with
 	float	m_w, m_h;									//Width and height of menu
 };
 

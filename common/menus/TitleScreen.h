@@ -19,17 +19,17 @@
 
 #include "imageSet.h"
 #include "menuList.h"
-#include "GameSelect.h"
 
 class TitleScreen : public GenericMenu {
 public:
 	TitleScreen();
+	void FadeIn();
+	int getSelection() { return m_selection; }
 protected:
 	void inputEvent(const Event & evt);
 private:
-	GameSelect gs;
 	RefPtr<menuList> ml;
-	RefPtr<Banner> bg;
+	RefPtr<imageSet> bg;
 	
 	int m_selection;
 	int m_menuItems;

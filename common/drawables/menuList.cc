@@ -20,6 +20,7 @@
 #ifdef TIKI
 #include <Tiki/tiki.h>
 #include <Tiki/gl.h>
+#include <Tiki/anims/logxymover.h>
 
 using namespace Tiki;
 using namespace Tiki::GL;
@@ -36,6 +37,9 @@ menuList::menuList(Texture *bg, Texture *bar, Font *fnt) {
 	m_fnt=fnt;
 }
 
+menuList::~menuList() {
+}
+
 void menuList::setSize(float w, float h) {
 	m_w=w;
 	m_h=h;
@@ -50,6 +54,9 @@ void menuList::addItem(char *text) {
 
 void menuList::selectItem(int num) {
 	m_currentItem=num;
+	m_bar->animRemoveAll();
+	m_bar->animAdd(new LogXYMover(0,-m_h/2 - 11 + ((m_currentItem+1)*22)));
+	//m_bar->setTranslate(Vector(0,-m_h/2 - 11 + ((m_currentItem+1)*22),0));
 }
 
 void menuList::draw(ObjType list) {
@@ -68,9 +75,4 @@ void menuList::draw(ObjType list) {
 			}
 		}
 	}
-}
-
-void menuList::nextFrame(uint64 tm) {
-	m_bar->setTranslate(Vector(0,-m_h/2 - 11 + ((m_currentItem+1)*22),0));
-	Drawable::nextFrame(tm);
 }

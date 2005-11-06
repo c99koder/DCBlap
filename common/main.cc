@@ -41,13 +41,15 @@ using namespace Tiki::Audio;
 #include "TitleScreen.h"
 #include "GameSelect.h"
 
-volatile bool quitting = false;
+bool quitting = false;
+bool playing = false;
 
 int player_axis_x[4];
 
 void tkCallback(const Hid::Event & evt, void * data) {
 	if (evt.type == Hid::Event::EvtQuit) {
 		quitting = true;
+		playing=false;
 	}
 	if (evt.type == Hid::Event::EvtKeyDown) {
 		switch(evt.key) {
@@ -56,6 +58,12 @@ void tkCallback(const Hid::Event & evt, void * data) {
 				break;
 			case Hid::Event::KeyRight:
 				player_axis_x[0]=1;
+				break;
+			case 27:
+				playing = false;
+				break;
+			default:
+				printf("Key: %i\n",evt.key);
 				break;
 		}
 	}
@@ -100,6 +108,28 @@ extern "C" int tiki_main(int argc, char **argv) {
 			case 0:
 				gs->FadeIn();
 				gs->doMenu();
+
+				game_init("BlapOut/classic.wld");
+				update_world(0);
+
+				playing=true;
+				while (playing==true) {
+					update_world(0.01);
+					Frame::begin();
+					glClearDepth(1.0f);
+					glDepthFunc(GL_LEQUAL);
+					glClear(GL_COLOR_BUFFER_BIT+GL_DEPTH_BUFFER_BIT+GL_STENCIL_BUFFER_BIT);
+					glColor4f(1,1,1,1);
+					Frame::set3d();
+					render_world_solid();
+					Frame::transEnable();
+					render_world_trans();
+					Frame::set2d();
+					render_HUD();
+					Frame::finish();
+				}
+					
+				destroy_world();
 				break;
 			case 3:
 				quitting=true;
@@ -107,24 +137,7 @@ extern "C" int tiki_main(int argc, char **argv) {
 		}
 	}
 	
-	/*game_init("BlapOut/classic.wld");
-	update_world(0);
-	
-	while (!quitting) {
-		update_world(0.01);
-		Frame::begin();
-		glClearDepth(1.0f);
-		glDepthFunc(GL_LEQUAL);
-		glClear(GL_COLOR_BUFFER_BIT+GL_DEPTH_BUFFER_BIT+GL_STENCIL_BUFFER_BIT);
-		glColor4f(1,1,1,1);
-		Frame::set3d();
-		render_world_solid();
-		Frame::transEnable();
-		render_world_trans();
-		Frame::set2d();
-		render_HUD();
-		Frame::finish();
-	}*/
+	/**/
 
 	// Shut down Tiki
 	Tiki::shutdown();

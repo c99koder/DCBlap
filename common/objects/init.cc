@@ -33,7 +33,7 @@ void objects_init() {
   //register_callbacks("paddle_md2",paddlemd2_create,paddlemd2_update,paddlemd2_message,paddlemd2_reset);
   register_callbacks("ball",ball_create,ball_update,ball_message,NULL);
   register_callbacks("goal",goal_create,goal_callback,goal_message,NULL);
-  register_callbacks("speedup",speedup_create,speedup_update,speedup_message,NULL);
+  register_callbacks("speedup",speedup_create,speedup_update,speedup_message,speedup_reset);
   register_callbacks("slowdown",slowdown_create,slowdown_update,slowdown_message,NULL);
   register_callbacks("bonus_spawn",bonus_create,bonus_update,bonus_message,NULL);
   register_callbacks("hyper",hyper_create,hyper_update,hyper_message,NULL);

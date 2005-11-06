@@ -23,11 +23,14 @@
 class GameSelect : public GenericMenu {
 public:
 	GameSelect();
+	void FadeIn();
+	int getSelection() { return m_selection; }
 protected:
 	void inputEvent(const Event & evt);
 private:
-	imageSet *is;
-	menuList *ml;
+	RefPtr<Banner> bg;
+	RefPtr<imageSet> is;
+	RefPtr<menuList> ml;
 	int m_selection;
 	int m_menuItems;
 	int m_repeatDelay;

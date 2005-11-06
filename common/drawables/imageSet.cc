@@ -33,6 +33,9 @@ imageSet::imageSet() {
 	m_blend=0;
 }
 
+imageSet::~imageSet() {
+}
+
 void imageSet::addTexture(Texture * tex) {
 	m_textureList.push_back(tex);
 }
@@ -40,7 +43,7 @@ void imageSet::addTexture(Texture * tex) {
 void imageSet::selectTexture(int num) {
 	if(m_nextTexture!=-1) m_currentTexture=m_nextTexture;
 	m_nextTexture=num;
-	m_blend=1;
+	m_blend=1.0f;
 }
 
 void imageSet::draw(ObjType list) {
@@ -62,10 +65,11 @@ void imageSet::draw(ObjType list) {
 
 void imageSet::nextFrame(uint64 tm) {
 	if(m_blend>0) {
-		m_blend -= 0.02;
+		m_blend-=1.0f/20.0f;
 		if(m_blend<=0) {
 			m_currentTexture = m_nextTexture;
 			m_nextTexture=-1;
 		}
 	}
+	Drawable::nextFrame(tm);
 }

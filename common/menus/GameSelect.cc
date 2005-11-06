@@ -21,36 +21,35 @@
 #include "Tiki/genmenu.h"
 #include "Tiki/texture.h"
 #include "Tiki/drawables/banner.h"
+#include "Tiki/anims/tintfader.h"
+#include "Tiki/anims/logxymover.h"
 
 using namespace Tiki;
 using namespace Tiki::GL;
 
 #include "GameSelect.h"
 
-extern Font *fnt;
+extern RefPtr<Font> fnt;
 
 GameSelect::GameSelect() {
-	Texture *tex;
-	Banner *ban;
 	GenericMenu::GenericMenu();
 	
-	tex = new Texture("game_bg.png",1);
-	ban = new Banner(Drawable::Trans,tex);
+	bg = new Banner(Drawable::Opaque,new Texture("game_bg.png",0));
 	is = new imageSet;
-	ml = new menuList(new Texture("game_box.png",1), new Texture("game_bar.png",1), fnt);
-	ban->setSize(640,480);
-	ban->setTranslate(Vector(320,240,0));
-	m_scene->subAdd(ban);
+	ml = new menuList(new Texture("game_box.png",0), new Texture("game_bar.png",0), fnt);
+	bg->setSize(640,480);
+	bg->setTranslate(Vector(320,240,0));
+	m_scene->subAdd(bg);
 	
 	is->setSize(240,200);
 	ml->setSize(240,240);
-	is->setTranslate(Vector(160,200,0));
-	ml->setTranslate(Vector(480,220,0));
-	is->addTexture(new Texture("maps/BlapOut/classic.png",1));
+	is->setTranslate(Vector(160,200,-0.1));
+	ml->setTranslate(Vector(480,220,-0.1));
+	is->addTexture(new Texture("maps/BlapOut/classic.png",0));
 	ml->addItem("Classic");
-	is->addTexture(new Texture("maps/BlapOut/buggy.png",1));
+	is->addTexture(new Texture("maps/BlapOut/buggy.png",0));
 	ml->addItem("Buggy");
-	is->addTexture(new Texture("maps/BlapOut/blapberry.png",1));
+	is->addTexture(new Texture("maps/BlapOut/blapberry.png",0));
 	ml->addItem("Blapberry Pie");
 	is->selectTexture(0);
 	ml->selectItem(0);
@@ -60,6 +59,22 @@ GameSelect::GameSelect() {
 	m_selection=0;
 	m_menuItems=3;
 	m_repeatDelay=0;
+}
+
+void GameSelect::FadeIn() {
+	bg->setTint(Color(0,0,0));
+	bg->animAdd(new TintFader(Color(1,1,1),Color(1.0f/60.0f,1.0f/60.0f,1.0f/60.0f)));
+	ml->setTint(Color(0,0,0,0));
+	ml->setTranslate(Vector(640+240,220,-0.1));
+	ml->animAdd(new LogXYMover(480,220,10));
+	ml->animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/60.0f,1.0f/60.0f,1.0f/60.0f,1.0f/60.0f)));
+	is->setTint(Color(0,0,0,0));
+	is->setTranslate(Vector(-240,200,-0.1));
+	is->animAdd(new LogXYMover(160,200,10));
+	is->animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/60.0f,1.0f/60.0f,1.0f/60.0f,1.0f/60.0f)));
+	m_selection=0;
+	is->selectTexture(0);
+	ml->selectItem(0);
 }
 
 void GameSelect::inputEvent(const Event & evt) {
@@ -73,6 +88,11 @@ void GameSelect::inputEvent(const Event & evt) {
 		case Event::EvtKeypress:
 			switch(evt.key) {
 				case Event::KeySelect:
+					bg->animAdd(new TintFader(Color(0,0,0),Color(-1.0f/60.0f,-1.0f/60.0f,-1.0f/60.0f)));
+					ml->animAdd(new TintFader(Color(0,0,0,0),Color(-1.0f/60.0f,-1.0f/60.0f,-1.0f/60.0f,-1.0f/60.0f)));
+					ml->animAdd(new LogXYMover(640+240,220,10));
+					is->animAdd(new TintFader(Color(0,0,0,0),Color(-1.0f/60.0f,-1.0f/60.0f,-1.0f/60.0f,-1.0f/60.0f)));
+					is->animAdd(new LogXYMover(-240,220,10));
 					startExit();
 					break;
 				case Event::KeyUp:
