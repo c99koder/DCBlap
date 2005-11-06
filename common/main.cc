@@ -108,7 +108,8 @@ extern "C" int tiki_main(int argc, char **argv) {
 			case 0:
 				gs->FadeIn();
 				gs->doMenu();
-
+				if(quitting) break;
+				
 				game_init("BlapOut/classic.wld");
 				update_world(0);
 
