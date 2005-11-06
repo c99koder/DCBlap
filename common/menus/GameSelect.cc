@@ -60,9 +60,9 @@ GameSelect::GameSelect() {
 	is->addTexture(new Texture("maps/Traditional/beamride.png",0));
 	ml->addItem("BeamRide");
 	m_levelList.push_back(*new string("Traditional/beamride.wld"));
-	is->addTexture(new Texture("maps/Traditional/beamride.png",0));
+	is->addTexture(new Texture("maps/Traditional/plasma.png",0));
 	ml->addItem("Plasma");
-	m_levelList.push_back(*new string("Traditional/beamride.wld"));
+	m_levelList.push_back(*new string("Traditional/plasma.wld"));
 	is->addTexture(new Texture("maps/Traditional/lake.png",0));
 	ml->addItem("Lake");
 	m_levelList.push_back(*new string("Traditional/lake.wld"));
