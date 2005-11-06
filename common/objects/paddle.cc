@@ -91,6 +91,7 @@ void sys_render_finish();
 void render_bg(float a);
 
 extern int player_axis_x[];
+extern int player_axis_y[];
 
 void paddle_update(struct entity *me, float gt) {
   char buf[100];
@@ -135,6 +136,7 @@ void paddle_update(struct entity *me, float gt) {
 	if(playermap[(int)me->arg1-1]!=-1 && me->arg2==1) {
 		thinker[(int)me->arg1-1]=0;
 		if(me->arg5==2&&me->arg9==0) me->xvel+=(me->arg4/3) * player_axis_x[(int)me->arg1-1];
+		if(me->arg5==0&&me->arg9==0) me->zvel-=(me->arg4/3) * player_axis_y[(int)me->arg1-1];
     //if(me->arg5==0&&me->arg9==0) me->zvel+=me->arg4/3;
 /*      case START_BTN:
         if(me->arg9==1) {

@@ -45,6 +45,7 @@ bool quitting = false;
 bool playing = false;
 
 int player_axis_x[4];
+int player_axis_y[4];
 
 void tkCallback(const Hid::Event & evt, void * data) {
 	if (evt.type == Hid::Event::EvtQuit) {
@@ -59,6 +60,12 @@ void tkCallback(const Hid::Event & evt, void * data) {
 			case Hid::Event::KeyRight:
 				player_axis_x[0]=1;
 				break;
+			case Hid::Event::KeyUp:
+				player_axis_y[0]=-1;
+				break;
+			case Hid::Event::KeyDown:
+				player_axis_y[0]=1;
+				break;
 			case 27:
 				playing = false;
 				break;
@@ -67,6 +74,9 @@ void tkCallback(const Hid::Event & evt, void * data) {
 	if(evt.type == Hid::Event::EvtKeyUp) {
 		if(evt.key == Hid::Event::KeyLeft || evt.key == Hid::Event::KeyRight) {
 			player_axis_x[0]=0;
+		}
+		if(evt.key == Hid::Event::KeyUp || evt.key == Hid::Event::KeyDown) {
+			player_axis_y[0]=0;
 		}
 	}
 }
@@ -114,7 +124,7 @@ extern "C" int tiki_main(int argc, char **argv) {
 				bgm.stop();
 				bgm.load("game.ogg",1);
 				bgm.start();
-				game_init("BlapOut/classic.wld");
+				game_init(gs->getSelection().c_str());
 				update_world(0);
 
 				playing=true;
