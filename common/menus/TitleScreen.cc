@@ -70,9 +70,9 @@ TitleScreen::TitleScreen() {
 
 void TitleScreen::FadeIn() {
 	bg->setTint(Color(0,0,0));
-	bg->animAdd(new TintFader(Color(1,1,1),Color(1.0f/60.0f,1.0f/60.0f,1.0f/60.0f)));
+	bg->animAdd(new TintFader(Color(1,1,1),Color(1.0f/20.0f,1.0f/20.0f,1.0f/20.0f)));
 	ml->setTint(Color(0,0,0,0));
-	ml->animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/60.0f,1.0f/60.0f,1.0f/60.0f,1.0f/60.0f)));
+	ml->animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/20.0f,1.0f/20.0f,1.0f/20.0f,1.0f/20.0f)));
 	
 	bg->selectTexture(rand()%14);
 }
@@ -88,9 +88,10 @@ void TitleScreen::inputEvent(const Event & evt) {
 		case Event::EvtKeypress:
 			switch(evt.key) {
 				case Event::KeySelect:
-					bg->animAdd(new TintFader(Color(0,0,0),Color(-1.0f/60.0f,-1.0f/60.0f,-1.0f/60.0f)));
-					ml->animAdd(new TintFader(Color(0,0,0,0),Color(-1.0f/60.0f,-1.0f/60.0f,-1.0f/60.0f,-1.0f/60.0f)));
+					bg->animAdd(new TintFader(Color(0,0,0),Color(-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f)));
+					ml->animAdd(new TintFader(Color(0,0,0,0),Color(-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f)));
 					startExit();
+					m_exitSpeed=1.0f/20.0f;
 					break;
 				case Event::KeyUp:
 					if(m_repeatDelay==0) {

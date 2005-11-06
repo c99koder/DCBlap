@@ -62,16 +62,20 @@ GameSelect::GameSelect() {
 }
 
 void GameSelect::FadeIn() {
+	bg->animRemoveAll();
+	ml->animRemoveAll();
+	is->animRemoveAll();
+	
 	bg->setTint(Color(0,0,0));
-	bg->animAdd(new TintFader(Color(1,1,1),Color(1.0f/60.0f,1.0f/60.0f,1.0f/60.0f)));
+	bg->animAdd(new TintFader(Color(1,1,1),Color(1.0f/20.0f,1.0f/20.0f,1.0f/20.0f)));
 	ml->setTint(Color(0,0,0,0));
 	ml->setTranslate(Vector(640+240,220,-0.1));
 	ml->animAdd(new LogXYMover(480,220,10));
-	ml->animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/60.0f,1.0f/60.0f,1.0f/60.0f,1.0f/60.0f)));
+	ml->animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/20.0f,1.0f/20.0f,1.0f/20.0f,1.0f/20.0f)));
 	is->setTint(Color(0,0,0,0));
 	is->setTranslate(Vector(-240,200,-0.1));
 	is->animAdd(new LogXYMover(160,200,10));
-	is->animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/60.0f,1.0f/60.0f,1.0f/60.0f,1.0f/60.0f)));
+	is->animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/20.0f,1.0f/20.0f,1.0f/20.0f,1.0f/20.0f)));
 	m_selection=0;
 	is->selectTexture(0);
 	ml->selectItem(0);
@@ -88,12 +92,13 @@ void GameSelect::inputEvent(const Event & evt) {
 		case Event::EvtKeypress:
 			switch(evt.key) {
 				case Event::KeySelect:
-					bg->animAdd(new TintFader(Color(0,0,0),Color(-1.0f/60.0f,-1.0f/60.0f,-1.0f/60.0f)));
-					ml->animAdd(new TintFader(Color(0,0,0,0),Color(-1.0f/60.0f,-1.0f/60.0f,-1.0f/60.0f,-1.0f/60.0f)));
+					bg->animAdd(new TintFader(Color(0,0,0),Color(-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f)));
+					ml->animAdd(new TintFader(Color(0,0,0,0),Color(-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f)));
 					ml->animAdd(new LogXYMover(640+240,220,10));
-					is->animAdd(new TintFader(Color(0,0,0,0),Color(-1.0f/60.0f,-1.0f/60.0f,-1.0f/60.0f,-1.0f/60.0f)));
+					is->animAdd(new TintFader(Color(0,0,0,0),Color(-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f)));
 					is->animAdd(new LogXYMover(-240,220,10));
 					startExit();
+					m_exitSpeed=1.0f/20.0f;
 					break;
 				case Event::KeyUp:
 					if(m_repeatDelay==0) {
