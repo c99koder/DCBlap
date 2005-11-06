@@ -62,9 +62,6 @@ void tkCallback(const Hid::Event & evt, void * data) {
 			case 27:
 				playing = false;
 				break;
-			default:
-				printf("Key: %i\n",evt.key);
-				break;
 		}
 	}
 	if(evt.type == Hid::Event::EvtKeyUp) {
@@ -78,6 +75,7 @@ extern "C" int tiki_main(int argc, char **argv) {
 	TitleScreen *ts;
 	GameSelect *gs;
 	Banner *loading;
+	VorbisStream bgm;
 	
 	// Init Tiki
 	Tiki::init(argc, argv);
@@ -101,6 +99,9 @@ extern "C" int tiki_main(int argc, char **argv) {
 	gs=new GameSelect;
 
 	while(quitting==false) {
+		bgm.stop();
+		bgm.load("menu.ogg",1);
+		bgm.start();
 		ts->FadeIn();
 		ts->doMenu();
 		if(quitting) break;
@@ -110,6 +111,9 @@ extern "C" int tiki_main(int argc, char **argv) {
 				gs->doMenu();
 				if(quitting) break;
 				
+				bgm.stop();
+				bgm.load("game.ogg",1);
+				bgm.start();
 				game_init("BlapOut/classic.wld");
 				update_world(0);
 
@@ -138,8 +142,9 @@ extern "C" int tiki_main(int argc, char **argv) {
 		}
 	}
 	
-	/**/
-
+	delete gs;
+	delete ts;
+	
 	// Shut down Tiki
 	Tiki::shutdown();
 	
