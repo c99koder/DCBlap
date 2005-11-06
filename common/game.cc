@@ -30,6 +30,7 @@ using namespace Tiki::GL;
 
 bool win_flag=0;
 bool lose_flag=0;
+bool game_paused=0;
 int doublespeed=0;
 bool enable_sound=1;
 bool enable_music=0;
@@ -65,6 +66,7 @@ void game_init(const char *filename) {
 	win_flag=0;
 	lose_flag=0;
 	doublespeed=0;
+	game_paused=0;
 	
 	reset_HUD();
 	pause_world(1);

@@ -47,6 +47,10 @@ bool playing = false;
 int player_axis_x[4];
 int player_axis_y[4];
 
+extern bool win_flag;
+extern bool lose_flag;
+extern bool game_paused;
+
 void tkCallback(const Hid::Event & evt, void * data) {
 	if (evt.type == Hid::Event::EvtQuit) {
 		quitting = true;
@@ -69,6 +73,24 @@ void tkCallback(const Hid::Event & evt, void * data) {
 			case 27:
 				playing = false;
 				break;
+		}
+	}
+	if(evt.type == Hid::Event::EvtKeypress) {
+		printf("Key:%i\n",evt.key);
+		if(evt.key == 13) {
+			if(win_flag || lose_flag) {
+				playing = false;
+			} else {
+				if(game_paused) {
+					pause_world(0);
+					set_hud(3,320-(txt_width("Paused")/2),240-16,"",1,1,1);
+					game_paused=0;
+				} else {
+					pause_world(1);
+					set_hud(3,320-(txt_width("Paused")/2),240-16,"Paused",1,1,1);
+					game_paused=1;
+				}
+			}
 		}
 	}
 	if(evt.type == Hid::Event::EvtKeyUp) {
