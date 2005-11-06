@@ -62,10 +62,8 @@ using namespace Tiki::GL;
 std::vector< RefPtr<Texture> > texture_list;
 
 void free_world_textures() {
-	std::vector< RefPtr<Texture> >::iterator tex_iter;
-	for(tex_iter = texture_list.begin(); tex_iter != texture_list.end(); tex_iter++) {
-		(*tex_iter)->destroy();
-		tex_iter=texture_list.erase(tex_iter);
+	while(!texture_list.empty()) {
+		texture_list.pop_back();
 	}
 }
 
