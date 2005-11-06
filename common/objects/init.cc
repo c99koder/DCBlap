@@ -31,7 +31,7 @@ void objects_init() {
   register_callbacks("camera",camera_create,camera_callback,NULL,NULL);
   register_callbacks("paddle",paddle_create,paddle_update,paddle_message,paddle_reset);
   //register_callbacks("paddle_md2",paddlemd2_create,paddlemd2_update,paddlemd2_message,paddlemd2_reset);
-  register_callbacks("ball",ball_create,ball_update,ball_message,NULL);
+  register_callbacks("ball",ball_create,ball_update,ball_message,ball_reset);
   register_callbacks("goal",goal_create,goal_callback,goal_message,NULL);
   register_callbacks("speedup",speedup_create,speedup_update,speedup_message,speedup_reset);
   register_callbacks("slowdown",slowdown_create,slowdown_update,slowdown_message,slowdown_reset);

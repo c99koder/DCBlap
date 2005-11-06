@@ -66,13 +66,24 @@ extern struct entity *wld;
 extern bool lose_flag;
 extern int doublespeed;
 bool ball_spin=1;
+
+Texture *ball_tex=NULL;
+
+void ball_reset() {
+	if(ball_tex!=NULL) {
+		delete ball_tex;
+		ball_tex=NULL;
+	}
+}
+
 void ball_create(struct entity *me) {
 #ifdef WIN32
   HRESULT hr;
 #endif
   me->model=new md2Model;
 	me->model->Load("ball.md2");
-	me->tex=new Texture("ball.png",0);
+	if(ball_tex==NULL) new Texture("ball.png",0);
+	me->tex=ball_tex;
 	me->blendcount=1;
   me->anim_start=me->model->anim_start("stand");
   me->anim_end=me->model->anim_end("stand");
