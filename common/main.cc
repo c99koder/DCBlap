@@ -142,6 +142,8 @@ extern "C" int tiki_main(int argc, char **argv) {
 		}
 	}
 	
+	bgm.stop();
+	
 	delete gs;
 	delete ts;
 	
