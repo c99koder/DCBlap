@@ -34,9 +34,9 @@ void objects_init() {
   register_callbacks("ball",ball_create,ball_update,ball_message,NULL);
   register_callbacks("goal",goal_create,goal_callback,goal_message,NULL);
   register_callbacks("speedup",speedup_create,speedup_update,speedup_message,speedup_reset);
-  register_callbacks("slowdown",slowdown_create,slowdown_update,slowdown_message,NULL);
+  register_callbacks("slowdown",slowdown_create,slowdown_update,slowdown_message,slowdown_reset);
   register_callbacks("bonus_spawn",bonus_create,bonus_update,bonus_message,NULL);
-  register_callbacks("hyper",hyper_create,hyper_update,hyper_message,NULL);
+  register_callbacks("hyper",hyper_create,hyper_update,hyper_message,hyper_reset);
   register_callbacks("func_rotating",func_rotate_create,func_rotate_update,func_rotate_message,NULL);
   register_callbacks("water",water_create,NULL,NULL,NULL);
   register_callbacks("glass",water_create,NULL,NULL,NULL);

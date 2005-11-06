@@ -57,10 +57,20 @@ extern CSound *sfx_hyper;
 
 extern bool enable_sound;
 
+Texture *hyper_tex=NULL;
+
+void hyper_reset() {
+	if(hyper_tex!=NULL) {
+		delete hyper_tex;
+		hyper_tex=NULL;
+	}
+}
+
 void hyper_create(struct entity *me) {
   me->model=new md2Model;
   me->model->Load("hyper.md2");
-  me->tex=new Texture("hyper.png",0);
+  if(hyper_tex==NULL) hyper_tex=new Texture("hyper.png",0);
+	me->tex=hyper_tex;
   me->anim_start=me->model->anim_start("stand");
   me->anim_end=me->model->anim_end("stand");
   me->arg3=2;

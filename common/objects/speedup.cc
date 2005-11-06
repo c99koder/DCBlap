@@ -59,8 +59,10 @@ extern bool enable_sound;
 Texture *speedup_tex=NULL;
 
 void speedup_reset() {
-	delete speedup_tex;
-	speedup_tex=NULL;
+	if(speedup_tex!=NULL) {
+		delete speedup_tex;
+		speedup_tex=NULL;
+	}
 }
 
 void speedup_create(struct entity *me) {

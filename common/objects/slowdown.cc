@@ -56,13 +56,23 @@ extern CSound *sfx_slowdown;
 
 extern bool enable_sound;
 
+Texture *slowdown_tex=NULL;
+
+void slowdown_reset() {
+	if(slowdown_tex!=NULL) {
+		delete slowdown_tex;
+		slowdown_tex=NULL;
+	}
+}
+
 void slowdown_create(struct entity *me) {
   int fd;
   struct entity *ent;
   char tmp[100];
   me->model=new md2Model;
   me->model->Load("slowdown.md2");
-  me->tex=new Texture("slowdown.png",0);
+  if(slowdown_tex==NULL) slowdown_tex = new Texture("slowdown.png",0);
+	me->tex=slowdown_tex;
   me->anim_start=me->model->anim_start("stand");
   me->anim_end=me->model->anim_end("stand");
   me->arg3=2;
