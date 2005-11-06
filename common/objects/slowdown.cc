@@ -29,9 +29,11 @@
 #ifdef TIKI
 #include <Tiki/tiki.h>
 #include <Tiki/texture.h>
+#include <Tiki/sound.h>
 
 using namespace Tiki;
 using namespace Tiki::GL;
+using namespace Tiki::Audio;
 #endif
 #include <stdlib.h>
 #include <string.h>
@@ -52,6 +54,10 @@ extern Mix_Chunk *sfx_slowdown;
 extern CSoundManager *g_pSoundManager;
 extern CSound *sfx_bounce;
 extern CSound *sfx_slowdown;
+#endif
+#ifdef TIKI
+extern Sound *sfx_bounce;
+Sound *sfx_slowdown=NULL;
 #endif
 
 extern bool enable_sound;
@@ -90,9 +96,13 @@ void slowdown_create(struct entity *me) {
 #ifdef DREAMCAST
   if(sfx_slowdown==-1) sfx_slowdown=snd_sfx_load("slowdown.wav");
 #endif
+#ifdef TIKI
+	if(sfx_slowdown==NULL) sfx_slowdown = new Sound("slowdown.wav");
 }
 
+#ifndef M_PI
 #define M_PI 3.141592653589793238
+#endif
 
 void slowdown_update(struct entity *me, float gt) {
   me->yrot++;
@@ -130,6 +140,9 @@ void slowdown_message(struct entity *me, struct entity *them, char *message) {
 #ifdef LINUX
 	if(enable_sound) Mix_PlayChannel(-1,sfx_slowdown,0);
 #endif
+#ifdef TIKI
+	if(enable_sound) sfx_slowdown->play();
+#endif
     } else {
 #ifdef DREAMCAST
       if(enable_sound) snd_sfx_play(sfx_bounce,255,128);
@@ -139,6 +152,9 @@ void slowdown_message(struct entity *me, struct entity *them, char *message) {
 #endif
 #ifdef LINUX
 	if(enable_sound) Mix_PlayChannel(-1,sfx_bounce,0);
+#endif
+#ifdef TIKI
+	if(enable_sound) sfx_bounce->play();
 #endif
       me->x-=me->arg1;
 	  	if(me->arg5==0) {

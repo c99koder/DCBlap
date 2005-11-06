@@ -29,9 +29,11 @@
 #ifdef TIKI
 #include <Tiki/tiki.h>
 #include <Tiki/texture.h>
+#include <Tiki/sound.h>
 
 using namespace Tiki;
 using namespace Tiki::GL;
+using namespace Tiki::Audio;
 #endif
 #include <stdlib.h>
 #include <string.h>
@@ -53,6 +55,10 @@ extern Mix_Chunk *sfx_hyper;
 extern CSoundManager *g_pSoundManager;
 extern CSound *sfx_bounce;
 extern CSound *sfx_hyper;
+#endif
+#ifdef TIKI
+extern Sound *sfx_bounce;
+Sound *sfx_hyper=NULL
 #endif
 
 extern bool enable_sound;
@@ -87,9 +93,14 @@ void hyper_create(struct entity *me) {
 #ifdef DREAMCAST
  	if(sfx_hyper==-1) sfx_hyper=snd_sfx_load("hyper.wav");
 #endif
+#ifdef TIKI
+	if(sfx_hyper==NULL) sfx_hyper=new Sound("hyper.wav");
+#endif
 }
 
+#ifndef M_PI
 #define M_PI 3.141592653589793238
+#endif
 
 void hyper_update(struct entity *me, float gt) {
   me->yrot++;
@@ -127,6 +138,9 @@ void hyper_message(struct entity *me, struct entity *them, char *message) {
 #ifdef LINUX
 	    if(enable_sound) Mix_PlayChannel(-1,sfx_hyper,0);
 #endif
+#ifdef TIKI
+			if(enable_sound) sfx_hyper->play();
+#endif
     } else {
 #ifdef DREAMCAST
       if(enable_sound) snd_sfx_play(sfx_bounce,255,128);
@@ -136,6 +150,9 @@ void hyper_message(struct entity *me, struct entity *them, char *message) {
 #endif
 #ifdef LINUX
 	    if(enable_sound) Mix_PlayChannel(-1,sfx_bounce,0);
+#endif
+#ifdef TIKI
+			if(enable_sound) sfx_bounce->play();
 #endif
       me->x-=me->arg1;
 	  	if(me->arg5==0) {

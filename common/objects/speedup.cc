@@ -29,9 +29,11 @@
 #ifdef TIKI
 #include <Tiki/tiki.h>
 #include <Tiki/texture.h>
+#include <Tiki/sound.h>
 
 using namespace Tiki;
 using namespace Tiki::GL;
+using namespace Tiki::Audio;
 #endif
 #include <stdlib.h>
 #include <string.h>
@@ -53,7 +55,10 @@ extern CSoundManager *g_pSoundManager;
 extern CSound *sfx_bounce;
 extern CSound *sfx_speedup;
 #endif
-
+#ifdef TIKI
+extern Sound *sfx_bounce;
+Sound *sfx_speedup=NULL;
+#endif
 extern bool enable_sound;
 
 Texture *speedup_tex=NULL;
@@ -89,10 +94,14 @@ void speedup_create(struct entity *me) {
 #ifdef DREAMCAST
  	if(sfx_speedup==-1) sfx_speedup=snd_sfx_load("speedup.wav");
 #endif
-
+#ifdef TIKI
+	if(sfx_speedup==NULL) sfx_speedup=new Sound("speedup.wav");
+#endif
 }
 
+#ifndef M_PI
 #define M_PI 3.141592653589793238
+#endif
 
 void speedup_update(struct entity *me, float gt) {
   me->yrot++;
@@ -129,6 +138,9 @@ void speedup_message(struct entity *me, struct entity *them, char *message) {
 #ifdef LINUX
 	if(enable_sound) Mix_PlayChannel(-1,sfx_speedup,0);
 #endif
+#ifdef TIKI
+	if(enable_sound) sfx_speedup->play();
+#endif
     } else {
 #ifdef DREAMCAST
       if(enable_sound) snd_sfx_play(sfx_bounce,255,128);
@@ -138,6 +150,9 @@ void speedup_message(struct entity *me, struct entity *them, char *message) {
 #endif
 #ifdef LINUX
 	if(enable_sound) Mix_PlayChannel(-1,sfx_bounce,0);
+#endif
+#ifdef TIKI
+	if(enable_sound) sfx_speedup->play();
 #endif
       me->x-=me->arg1;
 	  	if(me->arg5==0) {
