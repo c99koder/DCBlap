@@ -37,7 +37,13 @@ void camera_create(struct entity *me) {
 }
 
 void camera_callback(struct entity *me, float gt) {
-  if(me->arg1>0) me->arg1-=gt * 40;
+  if(me->arg1>0) {
+		me->arg1-=gt * 40;
+		if(me->arg1<=0) {
+			set_status_text("Go!",1.0f,1.0f,1.0f);
+			pause_world(0);
+		}
+	}
   if(!cam_no_move) {
     if(me->arg1>0) {
       camera_x=me->x;
@@ -54,10 +60,6 @@ void camera_callback(struct entity *me, float gt) {
       camera_yrot=me->yrot-90;
       camera_zrot=me->zrot;
     }
-  }
-  if(me->arg1==1) {
-    set_status_text("Go!",1.0f,1.0f,1.0f);
-    pause_world(0);
   }
 }
 

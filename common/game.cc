@@ -26,6 +26,7 @@ using namespace Tiki::GL;
 #include <stdlib.h>
 #include "game.h"
 #include "entity.h"
+#include "hud.h"
 
 bool win_flag=0;
 bool lose_flag=0;
@@ -60,4 +61,11 @@ void game_init(const char *filename) {
   if(p2_score>0) g2->arg1=p2_score;
   if(ballcnt>0) wld->arg1=ballcnt;
   if(ballmax>0) wld->arg2=ballmax;	
+	
+	win_flag=0;
+	lose_flag=0;
+	doublespeed=0;
+	
+	reset_HUD();
+	pause_world(1);
 }
