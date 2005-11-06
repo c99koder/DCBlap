@@ -61,7 +61,9 @@ void paddlemd2_create(struct entity *me) {
   char tmp[40];
   me->model=new md2Model;
   me->model->Load(get_prop(me,"model"));
-  me->tex=new Texture(get_prop(me,"skin"),0);
+	strcpy(tmp,get_prop(me,"skin"));
+	strcat(tmp,".png");
+  me->tex=new Texture(tmp,0);
   me->anim_start=me->model->anim_start("stand");
   me->anim_end=me->model->anim_end("stand");
   me->blendcount=8;
@@ -92,7 +94,10 @@ bool sys_render_begin();
 void sys_render_finish();
 void render_bg(float a);
 
-void paddlemd2_update(struct entity *me) {
+extern int player_axis_x[];
+extern int player_axis_y[];
+
+void paddlemd2_update(struct entity *me, float gt) {
   char buf[100];
   float x=0,y=0;
 	if(ball==NULL) ball=find_ent_by_type("ball");
@@ -128,32 +133,17 @@ void paddlemd2_update(struct entity *me) {
 
   if(me->arg3>0) me->arg3--;
 
+	me->yrot--;
+	
   /*read_analog(&x,&y);
   me->xvel+=x;
   me->zvel-=y;
-
-	if(playermap[me->arg1-1]!=-1 && me->arg2==1) {
-    switch(get_controls(me->arg1-1)) {
-      case MOVE_RIGHT:
-        if(me->arg9==0) me->xvel+=me->arg4/3;
-        break;
-      case MOVE_UP:
-        if(me->arg9==0) me->zvel+=me->arg4/3;
-        break;
-      case MOVE_LEFT:
-        if(me->arg9==0) me->xvel-=me->arg4/3;
-        break;
-      case MOVE_DOWN:
-        if(me->arg9==0) me->zvel-=me->arg4/3;
-        me->zrot--;
-        break;
-      case FIRE_BTN:
-        if(me->arg3==0) {
-          me->arg3=10;
-          create_new_entity("bullet",me->x+me->xmax+30,me->y,me->z,0,me->yrot-90,0,"bullet.md2","bullet");
-        }
-        break;
-      case START_BTN:
+  */
+	if(playermap[(int)me->arg1-1]!=-1 && me->arg2==1) {
+		thinker[(int)me->arg1-1]=0;
+		if(me->arg9==0) me->xvel+=(me->arg4/3) * player_axis_x[(int)me->arg1-1];
+		if(me->arg9==0) me->zvel-=(me->arg4/3) * player_axis_y[(int)me->arg1-1];
+/*      case START_BTN:
         if(me->arg9==1) {
           if(me->arg5==10) {
             win_flag=1;
@@ -170,8 +160,7 @@ void paddlemd2_update(struct entity *me) {
         delay(.1);
         break;
       default:
-        thinker[me->arg1-1]=0;
-    }
+        thinker[me->arg1-1]=0;*/
     if(me->xvel>me->arg4*1.5) me->xvel=me->arg4*1.5;
     if(me->xvel<-me->arg4*1.5) me->xvel=-me->arg4*1.5;
     if(me->zvel>me->arg4*1.5) me->zvel=me->arg4*1.5;
@@ -204,36 +193,42 @@ void paddlemd2_update(struct entity *me) {
       socket_write_line(net_socket,buf);
     }
 #endif
-  } else {*/
+  } else {
     if(me->arg2==1) {
       switch((int)me->arg5) {
-      case 0:
-				if((int)ball->z>(int)me->z) {
-					thinker[(int)me->arg1-1]=me->arg4+(rand()%2);
-				}
-				if((int)ball->z<(int)me->z) {
-					thinker[(int)me->arg1-1]=-(me->arg4+(rand()%2));
-				}
-        break;
-      case 1:
-				if((int)ball->y>(int)me->y) {
-					thinker[(int)me->arg1-1]=me->arg4+(rand()%2);
-				}
-				if((int)ball->y<(int)me->y) {
-					thinker[(int)me->arg1-1]=-(me->arg4+(rand()%2));
-				}
-        break;
-      case 2:
-        if((int)ball->x>(int)me->x) {
-					thinker[(int)me->arg1-1]=me->arg4+(rand()%2);
-				}
-				if((int)ball->x<(int)me->x) {
-					thinker[(int)me->arg1-1]=-(me->arg4+(rand()%2));
-				}
-        break;
+				case 0:
+					if(ball->z>(me->z+(me->zmax*100)*1.2f)) {
+						thinker[(int)me->arg1-1]=me->arg4+(rand()%3);
+					}
+					else if(ball->z<(me->z+(me->zmin*100)*1.2f)) {
+						thinker[(int)me->arg1-1]=-(me->arg4+(rand()%3));
+					} else {
+						thinker[(int)me->arg1-1]=0;
+					}
+					break;
+				case 1:
+					if(ball->y>(me->y+(me->ymax*100)*1.2f)) {
+						thinker[(int)me->arg1-1]=me->arg4+(rand()%3);
+					}
+					else if(ball->y<(me->y+(me->ymin*100)*1.2f)) {
+						thinker[(int)me->arg1-1]=-(me->arg4+(rand()%3));
+					} else {
+						thinker[(int)me->arg1-1]=0;
+					}
+					break;
+				case 2:
+					if(ball->x>(me->x+(me->xmax*100)*1.2f)) {
+						thinker[(int)me->arg1-1]=me->arg4+(rand()%3);
+					}
+					else if(ball->x<(me->x+(me->xmin*100)*1.2f)) {
+						thinker[(int)me->arg1-1]=-(me->arg4+(rand()%3));
+					} else {
+						thinker[(int)me->arg1-1]=0;
+					}
+					break;
 			}
 		}
-  //}
+  }
   if(me->paused==1) return;
   me->alpha=1.0f;
 	switch((int)me->arg5) {

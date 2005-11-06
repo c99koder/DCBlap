@@ -194,27 +194,33 @@ void paddle_update(struct entity *me, float gt) {
     if(me->arg2==1 && tt > 0.1) {
       switch((int)me->arg5) {
       case 0:
-				if((int)ball->z>(int)me->z) {
-					thinker[(int)me->arg1-1]=me->arg4+(rand()%2);
+				if(ball->z>(me->z+(me->zmax*100)*0.4f)) {
+					thinker[(int)me->arg1-1]=me->arg4+4+(rand()%6);
 				}
-				if((int)ball->z<(int)me->z) {
-					thinker[(int)me->arg1-1]=-(me->arg4+(rand()%2));
+				else if(ball->z<(me->z+(me->zmin*100)*0.4f)) {
+					thinker[(int)me->arg1-1]=-(me->arg4+4+(rand()%6));
+				} else {
+					thinker[(int)me->arg1-1]=0;
 				}
         break;
       case 1:
-				if((int)ball->y>(int)me->y) {
-					thinker[(int)me->arg1-1]=me->arg4+(rand()%2);
+				if(ball->y>(me->y+(me->ymax*100)*0.4f)) {
+					thinker[(int)me->arg1-1]=me->arg4+4+(rand()%6);
 				}
-				if((int)ball->y<(int)me->y) {
-					thinker[(int)me->arg1-1]=-(me->arg4+(rand()%2));
+				else if(ball->y<(me->y+(me->ymin*100)*0.4f)) {
+					thinker[(int)me->arg1-1]=-(me->arg4+4+(rand()%6));
+				} else {
+					thinker[(int)me->arg1-1]=0;
 				}
         break;
       case 2:
-        if((int)ball->x>(int)me->x) {
-					thinker[(int)me->arg1-1]=me->arg4+(rand()%2);
+				if(ball->x>(me->x+(me->xmax*100)*0.4f)) {
+					thinker[(int)me->arg1-1]=me->arg4+4+(rand()%6);
 				}
-				if((int)ball->x<(int)me->x) {
-					thinker[(int)me->arg1-1]=-(me->arg4+(rand()%2));
+				else if(ball->x<(me->x+(me->xmin*100)*0.4f)) {
+					thinker[(int)me->arg1-1]=-(me->arg4+4+(rand()%6));
+				} else {
+					thinker[(int)me->arg1-1]=0;
 				}
         break;
 			}
@@ -352,6 +358,7 @@ void paddle_update(struct entity *me, float gt) {
 void paddle_message(struct entity *me, struct entity *them, char *message) {
   if(!strcmp(message,"reset")) {
     make_coordinates(get_prop(me,"origin"),&me->x,&me->y,&me->z);
+		thinker[(int)me->arg1-1]=0;
     //me->z=0;
   } else if(!strcmp(message,"win")) {
   	me->arg4=atoi(get_prop(me,"speed")); //undo the powerup changes
