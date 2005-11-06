@@ -38,6 +38,9 @@ menuList::menuList(Texture *bg, Texture *bar, Font *fnt) {
 }
 
 menuList::~menuList() {
+	while(!m_itemList.empty()) {
+		m_itemList.pop_back();
+	}
 }
 
 void menuList::setSize(float w, float h) {
