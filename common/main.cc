@@ -38,8 +38,8 @@ using namespace Tiki::Audio;
 #include "game.h"
 #include "hud.h"
 #include "objects.h"
-#include "TitleScreen.h"
-#include "GameSelect.h"
+#include "menus/TitleScreen.h"
+#include "menus/GameSelect.h"
 
 bool quitting = false;
 bool playing = false;
@@ -112,13 +112,19 @@ extern "C" int tiki_main(int argc, char **argv) {
 	Tiki::init(argc, argv);
 	Hid::callbackReg(tkCallback, NULL);
 	
-	loading = new Banner(Drawable::Opaque,new Texture("loading.png",0));
+	loading = new Banner(Drawable::Opaque,new Texture("loading.jpg",0));
 	loading->setSize(640,480);
 	loading->setTranslate(Vector(320,240,0));
 	
-	Frame::begin();
-	loading->draw(Drawable::Opaque);
-	Frame::finish();
+	for(int i=0; i<3; i++) {
+		Frame::begin();
+		glClearDepth(1.0f);
+		glDepthFunc(GL_LEQUAL);
+		glClear(GL_COLOR_BUFFER_BIT+GL_DEPTH_BUFFER_BIT);
+		glColor4f(1,1,1,1);	
+		loading->draw(Drawable::Opaque);
+		Frame::finish();
+	}
 	
 	objects_init();
 	hud_init();
@@ -126,10 +132,13 @@ extern "C" int tiki_main(int argc, char **argv) {
 
 	srand(time(0));
 	
-	ts=new TitleScreen;
-	gs=new GameSelect;
+	//ts=new TitleScreen;
+	//gs=new GameSelect;
 
-	while(quitting==false) {
+	//ts->FadeIn();
+	//ts->doMenu();	
+	
+	/*while(quitting==false) {
 		bgm.stop();
 		bgm.load("menu.ogg",1);
 		bgm.start();
@@ -145,7 +154,8 @@ extern "C" int tiki_main(int argc, char **argv) {
 				bgm.stop();
 				bgm.load("game.ogg",1);
 				bgm.start();
-				game_init(gs->getSelection().c_str());
+				game_init(gs->getSelection().c_str());*/
+				game_init("Traditional/classic.wld");
 				update_world(0);
 
 				playing=true;
@@ -154,7 +164,7 @@ extern "C" int tiki_main(int argc, char **argv) {
 					Frame::begin();
 					glClearDepth(1.0f);
 					glDepthFunc(GL_LEQUAL);
-					glClear(GL_COLOR_BUFFER_BIT+GL_DEPTH_BUFFER_BIT+GL_STENCIL_BUFFER_BIT);
+					glClear(GL_COLOR_BUFFER_BIT+GL_DEPTH_BUFFER_BIT);
 					glColor4f(1,1,1,1);
 					Frame::set3d();
 					render_world_solid();
@@ -166,7 +176,7 @@ extern "C" int tiki_main(int argc, char **argv) {
 				}
 					
 				destroy_world();
-				break;
+/*				break;
 			case 3:
 				quitting=true;
 				break;
@@ -177,7 +187,7 @@ extern "C" int tiki_main(int argc, char **argv) {
 	
 	delete gs;
 	delete ts;
-	
+	*/
 	// Shut down Tiki
 	Tiki::shutdown();
 	

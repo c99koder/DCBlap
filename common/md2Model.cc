@@ -28,8 +28,12 @@
 #ifdef LINUX
 #include <GL/gl.h>
 #endif
+#ifdef TIKI
 #ifdef MACOS
 #include <OpenGL/gl.h>
+#else
+#include <GL/gl.h>
+#endif
 #endif
 #include <string.h>
 #include <stdlib.h>

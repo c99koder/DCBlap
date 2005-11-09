@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		22171EAA0902C763001663B0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22171EA90902C763001663B0 /* main.m */; };
 		22171EAE0902C77E001663B0 /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 22171EAC0902C77E001663B0 /* Controller.m */; };
-		22171EB50902C792001663B0 /* Tiki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22171EB40902C792001663B0 /* Tiki.framework */; };
-		22171EBB0902C7B1001663B0 /* Tiki.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22171EB40902C792001663B0 /* Tiki.framework */; };
 		22171F320902C9C1001663B0 /* main.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22171F310902C9C1001663B0 /* main.cc */; };
 		22343EA4091A84CA00245FC3 /* menuList.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22343EA2091A84CA00245FC3 /* menuList.h */; };
 		22343EA5091A84CA00245FC3 /* menuList.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22343EA3091A84CA00245FC3 /* menuList.cc */; };
@@ -43,6 +41,7 @@
 		22DDC2E8091D1875008067D8 /* GameSelect.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22DDC2E4091D1875008067D8 /* GameSelect.h */; };
 		22DDC2E9091D1875008067D8 /* TitleScreen.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22DDC2E5091D1875008067D8 /* TitleScreen.cc */; };
 		22DDC2EA091D1875008067D8 /* TitleScreen.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22DDC2E6091D1875008067D8 /* TitleScreen.h */; };
+		22FAEA3C0921A691006D2888 /* Tiki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FAE9FF0921A691006D2888 /* Tiki.framework */; };
 		565FEC4F07B179CA00C4E23A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565FEC3907B179A100C4E23A /* Cocoa.framework */; };
 		565FEC5207B179D400C4E23A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565FEC3B07B179A100C4E23A /* OpenGL.framework */; };
 		565FEC6407B17BE200C4E23A /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 565FEC3407B1797F00C4E23A /* MainMenu.nib */; };
@@ -72,7 +71,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				22171EBB0902C7B1001663B0 /* Tiki.framework in CopyFiles */,
 				22690B860911210C0026D5BC /* imageSet.h in CopyFiles */,
 				22343EA4091A84CA00245FC3 /* menuList.h in CopyFiles */,
 				22DDC2E8091D1875008067D8 /* GameSelect.h in CopyFiles */,
@@ -86,7 +84,6 @@
 		22171EA90902C763001663B0 /* main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		22171EAB0902C77E001663B0 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = Controller.h; path = src/Controller.h; sourceTree = "<group>"; };
 		22171EAC0902C77E001663B0 /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = Controller.m; path = src/Controller.m; sourceTree = "<group>"; };
-		22171EB40902C792001663B0 /* Tiki.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Tiki.framework; path = ../../../tiki/osx/build/Default/Tiki.framework; sourceTree = SOURCE_ROOT; };
 		22171F310902C9C1001663B0 /* main.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cc; path = ../common/main.cc; sourceTree = SOURCE_ROOT; };
 		22343EA2091A84CA00245FC3 /* menuList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = menuList.h; path = ../common/drawables/menuList.h; sourceTree = SOURCE_ROOT; };
 		22343EA3091A84CA00245FC3 /* menuList.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = menuList.cc; path = ../common/drawables/menuList.cc; sourceTree = SOURCE_ROOT; };
@@ -142,6 +139,7 @@
 		22DDC2E4091D1875008067D8 /* GameSelect.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = GameSelect.h; path = ../common/menus/GameSelect.h; sourceTree = SOURCE_ROOT; };
 		22DDC2E5091D1875008067D8 /* TitleScreen.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = TitleScreen.cc; path = ../common/menus/TitleScreen.cc; sourceTree = SOURCE_ROOT; };
 		22DDC2E6091D1875008067D8 /* TitleScreen.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = TitleScreen.h; path = ../common/menus/TitleScreen.h; sourceTree = SOURCE_ROOT; };
+		22FAE9FF0921A691006D2888 /* Tiki.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Tiki.framework; path = ../../../tiki/osx/build/Development/Tiki.framework; sourceTree = SOURCE_ROOT; };
 		565FEC3507B1797F00C4E23A /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		565FEC3907B179A100C4E23A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		565FEC3B07B179A100C4E23A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
@@ -156,7 +154,7 @@
 			files = (
 				565FEC4F07B179CA00C4E23A /* Cocoa.framework in Frameworks */,
 				565FEC5207B179D400C4E23A /* OpenGL.framework in Frameworks */,
-				22171EB50902C792001663B0 /* Tiki.framework in Frameworks */,
+				22FAEA3C0921A691006D2888 /* Tiki.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,7 +320,7 @@
 		565FEC3007B1794A00C4E23A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				22171EB40902C792001663B0 /* Tiki.framework */,
+				22FAE9FF0921A691006D2888 /* Tiki.framework */,
 				565FEC3907B179A100C4E23A /* Cocoa.framework */,
 				565FEC3B07B179A100C4E23A /* OpenGL.framework */,
 			);
@@ -496,7 +494,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../../../tiki/osx/build/Default\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../../../tiki/osx/build/Default",
+					"$(SRCROOT)/../../../tiki/osx/build/Development",
+				);
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = G5;
@@ -531,7 +532,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../../../tiki/osx/build/Default\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../../../tiki/osx/build/Default",
+					"$(SRCROOT)/../../../tiki/osx/build/Development",
+				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
@@ -564,7 +568,10 @@
 		22752C2E08F01F7500DCB98C /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../../../tiki/osx/build/Default\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../../../tiki/osx/build/Default",
+					"$(SRCROOT)/../../../tiki/osx/build/Development",
+				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
@@ -597,10 +604,7 @@
 		22752C3008F01F7500DCB98C /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = ppc;
 				GCC_PREPROCESSOR_DEFINITIONS = TIKI;
 				GCC_USE_GCC3_PFE_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = (
@@ -623,10 +627,7 @@
 		22752C3108F01F7500DCB98C /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = ppc;
 				GCC_PREPROCESSOR_DEFINITIONS = TIKI;
 				GCC_USE_GCC3_PFE_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = (
@@ -649,10 +650,7 @@
 		22752C3208F01F7500DCB98C /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = ppc;
 				GCC_PREPROCESSOR_DEFINITIONS = TIKI;
 				GCC_USE_GCC3_PFE_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = (

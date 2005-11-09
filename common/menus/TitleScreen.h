@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
-#include "imageSet.h"
-#include "menuList.h"
+#include "drawables/imageSet.h"
+#include "drawables/menuList.h"
 
 class TitleScreen : public GenericMenu {
 public:

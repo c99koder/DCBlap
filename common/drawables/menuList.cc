@@ -48,6 +48,7 @@ void menuList::setSize(float w, float h) {
 	m_h=h;
 	m_bg->setSize(m_w,m_h);
 	m_bar->setSize(m_w,22);
+	m_bar->setTranslate(Vector(0,-m_h/2 - 11 + 22,0));
 }
 
 void menuList::addItem(char *text) {
@@ -59,7 +60,6 @@ void menuList::selectItem(int num) {
 	m_currentItem=num;
 	m_bar->animRemoveAll();
 	m_bar->animAdd(new LogXYMover(0,-m_h/2 - 11 + ((m_currentItem+1)*22)));
-	//m_bar->setTranslate(Vector(0,-m_h/2 - 11 + ((m_currentItem+1)*22),0));
 }
 
 void menuList::draw(ObjType list) {

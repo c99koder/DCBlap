@@ -18,8 +18,8 @@
  */
 
 #include <vector> 
-#include "imageSet.h"
-#include "menuList.h"
+#include "drawables/imageSet.h"
+#include "drawables/menuList.h"
 
 class GameSelect : public GenericMenu {
 public:

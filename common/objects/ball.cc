@@ -144,8 +144,8 @@ void ball_create(struct entity *me) {
   if(sfx_score==NULL) sfx_score=Mix_LoadWAV("score.wav");
 #endif
 #ifdef TIKI
-	if(sfx_bounce==NULL) sfx_bounce = new Sound("bounce.wav");
-	if(sfx_score==NULL) sfx_score = new Sound("score.wav");
+	//if(sfx_bounce==NULL) sfx_bounce = new Sound("bounce.wav");
+	//if(sfx_score==NULL) sfx_score = new Sound("score.wav");
 #endif
 }
 
@@ -249,7 +249,7 @@ void ball_message(struct entity *me, struct entity *them, char *message) {
 	    if(enable_sound) Mix_PlayChannel(-1,sfx_score,0);
 #endif
 #ifdef TIKI
-	    if(enable_sound) sfx_score->play();
+	    if(enable_sound && sfx_score!=NULL) sfx_score->play();
 #endif
       me->arg2=0;
       broadcast_message(me,"reset");
@@ -264,7 +264,7 @@ void ball_message(struct entity *me, struct entity *them, char *message) {
 	  if(enable_sound) Mix_PlayChannel(-1,sfx_bounce,0);
 #endif
 #ifdef TIKI
-		sfx_bounce->play();
+		if(enable_sound && sfx_bounce!=NULL) sfx_bounce->play();
 #endif
 #ifdef WIN32
     if(net_host==1&&net_socket!=-1) {

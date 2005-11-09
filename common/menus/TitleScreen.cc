@@ -35,7 +35,7 @@ TitleScreen::TitleScreen() {
 
 	bg = new imageSet;
 	bg->addTexture(new Texture("title.png",0));
-	bg->addTexture(new Texture("rt/1.png",0));
+	/*bg->addTexture(new Texture("rt/1.png",0));
 	bg->addTexture(new Texture("rt/2.png",0));
 	bg->addTexture(new Texture("rt/3.png",0));
 	bg->addTexture(new Texture("rt/4.png",0));
@@ -47,8 +47,8 @@ TitleScreen::TitleScreen() {
 	bg->addTexture(new Texture("rt/10.png",0));
 	bg->addTexture(new Texture("rt/11.png",0));
 	bg->addTexture(new Texture("rt/12.png",0));
-	bg->addTexture(new Texture("rt/13.png",0));
-	bg->selectTexture(rand()%14);
+	bg->addTexture(new Texture("rt/13.png",0));*/
+	bg->selectTexture(0/*rand()%14*/);
 	bg->setSize(640,480);
 	bg->setTranslate(Vector(320,240,0));
 	m_scene->subAdd(bg);
@@ -74,7 +74,7 @@ void TitleScreen::FadeIn() {
 	ml->setTint(Color(0,0,0,0));
 	ml->animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/20.0f,1.0f/20.0f,1.0f/20.0f,1.0f/20.0f)));
 	
-	bg->selectTexture(rand()%14);
+	bg->selectTexture(0/*rand()%14*/);
 }
 
 void TitleScreen::inputEvent(const Event & evt) {
