@@ -55,7 +55,7 @@ void reset_HUD() {
 }
 
 void hud_init() {
-	fnt=new Font("Helvetica_bold.txf");
+	fnt=new Font("helvetica_bold.txf");
 	
 	fnt->setSize(24);
 }

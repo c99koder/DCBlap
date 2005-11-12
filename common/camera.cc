@@ -17,7 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
-#include <tiki/tikimath.h>
+#include <Tiki/tiki.h>
+#include <Tiki/tikimath.h>
 
 using namespace Tiki::Math;
 
