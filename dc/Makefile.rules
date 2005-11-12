@@ -20,4 +20,4 @@ clean_subdirs: $(patsubst %, _clean_dir_%, $(SUBDIRS))
 $(patsubst %, _clean_dir_%, $(SUBDIRS)):
 	@$(MAKE) -C $(patsubst _clean_dir_%, %, $@) clean
 
-TIKI_BASE_LIBS=-ltiki -ljpeg -loggvorbisplay -lpng -lz -lkglx -lm
+TIKI_BASE_LIBS=-ltiki -ljpeg -loggvorbisplay -lpng -lz -lgl -lm

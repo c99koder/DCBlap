@@ -144,8 +144,8 @@ void ball_create(struct entity *me) {
   if(sfx_score==NULL) sfx_score=Mix_LoadWAV("score.wav");
 #endif
 #ifdef TIKI
-	//if(sfx_bounce==NULL) sfx_bounce = new Sound("bounce.wav");
-	//if(sfx_score==NULL) sfx_score = new Sound("score.wav");
+	if(sfx_bounce==NULL) sfx_bounce = new Sound("bounce.wav");
+	if(sfx_score==NULL) sfx_score = new Sound("score.wav");
 #endif
 }
 

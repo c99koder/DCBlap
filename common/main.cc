@@ -56,6 +56,12 @@ void tkCallback(const Hid::Event & evt, void * data) {
 		quitting = true;
 		playing=false;
 	}
+	if (evt.type == Hid::Event::EvtAttach) {
+		printf("Device attached: %s\n",evt.dev->getName().c_str());
+	}
+	if (evt.type == Hid::Event::EvtDetach) {
+		printf("Device Detached: %s\n",evt.dev->getName().c_str());
+	}
 	if (evt.type == Hid::Event::EvtKeyDown) {
 		switch(evt.key) {
 			case Hid::Event::KeyLeft:
@@ -112,36 +118,33 @@ extern "C" int tiki_main(int argc, char **argv) {
 	Tiki::init(argc, argv);
 	Hid::callbackReg(tkCallback, NULL);
 	
-	loading = new Banner(Drawable::Opaque,new Texture("loading.jpg",0));
+	loading = new Banner(Drawable::Opaque,new Texture("loading.png",1));
 	loading->setSize(640,480);
 	loading->setTranslate(Vector(320,240,0));
 	
 	for(int i=0; i<3; i++) {
 		Frame::begin();
-		glClearDepth(1.0f);
-		glDepthFunc(GL_LEQUAL);
-		glClear(GL_COLOR_BUFFER_BIT+GL_DEPTH_BUFFER_BIT);
-		glColor4f(1,1,1,1);	
+		//glClearDepth(1.0f);
+		//glDepthFunc(GL_LEQUAL);
+		//glClear(GL_COLOR_BUFFER_BIT+GL_DEPTH_BUFFER_BIT);
+		//glColor4f(1,1,1,1);	
 		loading->draw(Drawable::Opaque);
 		Frame::finish();
 	}
-	
+//return 0;
 	objects_init();
 	hud_init();
 	player_axis_x[0]=0;
 
 	srand(time(0));
 	
-	//ts=new TitleScreen;
-	//gs=new GameSelect;
-
-	//ts->FadeIn();
-	//ts->doMenu();	
+	ts=new TitleScreen;
+	gs=new GameSelect;
 	
-	/*while(quitting==false) {
-		bgm.stop();
-		bgm.load("menu.ogg",1);
-		bgm.start();
+	while(quitting==false) {
+		//bgm.stop();
+		//bgm.load("menu.ogg",1);
+		//bgm.start();
 		ts->FadeIn();
 		ts->doMenu();
 		if(quitting) break;
@@ -151,11 +154,10 @@ extern "C" int tiki_main(int argc, char **argv) {
 				gs->doMenu();
 				if(quitting) break;
 				
-				bgm.stop();
-				bgm.load("game.ogg",1);
-				bgm.start();
-				game_init(gs->getSelection().c_str());*/
-				game_init("Traditional/classic.wld");
+				//bgm.stop();
+				//bgm.load("game.ogg",1);
+				//bgm.start();
+				game_init(gs->getSelection().c_str());
 				update_world(0);
 
 				playing=true;
@@ -176,7 +178,7 @@ extern "C" int tiki_main(int argc, char **argv) {
 				}
 					
 				destroy_world();
-/*				break;
+				break;
 			case 3:
 				quitting=true;
 				break;
@@ -187,7 +189,7 @@ extern "C" int tiki_main(int argc, char **argv) {
 	
 	delete gs;
 	delete ts;
-	*/
+	
 	// Shut down Tiki
 	Tiki::shutdown();
 	

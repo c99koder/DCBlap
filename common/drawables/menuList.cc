@@ -73,7 +73,7 @@ void menuList::draw(ObjType list) {
 		m_fnt->setColor(getTint());
 		if(m_itemList.size() > 0) {
 			for(item_iter = m_itemList.begin(); item_iter != m_itemList.end(); item_iter++) {
-				m_fnt->draw(getTranslate() + Vector(-m_w/2,-m_h/2 - 4 + ((i+1)*22),-0.2),*(item_iter));
+				m_fnt->draw(getTranslate() + Vector(-m_w/2,-m_h/2 - 4 + ((i+1)*22),0.2),*(item_iter));
 				i++;
 			}
 		}

@@ -87,11 +87,11 @@ void GameSelect::FadeIn() {
 	bg->setTint(Color(0,0,0));
 	bg->animAdd(new TintFader(Color(1,1,1),Color(1.0f/20.0f,1.0f/20.0f,1.0f/20.0f)));
 	ml->setTint(Color(0,0,0,0));
-	ml->setTranslate(Vector(640+240,220,-0.1));
+	ml->setTranslate(Vector(640+240,220,0.1));
 	ml->animAdd(new LogXYMover(480,220,8));
 	ml->animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/20.0f,1.0f/20.0f,1.0f/20.0f,1.0f/20.0f)));
 	is->setTint(Color(0,0,0,0));
-	is->setTranslate(Vector(-240,200,-0.1));
+	is->setTranslate(Vector(-240,200,0.1));
 	is->animAdd(new LogXYMover(160,200,8));
 	is->animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/20.0f,1.0f/20.0f,1.0f/20.0f,1.0f/20.0f)));
 	m_selection=0;
