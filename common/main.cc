@@ -118,7 +118,7 @@ extern "C" int tiki_main(int argc, char **argv) {
 	Tiki::init(argc, argv);
 	Hid::callbackReg(tkCallback, NULL);
 	
-	loading = new Banner(Drawable::Opaque,new Texture("loading.png",1));
+	loading = new Banner(Drawable::Opaque,new Texture("loading.png",0));
 	loading->setSize(640,480);
 	loading->setTranslate(Vector(320,240,0));
 	
