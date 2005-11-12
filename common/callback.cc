@@ -17,13 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
-#ifdef TIKI
-#include <Tiki/tiki.h>
-#include <Tiki/texture.h>
-
-using namespace Tiki;
-using namespace Tiki::GL;
-#endif
 #include <string.h>
 #include <stdlib.h>
 #include "entity.h"

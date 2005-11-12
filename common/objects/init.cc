@@ -16,16 +16,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
-#ifdef TIKI
 #include <Tiki/tiki.h>
 #include <Tiki/texture.h>
 
 using namespace Tiki;
 using namespace Tiki::GL;
-#endif
+
 #include "objects.h"
 #include "callback.h"
-#define NULL 0
 
 void objects_init() {
   register_callbacks("camera",camera_create,camera_callback,NULL,NULL);

@@ -17,17 +17,6 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
-#ifdef WIN32
-#include <windows.h>
-#include <GL\gl.h>
-#endif
-#ifdef DREAMCAST
-#include <kos.h>
-#include <GL/gl.h>
-#endif
-#ifdef LINUX
-#include <GL/gl.h>
-#endif
 #ifdef TIKI
 #ifdef MACOS
 #include <OpenGL/gl.h>

@@ -17,9 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
-#ifdef TIKI
 #include <Tiki/tiki.h>
-#include <Tiki/plxcompat.h>
 #include <Tiki/gl.h>
 #include <Tiki/hid.h>
 #include <Tiki/oggvorbis.h>
@@ -27,12 +25,9 @@
 #include <Tiki/drawables/banner.h>
 
 using namespace Tiki;
-using namespace Tiki::Math;
 using namespace Tiki::GL;
-using namespace Tiki::GL::Plxcompat;
 using namespace Tiki::Hid;
 using namespace Tiki::Audio;
-#endif
 
 #include "entity.h"
 #include "game.h"
@@ -60,7 +55,7 @@ void tkCallback(const Hid::Event & evt, void * data) {
 		printf("Device attached: %s\n",evt.dev->getName().c_str());
 	}
 	if (evt.type == Hid::Event::EvtDetach) {
-		printf("Device Detached: %s\n",evt.dev->getName().c_str());
+		printf("Device detached: %s\n",evt.dev->getName().c_str());
 	}
 	if (evt.type == Hid::Event::EvtKeyDown) {
 		switch(evt.key) {

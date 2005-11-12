@@ -17,18 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
-#ifdef WIN32
-#include <windows.h>
-#include <dxerr9.h>
-#include "dsutil.h"
-#endif
-#ifdef DREAMCAST
-#include <kos.h>
-#endif
-#ifdef LINUX
-#include <SDL/SDL_mixer.h>
-#endif
-#ifdef TIKI
 #include <Tiki/tiki.h>
 #include <Tiki/texture.h>
 #include <Tiki/sound.h>
@@ -36,7 +24,7 @@
 using namespace Tiki;
 using namespace Tiki::GL;
 using namespace Tiki::Audio;
-#endif
+
 #include <stdlib.h>
 #include <string.h>
 #include "entity.h"
@@ -45,23 +33,9 @@ using namespace Tiki::Audio;
 #include "utils.h"
 #include "hud.h"
 
-#ifdef DREAMCAST
-sfxhnd_t sfx_bounce=-1;
-sfxhnd_t sfx_score=-1;
-#endif
-#ifdef LINUX
-Mix_Chunk *sfx_bounce=NULL;
-Mix_Chunk *sfx_score=NULL;
-#endif
-#ifdef WIN32
-extern CSoundManager *g_pSoundManager;
-CSound*        sfx_bounce=NULL;
-CSound*        sfx_score=NULL;
-#endif
-#ifdef TIKI
 Sound *sfx_bounce=NULL;
 Sound *sfx_score=NULL;
-#endif
+
 extern bool enable_sound;
 extern struct entity *wld;
 extern bool lose_flag;
@@ -78,9 +52,6 @@ void ball_reset() {
 }
 
 void ball_create(struct entity *me) {
-#ifdef WIN32
-  HRESULT hr;
-#endif
   me->model=new md2Model;
 	if(get_prop(me,"model")!=NULL) {
 		me->model->Load(get_prop(me,"model"));
@@ -127,36 +98,10 @@ void ball_create(struct entity *me) {
     me->arg2=-me->arg3;
     break;
   }
-#ifdef DREAMCAST
-  if(sfx_bounce==-1) sfx_bounce = snd_sfx_load("bounce.wav");
-  if(sfx_score==-1) sfx_score = snd_sfx_load("score.wav");
-#endif
-#ifdef WIN32
-  if(sfx_bounce==NULL) {
-    hr=g_pSoundManager->Create( &sfx_bounce, "bounce.wav", 0, GUID_NULL );
-  }
-  if(sfx_score==NULL) {
-    hr=g_pSoundManager->Create( &sfx_score, "score.wav", 0, GUID_NULL );
-  }
-#endif
-#ifdef LINUX
-  if(sfx_bounce==NULL) sfx_bounce=Mix_LoadWAV("bounce.wav");
-  if(sfx_score==NULL) sfx_score=Mix_LoadWAV("score.wav");
-#endif
-#ifdef TIKI
+
 	if(sfx_bounce==NULL) sfx_bounce = new Sound("bounce.wav");
 	if(sfx_score==NULL) sfx_score = new Sound("score.wav");
-#endif
 }
-
-#ifndef M_PI
-#define M_PI 3.141592653589793238
-#endif
-
-#ifdef WIN32
-extern SOCKET net_socket;
-extern bool net_host;
-#endif
 
 void ball_update(struct entity *me, float gt) {
   static int cnt=0;
@@ -176,16 +121,6 @@ void ball_update(struct entity *me, float gt) {
   } else {
     me->y+=me->arg2 * gt * 40;
   }
-#ifdef WIN32
-  cnt++;
-  if(cnt>3) {
-    if(net_host==1&&net_socket!=-1) {
-      sprintf(buf,"3,%i,%f,%f,%f,%i,%i,%i,%i,%i,%i,%i\n",me->id,me->x,me->y,me->z,me->arg1,me->arg2,me->arg3,me->arg4,me->arg5,me->arg6,me->arg7);
-      socket_write_line(net_socket,buf);
-    }
-    cnt=0;
-  }
-#endif
 }
 
 void ball_message(struct entity *me, struct entity *them, char *message) {
@@ -239,39 +174,11 @@ void ball_message(struct entity *me, struct entity *them, char *message) {
           me->arg1=-me->arg3;
         }
       }
-#ifdef DREAMCAST
-      if(enable_sound) snd_sfx_play(sfx_score,255,128);
-#endif
-#ifdef WIN32
-    if(enable_sound) sfx_score->Play(0,0);
-#endif
-#ifdef LINUX
-	    if(enable_sound) Mix_PlayChannel(-1,sfx_score,0);
-#endif
-#ifdef TIKI
 	    if(enable_sound && sfx_score!=NULL) sfx_score->play();
-#endif
       me->arg2=0;
       broadcast_message(me,"reset");
     } else {
-#ifdef DREAMCAST
-      if(enable_sound) snd_sfx_play(sfx_bounce,255,128);
-#endif
-#ifdef WIN32
-    if(enable_sound) sfx_bounce->Play(0,0);
-#endif
-#ifdef LINUX
-	  if(enable_sound) Mix_PlayChannel(-1,sfx_bounce,0);
-#endif
-#ifdef TIKI
-		if(enable_sound && sfx_bounce!=NULL) sfx_bounce->play();
-#endif
-#ifdef WIN32
-    if(net_host==1&&net_socket!=-1) {
-      sprintf(buf,"3,%i,%f,%f,%f,%i,%i,%i,%i,%i,%i,%i\n",me->id,me->x,me->y,me->z,me->arg1,me->arg2,me->arg3,me->arg4,me->arg5,me->arg6,me->arg7);
-      socket_write_line(net_socket,buf);
-    }
-#endif
+			if(enable_sound && sfx_bounce!=NULL) sfx_bounce->play();
       me->x-=me->arg1;
 	  	if(me->arg5==0) {
 		  	me->z-=me->arg2;

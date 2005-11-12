@@ -16,14 +16,10 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
-#include <math.h>
 
-#ifdef DREAMCAST
-#include <dc/fmath.h>
-#else
-#define fsin sin
-#define fcos cos
-#endif
+#include <tiki/tikimath.h>
+
+using namespace Tiki::Math;
 
 float camera_x=0.0f;
 float camera_y=0.0f;

@@ -16,19 +16,12 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
-#ifdef WIN32
-#include <windows.h>
-#endif
-#ifdef DREAMCAST
-#include <kos.h>
-#endif
-#ifdef TIKI
 #include <Tiki/tiki.h>
 #include <Tiki/texture.h>
 
 using namespace Tiki;
 using namespace Tiki::GL;
-#endif
+
 #include <string.h>
 #include <stdlib.h>
 #include "entity.h"
@@ -41,12 +34,6 @@ extern int thinker[];
 extern int playermap[];
 extern struct entity *ball;
 extern bool win_flag;
-
-#ifdef WIN32
-extern SOCKET net_socket;
-#else
-extern int net_socket;
-#endif
 
 void paddlemd2_reset() {
 	for(int i=0;i<4;i++) {
@@ -135,32 +122,10 @@ void paddlemd2_update(struct entity *me, float gt) {
 
 	me->yrot--;
 	
-  /*read_analog(&x,&y);
-  me->xvel+=x;
-  me->zvel-=y;
-  */
 	if(playermap[(int)me->arg1-1]!=-1 && me->arg2==1) {
 		thinker[(int)me->arg1-1]=0;
 		if(me->arg9==0) me->xvel+=(me->arg4/3) * player_axis_x[(int)me->arg1-1];
 		if(me->arg9==0) me->zvel-=(me->arg4/3) * player_axis_y[(int)me->arg1-1];
-/*      case START_BTN:
-        if(me->arg9==1) {
-          if(me->arg5==10) {
-            win_flag=1;
-          } else {
-            pause_world(0);
-            set_hud(3,320-(txt_width("Paused")/2),240-16,"",1,1,1);
-            me->arg9=0;
-          }
-        } else {
-          me->arg9=1;
-          pause_world(1);
-          set_hud(3,320-(txt_width("Paused")/2),240-16,"Paused",1,1,1);
-        }
-        delay(.1);
-        break;
-      default:
-        thinker[me->arg1-1]=0;*/
     if(me->xvel>me->arg4*1.5) me->xvel=me->arg4*1.5;
     if(me->xvel<-me->arg4*1.5) me->xvel=-me->arg4*1.5;
     if(me->zvel>me->arg4*1.5) me->zvel=me->arg4*1.5;
@@ -186,13 +151,6 @@ void paddlemd2_update(struct entity *me, float gt) {
       me->zvel+=me->arg4/8;
       if(me->xvel>0) me->zvel=0;
     }
-    
-#ifdef WIN32
-    if(net_socket!=-1 && thinker[me->arg1-1]!=0) {
-      sprintf(buf,"1,%i,%i\n",me->id,thinker[me->arg1-1]);
-      socket_write_line(net_socket,buf);
-    }
-#endif
   } else {
     if(me->arg2==1) {
       switch((int)me->arg5) {
@@ -242,7 +200,6 @@ void paddlemd2_update(struct entity *me, float gt) {
     me->x+=thinker[(int)me->arg1-1];
     break;
 	}
-  //if(me->arg1==1) put_camera(me->x,me->y+5,me->z,me->xrot,me->yrot-90,me->zrot);
 }
 
 void paddlemd2_message(struct entity *me, struct entity *them, char *message) {

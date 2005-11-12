@@ -16,17 +16,6 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
-#ifdef WIN32
-#include <windows.h>
-#include "dsutil.h"
-#endif
-#ifdef DREAMCAST
-#include <kos.h>
-#endif
-#ifdef LINUX
-#include <SDL/SDL_mixer.h>
-#endif
-#ifdef TIKI
 #include <Tiki/tiki.h>
 #include <Tiki/texture.h>
 #include <Tiki/sound.h>
@@ -34,7 +23,7 @@
 using namespace Tiki;
 using namespace Tiki::GL;
 using namespace Tiki::Audio;
-#endif
+
 #include <stdlib.h>
 #include <string.h>
 #include "entity.h"
@@ -42,23 +31,9 @@ using namespace Tiki::Audio;
 #include "camera.h"
 #include "hud.h"
 
-#ifdef DREAMCAST
-extern sfxhnd_t sfx_bounce;
-extern sfxhnd_t sfx_speedup;
-#endif
-#ifdef LINUX
-extern Mix_Chunk *sfx_bounce;
-extern Mix_Chunk *sfx_speedup;
-#endif
-#ifdef WIN32
-extern CSoundManager *g_pSoundManager;
-extern CSound *sfx_bounce;
-extern CSound *sfx_speedup;
-#endif
-#ifdef TIKI
 extern Sound *sfx_bounce;
 Sound *sfx_speedup=NULL;
-#endif
+
 extern bool enable_sound;
 
 Texture *speedup_tex=NULL;
@@ -85,20 +60,8 @@ void speedup_create(struct entity *me) {
 		me->arg2=-2+(rand()%5);
 	} while(me->arg1==0 || me->arg2==0);
   me->arg3=1+rand()%3;
-#ifdef WIN32
-  if(sfx_speedup==NULL) g_pSoundManager->Create( &sfx_speedup, "speedup.wav", 0, GUID_NULL );
-#endif
-#ifdef DREAMCAST
- 	if(sfx_speedup==-1) sfx_speedup=snd_sfx_load("speedup.wav");
-#endif
-#ifdef TIKI
 	if(sfx_speedup==NULL) sfx_speedup=new Sound("speedup.wav");
-#endif
 }
-
-#ifndef M_PI
-#define M_PI 3.141592653589793238
-#endif
 
 void speedup_update(struct entity *me, float gt) {
   me->yrot++;
@@ -118,7 +81,7 @@ void speedup_message(struct entity *me, struct entity *them, char *message) {
     me->anim_start=me->model->anim_start("stand");
     me->anim_end=me->model->anim_end("stand");
     me->blendpos=0;
-	me->yrot=0;
+		me->yrot=0;
   } else if(!strcmp(message,"thud")) {
     if(!strcmp(them->type,"goal")) {
 			me->deleted=1;
@@ -126,31 +89,9 @@ void speedup_message(struct entity *me, struct entity *them, char *message) {
 			me->deleted=1;
 			set_status_text("Speed Up!",.1,.9,.1);
       them->arg4++; //increase speed
-#ifdef DREAMCAST
-      if(enable_sound) snd_sfx_play(sfx_speedup,255,128);
-#endif
-#ifdef WIN32
-	  if(enable_sound) sfx_speedup->Play(0,0);
-#endif
-#ifdef LINUX
-	if(enable_sound) Mix_PlayChannel(-1,sfx_speedup,0);
-#endif
-#ifdef TIKI
-	if(enable_sound) sfx_speedup->play();
-#endif
+			if(enable_sound) sfx_speedup->play();
     } else {
-#ifdef DREAMCAST
-      if(enable_sound) snd_sfx_play(sfx_bounce,255,128);
-#endif
-#ifdef WIN32
-	  if(enable_sound) sfx_bounce->Play(0,0);
-#endif
-#ifdef LINUX
-	if(enable_sound) Mix_PlayChannel(-1,sfx_bounce,0);
-#endif
-#ifdef TIKI
-	if(enable_sound) sfx_bounce->play();
-#endif
+			if(enable_sound) sfx_bounce->play();
       me->x-=me->arg1;
 	  	if(me->arg5==0) {
 		  	me->z-=me->arg2;

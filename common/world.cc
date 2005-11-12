@@ -16,37 +16,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
-#ifdef WIN32
-#include <windows.h>
-#include <io.h>
-#include <fcntl.h>
-#include <malloc.h>
-#include <stdio.h>
-#include <kos_w32.h>
-#include <time.h>
-#endif
-#ifdef UNIX
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <time.h>
-#endif
-#ifdef DREAMCAST
-#include <kos.h>
-#endif
-#ifdef LINUX
-#include <SDL/SDL.h>
-#endif
-#ifdef TIKI
 #include <Tiki/tiki.h>
 #include <Tiki/texture.h>
 #include <Tiki/file.h>
 
 using namespace Tiki;
 using namespace Tiki::GL;
-#endif
+
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
@@ -544,56 +520,6 @@ void make_coordinates(char *text,float *x, float *y, float *z) {
   *y=atoi(tmp);
 }
 
-#ifdef WIN32
-extern SOCKET net_socket;
-extern bool net_host;
-#else
-extern int net_socket;
-extern bool net_host;
-#endif
-extern int avg_cycle_len;
-extern int cycle_len;
-
-void update_net() {
-#ifdef WIN32
-  char buf[100];
-  struct entity *ent2;
-  if(net_socket!=-1) {
-    socket_read_line(net_socket,buf);
-    wordify(buf,',');
-    switch(atoi(get_word(0))) {
-    case 1: //move paddle step x
-      ent2=get_ent(atoi(get_word(1)));
-      ent2->z+=atoi(get_word(2));
-      break;
-   /* case 2:
-      if(atoi(get_word(1))>avg_cycle_len) {
-        avg_cycle_len=atoi(get_word(1));
-        cycle_len=atoi(get_word(1));
-      }
-      if(cycle_len<40) {
-        cycle_len=40;
-        avg_cycle_len=40;
-      }
-      break;*/
-    case 3:
-      ent2=get_ent(atoi(get_word(1)));
-      ent2->x=atof(get_word(2));
-      ent2->y=atof(get_word(3));
-      ent2->z=atof(get_word(4));
-      ent2->arg1=atoi(get_word(5));
-      ent2->arg2=atoi(get_word(6));
-      ent2->arg3=atoi(get_word(7));
-      ent2->arg4=atoi(get_word(8));
-      ent2->arg5=atoi(get_word(9));
-      ent2->arg6=atoi(get_word(10));
-      ent2->arg7=atoi(get_word(11));
-      break;
-    }
-  }
-#endif
-}
-
 void update_world(float gt) {
   struct entity *cur_ent=entity_list;
   struct entity *ent2;
@@ -617,7 +543,7 @@ void update_world(float gt) {
 			ent2=NULL;
 		}
 		if(cur_ent==entity_list && cur_ent->deleted) {
-			printf("Deleting ent\n");
+			//printf("Deleting ent\n");
 			ent2=cur_ent;
 			entity_list=cur_ent->next;
 			destroy_param_list(ent2->param_list);
@@ -635,9 +561,7 @@ void update_world(float gt) {
 		oz=cur_ent->z;
 		//printf("Running update callback for %s\n",cur_ent->type);
     if(cur_ent->update) cur_ent->update(cur_ent, gt);
-    //if(net_socket==-1||net_host==1) {
 		if(ox!=cur_ent->x || oy!=cur_ent->y || oz!=cur_ent->z) {
-			//printf("Doing collision tests..\n");
 			if(cur_ent->model!=NULL) {
 				cur_ent->model->bound_min(cur_ent->xmin,cur_ent->ymin,cur_ent->zmin);
 			  cur_ent->model->bound_max(cur_ent->xmax,cur_ent->ymax,cur_ent->zmax);
@@ -658,11 +582,8 @@ void render_world_solid() {
 
 	//printf("+++render_world()\n");
   
-  //glPushMatrix();
-
   while(cur_ent!=NULL) {
     if(cur_ent->model==NULL && cur_ent->poly_list!=NULL&&cur_ent->alpha==1.0f) {
-			//printf("Rendering a brush (%s)...\n",cur_ent->type);
       glLoadIdentity();
       glRotatef(camera_xrot,1.0f,0.0f,0.0f);
       glRotatef(camera_zrot,0.0f,0.0f,1.0f);
@@ -690,11 +611,7 @@ void render_world_solid() {
 				}
 
 				for(j=0;j<cur_pol->vert_count;j++) {
-			#ifndef WIN32
 					glTexCoord2f(cur_pol->point[j].s,cur_pol->point[j].t);
-			#else
-					glTexCoord2f(cur_pol->point[j].s,cur_pol->point[j].t*-1);
-			#endif
 					glVertex3f(cur_pol->point[j].x/100.0f, cur_pol->point[j].y/100.0f, -cur_pol->point[j].z/100.0f);
 				}
 				glEnd();
@@ -702,7 +619,6 @@ void render_world_solid() {
       }
     } else {
       if(cur_ent->model!=NULL&&cur_ent->alpha==1) {
-	//printf("Drawing an md2 model (%s)...\n",cur_ent->type); 
         if(cur_ent->framenum<cur_ent->anim_start) {
           cur_ent->framenum=cur_ent->anim_start;
         }
@@ -713,28 +629,22 @@ void render_world_solid() {
           frame2=cur_ent->framenum+1;
         }
         if(frame2>cur_ent->anim_end) { frame2=cur_ent->anim_end; }
-	      //printf("model name: %s, tex: %i, x: %f, y: %f, z: %f frame1: %i frame2: %i\n",cur_ent->model->filename,cur_ent->tex_id,cur_ent->x,cur_ent->y,cur_ent->z,frame1,frame2);
-        //draw_md2(cur_ent->model->filename,cur_ent->tex_id,cur_ent->x,cur_ent->y,cur_ent->z,cur_ent->xrot,cur_ent->yrot,cur_ent->zrot,frame1,frame2,cur_ent->blendpos,cur_ent->blendcount);
 
-      glLoadIdentity();
-      glRotatef(camera_xrot,1.0f,0.0f,0.0f);
-      glRotatef(camera_zrot,0.0f,0.0f,1.0f);
-      glRotatef(camera_yrot,0.0f,1.0f,0.0f);
-      glTranslatef(-camera_x/100.0f,-camera_y/100.0f,camera_z/100.0f);
-      glTranslatef(cur_ent->x/100.0f,cur_ent->y/100.0f,-cur_ent->z/100.0f);
-      glTranslatef(0,.16,0);
-      glRotatef(cur_ent->xrot,1.0f,0.0f,0.0f);
-      glRotatef(cur_ent->zrot,0.0f,0.0f,1.0f);
-      glRotatef(cur_ent->yrot,0.0f,1.0f,0.0f);
-      glRotatef(-90,1.0f,0.0f,0.0f);
-      //printf("Texid: %i\n",cur_ent->tex_id);
-      cur_ent->tex->select();
-			//printf("Setting frame..\n");
-      if(cur_ent->anim_start!=cur_ent->anim_end)
-        cur_ent->model->SetFrame(frame1,frame2,cur_ent->blendpos,cur_ent->blendcount);
-				//printf("md2model->draw()!\n");
+				glLoadIdentity();
+				glRotatef(camera_xrot,1.0f,0.0f,0.0f);
+				glRotatef(camera_zrot,0.0f,0.0f,1.0f);
+				glRotatef(camera_yrot,0.0f,1.0f,0.0f);
+				glTranslatef(-camera_x/100.0f,-camera_y/100.0f,camera_z/100.0f);
+				glTranslatef(cur_ent->x/100.0f,cur_ent->y/100.0f,-cur_ent->z/100.0f);
+				glTranslatef(0,.16,0);
+				glRotatef(cur_ent->xrot,1.0f,0.0f,0.0f);
+				glRotatef(cur_ent->zrot,0.0f,0.0f,1.0f);
+				glRotatef(cur_ent->yrot,0.0f,1.0f,0.0f);
+				glRotatef(-90,1.0f,0.0f,0.0f);
+				cur_ent->tex->select();
+				if(cur_ent->anim_start!=cur_ent->anim_end)
+					cur_ent->model->SetFrame(frame1,frame2,cur_ent->blendpos,cur_ent->blendcount);
         cur_ent->model->Draw();
-				//printf("inc blendpos\n");
         cur_ent->blendpos++;
         if(cur_ent->blendpos>cur_ent->blendcount) {
           cur_ent->blendpos=0;
@@ -757,10 +667,8 @@ void render_world_trans() {
   struct poly *cur_pol=NULL;
 	//printf("+++render_world()\n");
 
-  //glPushMatrix();
   while(cur_ent!=NULL) {
     if(cur_ent->poly_list!=NULL&&cur_ent->alpha!=1.0f) {
-			//printf("Rendering a brush (%s)...\n",cur_ent->type);
       glLoadIdentity();
       glRotatef(camera_xrot,1.0f,0.0f,0.0f);
       glRotatef(camera_zrot,0.0f,0.0f,1.0f);
@@ -787,64 +695,52 @@ void render_world_trans() {
         default:
 	        glBegin(GL_POLYGON);
           break;
-      }
-	for(j=0;j<cur_pol->vert_count;j++) {
-#ifndef WIN32
-		glTexCoord2f(cur_pol->point[j].s,cur_pol->point[j].t);
-#else
-		glTexCoord2f(cur_pol->point[j].s,cur_pol->point[j].t*-1);
-#endif
-		glVertex3f(cur_pol->point[j].x/100.0f, cur_pol->point[j].y/100.0f, -cur_pol->point[j].z/100.0f);
-	}
-	glEnd();
-        cur_pol=cur_pol->next;
-      }
+				}
+				for(j=0;j<cur_pol->vert_count;j++) {
+					glTexCoord2f(cur_pol->point[j].s,cur_pol->point[j].t);
+					glVertex3f(cur_pol->point[j].x/100.0f, cur_pol->point[j].y/100.0f, -cur_pol->point[j].z/100.0f);
+				}
+				glEnd();
+				cur_pol=cur_pol->next;
+			}
     } else {
-        if(cur_ent->model!=NULL&&cur_ent->alpha!=1) {
-	//printf("Drawing an md2 model (%s)...\n",cur_ent->type); 
-        if(cur_ent->framenum<cur_ent->anim_start) {
-          cur_ent->framenum=cur_ent->anim_start;
-        }
-        frame1=cur_ent->framenum;
-        if(cur_ent->framenum==cur_ent->anim_end) {
-          frame2=cur_ent->anim_start;
-        } else {
-          frame2=cur_ent->framenum+1;
-        }
-        if(frame2>cur_ent->anim_end) { frame2=cur_ent->anim_end; }
-	      //printf("model name: %s, tex: %i, x: %f, y: %f, z: %f frame1: %i frame2: %i\n",cur_ent->model->filename,cur_ent->tex_id,cur_ent->x,cur_ent->y,cur_ent->z,frame1,frame2);
-        //draw_md2(cur_ent->model->filename,cur_ent->tex_id,cur_ent->x,cur_ent->y,cur_ent->z,cur_ent->xrot,cur_ent->yrot,cur_ent->zrot,frame1,frame2,cur_ent->blendpos,cur_ent->blendcount);
+			if(cur_ent->model!=NULL&&cur_ent->alpha!=1) {
+				if(cur_ent->framenum<cur_ent->anim_start) {
+					cur_ent->framenum=cur_ent->anim_start;
+				}
+				frame1=cur_ent->framenum;
+				if(cur_ent->framenum==cur_ent->anim_end) {
+					frame2=cur_ent->anim_start;
+				} else {
+					frame2=cur_ent->framenum+1;
+				}
+				if(frame2>cur_ent->anim_end) { frame2=cur_ent->anim_end; }
 
-      glLoadIdentity();
-      glRotatef(camera_xrot,1.0f,0.0f,0.0f);
-      glRotatef(camera_zrot,0.0f,0.0f,1.0f);
-      glRotatef(camera_yrot,0.0f,1.0f,0.0f);
-      glTranslatef(-camera_x/100.0f,-camera_y/100.0f,camera_z/100.0f);
-      glTranslatef(cur_ent->x/100.0f,cur_ent->y/100.0f,-cur_ent->z/100.0f);
-      glTranslatef(0,.16,0);
-      glRotatef(cur_ent->xrot,1.0f,0.0f,0.0f);
-      glRotatef(cur_ent->zrot,0.0f,0.0f,1.0f);
-      glRotatef(cur_ent->yrot,0.0f,1.0f,0.0f);
-      glRotatef(-90,1.0f,0.0f,0.0f);
-      //printf("Texid: %i\n",cur_ent->tex_id);
-      cur_ent->tex->select();
-			//printf("Setting frame..\n");
-      if(cur_ent->anim_start!=cur_ent->anim_end)
-        cur_ent->model->SetFrame(frame1,frame2,cur_ent->blendpos,cur_ent->blendcount);
-				//printf("md2model->draw()!\n");
-        glColor4f(1.0f,1.0f,1.0f,cur_ent->alpha);
-        cur_ent->model->Draw();
-				//printf("inc blendpos\n");
-        cur_ent->blendpos++;
-        if(cur_ent->blendpos>cur_ent->blendcount) {
-          cur_ent->blendpos=0;
-          cur_ent->framenum++;
-        }
+				glLoadIdentity();
+				glRotatef(camera_xrot,1.0f,0.0f,0.0f);
+				glRotatef(camera_zrot,0.0f,0.0f,1.0f);
+				glRotatef(camera_yrot,0.0f,1.0f,0.0f);
+				glTranslatef(-camera_x/100.0f,-camera_y/100.0f,camera_z/100.0f);
+				glTranslatef(cur_ent->x/100.0f,cur_ent->y/100.0f,-cur_ent->z/100.0f);
+				glTranslatef(0,.16,0);
+				glRotatef(cur_ent->xrot,1.0f,0.0f,0.0f);
+				glRotatef(cur_ent->zrot,0.0f,0.0f,1.0f);
+				glRotatef(cur_ent->yrot,0.0f,1.0f,0.0f);
+				glRotatef(-90,1.0f,0.0f,0.0f);
+				cur_ent->tex->select();
+				if(cur_ent->anim_start!=cur_ent->anim_end)
+					cur_ent->model->SetFrame(frame1,frame2,cur_ent->blendpos,cur_ent->blendcount);
 
-        if(cur_ent->framenum>cur_ent->anim_end) { cur_ent->framenum=cur_ent->anim_start; }
-      }
-    }
-
-	cur_ent=cur_ent->next;
+				glColor4f(1.0f,1.0f,1.0f,cur_ent->alpha);
+				cur_ent->model->Draw();
+				cur_ent->blendpos++;
+				if(cur_ent->blendpos>cur_ent->blendcount) {
+					cur_ent->blendpos=0;
+					cur_ent->framenum++;
+				}
+				if(cur_ent->framenum>cur_ent->anim_end) { cur_ent->framenum=cur_ent->anim_start; }
+			}
+		}
+		cur_ent=cur_ent->next;
   }
 }

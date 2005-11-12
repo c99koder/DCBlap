@@ -16,19 +16,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
-#ifdef WIN32
-#include <windows.h>
-#endif
-#ifdef DREAMCAST
-#include <kos.h>
-#endif
-#ifdef TIKI
 #include <Tiki/tiki.h>
 #include <Tiki/texture.h>
+#include <Tiki/sound.h>
 
 using namespace Tiki;
 using namespace Tiki::GL;
-#endif
+using namespace Tiki::Audio;
+
 #include <stdlib.h>
 #include <string.h>
 #include "entity.h"
@@ -39,6 +34,14 @@ extern bool enable_powerups;
 extern bool win_flag;
 extern struct entity *wld;
 
+extern Sound *sfx_speedup;
+extern Sound *sfx_slowdown;
+extern Sound *sfx_hyper;
+
+extern Texture *slowdown_tex;
+extern Texture *speedup_tex;
+extern Texture *hyper_tex;
+
 void func_break_create(struct entity *me) {
   me->arg1=atoi(get_prop(me,"hits"));
   me->arg2=atoi(get_prop(me,"points"));
@@ -48,6 +51,14 @@ void func_break_create(struct entity *me) {
   }
   if(me->arg4>50) me->arg4=50;
   me->arg5=me->y;
+
+	if(sfx_speedup==NULL) sfx_speedup=new Sound("speedup.wav");
+	if(sfx_slowdown==NULL) sfx_speedup=new Sound("slowdown.wav");
+	if(sfx_hyper==NULL) sfx_speedup=new Sound("hyper.wav");
+	
+	if(speedup_tex==NULL) speedup_tex = new Texture("speedup.png",0);
+	if(slowdown_tex==NULL) slowdown_tex = new Texture("slowdown.png",0);
+	if(hyper_tex==NULL) hyper_tex = new Texture("hyper.png",0);	
 }
 
 extern struct entity *g1;
@@ -116,9 +127,6 @@ void func_break_update(struct entity *me, float gt) {
 }
 
 void func_break_message(struct entity *me, struct entity *them, char *message) {
-  //char tmp[10];
-  //struct entity *ent2;
-  //printf("Message %s recieved by a %s\n",message,them->type);
   if(!strcmp("thud",message)&&!strcmp("ball",them->type)) {
     me->arg1--;
     switch((int)them->arg7) {
