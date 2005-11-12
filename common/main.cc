@@ -124,14 +124,10 @@ extern "C" int tiki_main(int argc, char **argv) {
 	
 	for(int i=0; i<3; i++) {
 		Frame::begin();
-		//glClearDepth(1.0f);
-		//glDepthFunc(GL_LEQUAL);
-		//glClear(GL_COLOR_BUFFER_BIT+GL_DEPTH_BUFFER_BIT);
-		//glColor4f(1,1,1,1);	
 		loading->draw(Drawable::Opaque);
 		Frame::finish();
 	}
-//return 0;
+
 	objects_init();
 	hud_init();
 	player_axis_x[0]=0;
@@ -153,11 +149,16 @@ extern "C" int tiki_main(int argc, char **argv) {
 				gs->FadeIn();
 				gs->doMenu();
 				if(quitting) break;
-				
+
 				//bgm.stop();
+				for(int i=0; i<3; i++) {
+					Frame::begin();
+					loading->draw(Drawable::Opaque);
+					Frame::finish();
+				}				
+				game_init(gs->getSelection().c_str());
 				//bgm.load("game.ogg",1);
 				//bgm.start();
-				game_init(gs->getSelection().c_str());
 				update_world(0);
 
 				playing=true;
