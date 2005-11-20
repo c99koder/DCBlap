@@ -17,14 +17,14 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
-#ifdef TIKI
 #include <Tiki/tiki.h>
 #include <Tiki/gl.h>
 #include <Tiki/anims/logxymover.h>
+#include <Tiki/anims/alpharotate.h>
 
 using namespace Tiki;
 using namespace Tiki::GL;
-#endif
+
 #include "menuList.h"
 
 menuList::menuList(Texture *bg, Texture *bar, Font *fnt) {
@@ -33,6 +33,7 @@ menuList::menuList(Texture *bg, Texture *bar, Font *fnt) {
 	subAdd(m_bg);
 	m_bar=new Banner(Banner::Trans,bar);
 	m_bar->setAlpha(0.4f);
+	m_bar->animAdd(new AlphaRotate(1.0f/60.0f,0.4));
 	subAdd(m_bar);
 	m_fnt=fnt;
 }
@@ -73,7 +74,7 @@ void menuList::draw(ObjType list) {
 		m_fnt->setColor(getTint());
 		if(m_itemList.size() > 0) {
 			for(item_iter = m_itemList.begin(); item_iter != m_itemList.end(); item_iter++) {
-				m_fnt->draw(getTranslate() + Vector(-m_w/2,-m_h/2 - 4 + ((i+1)*22),0.2),*(item_iter));
+				m_fnt->draw(getTranslate() + Vector(-m_w/2,-m_h/2 - 4 + ((i+1)*22),0.1),*(item_iter));
 				i++;
 			}
 		}

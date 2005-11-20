@@ -34,7 +34,9 @@ extern RefPtr<Font> fnt;
 GameSelect::GameSelect() {
 	GenericMenu::GenericMenu();
 	
-	bg = new Banner(Drawable::Opaque,new Texture("game_bg.png",0));
+	m_scene->setTranslate(Vector(0,0,0));
+	
+	bg = new Banner(Drawable::Trans,new Texture("game_bg.png",0));
 	is = new imageSet;
 	ml = new menuList(new Texture("game_box.png",0), new Texture("game_bar.png",0), fnt);
 	bg->setSize(640,480);
@@ -43,8 +45,8 @@ GameSelect::GameSelect() {
 	
 	is->setSize(240,200);
 	ml->setSize(240,240);
-	is->setTranslate(Vector(160,200,-0.1));
-	ml->setTranslate(Vector(480,220,-0.1));
+	is->setTranslate(Vector(160,200,0));
+	ml->setTranslate(Vector(480,220,0));
 	is->addTexture(new Texture("maps/BlapOut/classic.png",0));
 	ml->addItem("Classic");
 	m_levelList.push_back(*new string("BlapOut/classic.wld"));
@@ -87,11 +89,11 @@ void GameSelect::FadeIn() {
 	bg->setTint(Color(0,0,0));
 	bg->animAdd(new TintFader(Color(1,1,1),Color(1.0f/20.0f,1.0f/20.0f,1.0f/20.0f)));
 	ml->setTint(Color(0,0,0,0));
-	ml->setTranslate(Vector(640+240,220,0.1));
+	ml->setTranslate(Vector(640+240,220,0));
 	ml->animAdd(new LogXYMover(480,220,8));
 	ml->animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/20.0f,1.0f/20.0f,1.0f/20.0f,1.0f/20.0f)));
 	is->setTint(Color(0,0,0,0));
-	is->setTranslate(Vector(-240,200,0.1));
+	is->setTranslate(Vector(-240,200,0));
 	is->animAdd(new LogXYMover(160,200,8));
 	is->animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/20.0f,1.0f/20.0f,1.0f/20.0f,1.0f/20.0f)));
 	m_selection=0;

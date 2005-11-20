@@ -27,7 +27,7 @@ using namespace Tiki::GL;
 #include <vector>
 #include "imageSet.h"
 
-imageSet::imageSet() {
+imageSet::imageSet() : Banner(Banner::Trans,NULL) {
 	m_currentTexture=-1;
 	m_nextTexture=-1;
 	m_blend=0;
@@ -52,13 +52,11 @@ void imageSet::selectTexture(int num) {
 void imageSet::draw(ObjType list) {
 	if(list==Trans) {
 		if(m_currentTexture>=0) {
-			setType(Banner::Trans);
 			setAlpha(1.0);
 			setTexture(m_textureList[m_currentTexture]);
 			Banner::draw(list);
 		}
 		if(m_nextTexture>=0) {
-			setType(Banner::Trans);
 			setAlpha(1.0 - m_blend);
 			setTexture(m_textureList[m_nextTexture]);
 			Banner::draw(list);

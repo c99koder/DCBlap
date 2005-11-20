@@ -22,6 +22,7 @@
 #include "Tiki/texture.h"
 #include "Tiki/drawables/banner.h"
 #include "Tiki/anims/tintfader.h"
+#include "Tiki/drawables/cursor.h"
 
 using namespace Tiki;
 using namespace Tiki::GL;
@@ -33,6 +34,8 @@ extern RefPtr<Font> fnt;
 TitleScreen::TitleScreen() {
 	GenericMenu::GenericMenu();
 
+	m_scene->setTranslate(Vector(0,0,0));
+	
 	bg = new imageSet;
 	bg->addTexture(new Texture("title.png",0));
 	/*bg->addTexture(new Texture("rt/1.png",0));
@@ -62,6 +65,8 @@ TitleScreen::TitleScreen() {
 	ml->addItem("Quit");
 	ml->selectItem(0);
 	m_scene->subAdd(ml);
+	
+	m_scene->subAdd(new TikiCursor);
 	
 	m_selection=0;
 	m_menuItems=4;
