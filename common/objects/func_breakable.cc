@@ -52,9 +52,9 @@ void func_break_create(struct entity *me) {
   if(me->arg4>50) me->arg4=50;
   me->arg5=me->y;
 
-	if(sfx_speedup==NULL) sfx_speedup=new Sound("speedup.wav");
-	if(sfx_slowdown==NULL) sfx_speedup=new Sound("slowdown.wav");
-	if(sfx_hyper==NULL) sfx_speedup=new Sound("hyper.wav");
+	//if(sfx_speedup==NULL) sfx_speedup=new Sound("speedup.wav");
+	//if(sfx_slowdown==NULL) sfx_speedup=new Sound("slowdown.wav");
+	//if(sfx_hyper==NULL) sfx_speedup=new Sound("hyper.wav");
 	
 	if(speedup_tex==NULL) speedup_tex = new Texture("speedup.png",0);
 	if(slowdown_tex==NULL) slowdown_tex = new Texture("slowdown.png",0);
@@ -71,12 +71,12 @@ void func_break_update(struct entity *me, float gt) {
   if(me->arg4>0) {
     switch((int)me->arg3) {
     case 1: //fade in
-      me->alpha=(50.0f-(float)me->arg4)/50.0f * gt * 40;
-      me->arg4-= gt * 40;
+      me->alpha=(50.0f-(float)me->arg4)/50.0f;
+      me->arg4-= gt * 25;
       break;
     case 2: //drop from sky
-      me->y=me->arg5+(me->arg4*10) * gt * 40;
-      me->arg4-= gt * 40;
+      me->y=me->arg5+(me->arg4*10);
+      me->arg4-= gt * 25;
     }
   } else {
     me->alpha=1.0f;

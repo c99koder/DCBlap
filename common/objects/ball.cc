@@ -66,7 +66,7 @@ void ball_create(struct entity *me) {
   me->blendpos=0;
   me->model->SetFrame(0,0,0,1);
 	if(get_prop(me,"speed")) {
-		me->arg3=atoi(get_prop(me,"speed"))+4;
+		me->arg3=atoi(get_prop(me,"speed"));
 	} else {
 		me->arg3=3;
 		me->arg6=1;
@@ -99,15 +99,15 @@ void ball_create(struct entity *me) {
     break;
   }
 
-	if(sfx_bounce==NULL) sfx_bounce = new Sound("bounce.wav");
-	if(sfx_score==NULL) sfx_score = new Sound("score.wav");
+	//if(sfx_bounce==NULL) sfx_bounce = new Sound("bounce.wav");
+	//if(sfx_score==NULL) sfx_score = new Sound("score.wav");
 }
 
 void ball_update(struct entity *me, float gt) {
   static int cnt=0;
   char buf[100];
   if(ball_spin) {
-    me->yrot+=6 * gt * 40;
+    me->yrot+=6 * gt;
     //me->xrot+=6 * gt * 40;
     if(me->yrot>360) me->yrot=0;
     //if(me->xrot>360) me->xrot=0;
@@ -179,12 +179,12 @@ void ball_message(struct entity *me, struct entity *them, char *message) {
       broadcast_message(me,"reset");
     } else {
 			if(enable_sound && sfx_bounce!=NULL) sfx_bounce->play();
-      me->x-=me->arg1;
+      /*me->x-=me->arg1;
 	  	if(me->arg5==0) {
 		  	me->z-=me->arg2;
   		} else {
 	  		me->y-=me->arg2;
-		  }
+		  }*/
       if(!strcmp(them->type,"paddle")) {
         me->arg7=them->arg1;
         //me->arg3=them->arg4+1;
@@ -214,12 +214,12 @@ void ball_message(struct entity *me, struct entity *them, char *message) {
           me->arg1=((rand()%2)-1)*(me->arg3-(rand()%2));
         }
       }
-      me->x+=me->arg1;
+      /*me->x+=me->arg1;
 		  if(me->arg5==0) {
 			  me->z+=me->arg2;
 		  } else {
 			  me->y+=me->arg2;
-		  }
+		  }*/
     }
   }
 }

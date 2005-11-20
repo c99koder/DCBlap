@@ -20,6 +20,7 @@
 #include <Tiki/tiki.h>
 #include <Tiki/gl.h>
 #include <Tiki/hid.h>
+#include <Tiki/tikitime.h>
 #include <Tiki/oggvorbis.h>
 #include <Tiki/genmenu.h>
 #include <Tiki/drawables/banner.h>
@@ -28,6 +29,7 @@ using namespace Tiki;
 using namespace Tiki::GL;
 using namespace Tiki::Hid;
 using namespace Tiki::Audio;
+using namespace Tiki::Time;
 
 #include "entity.h"
 #include "game.h"
@@ -47,6 +49,7 @@ extern bool lose_flag;
 extern bool game_paused;
 
 void tkCallback(const Hid::Event & evt, void * data) {
+	printf("Event from %s\n",evt.dev->getName().c_str());
 	if (evt.type == Hid::Event::EvtQuit) {
 		quitting = true;
 		playing=false;
@@ -56,6 +59,9 @@ void tkCallback(const Hid::Event & evt, void * data) {
 	}
 	if (evt.type == Hid::Event::EvtDetach) {
 		printf("Device detached: %s\n",evt.dev->getName().c_str());
+	}
+	if(evt.type == Hid::Event::EvtAxis) {
+		printf("Axis %i moved to %f on port %i\n",evt.axis,evt.axisValue,evt.port);
 	}
 	if (evt.type == Hid::Event::EvtKeyDown) {
 		switch(evt.key) {
@@ -71,7 +77,7 @@ void tkCallback(const Hid::Event & evt, void * data) {
 			case Hid::Event::KeyDown:
 				player_axis_y[0]=1;
 				break;
-			case 27:
+			case Hid::Event::KeyEsc:
 				playing = false;
 				break;
 		}
@@ -104,6 +110,9 @@ void tkCallback(const Hid::Event & evt, void * data) {
 }
 		
 extern "C" int tiki_main(int argc, char **argv) {
+	uint64 gt=0;
+	uint64 ogt=0;
+	uint64 st=0;
 	TitleScreen *ts;
 	GameSelect *gs;
 	Banner *loading;
@@ -115,7 +124,7 @@ extern "C" int tiki_main(int argc, char **argv) {
 	
 	loading = new Banner(Drawable::Opaque,new Texture("loading.png",0));
 	loading->setSize(640,480);
-	loading->setTranslate(Vector(320,240,0));
+	loading->setTranslate(Vector(320,240,10));
 	
 	for(int i=0; i<3; i++) {
 		Frame::begin();
@@ -157,20 +166,25 @@ extern "C" int tiki_main(int argc, char **argv) {
 				update_world(0);
 
 				playing=true;
+				
+				st = gettime();
+				
 				while (playing==true) {
-					update_world(0.01);
+					gt=gettime() - st;
+					update_world(float(gt-ogt)/1000000.0f);
 					Frame::begin();
 					glClearDepth(1.0f);
 					glDepthFunc(GL_LEQUAL);
 					glClear(GL_COLOR_BUFFER_BIT+GL_DEPTH_BUFFER_BIT);
 					glColor4f(1,1,1,1);
 					Frame::set3d();
-					render_world_solid();
+					render_world(true);
 					Frame::transEnable();
-					render_world_trans();
+					render_world(false);
 					Frame::set2d();
 					render_HUD();
 					Frame::finish();
+					ogt=gt;
 				}
 					
 				destroy_world();
