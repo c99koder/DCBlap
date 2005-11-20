@@ -37,6 +37,6 @@ void objects_init() {
   register_callbacks("hyper",hyper_create,hyper_update,hyper_message,hyper_reset);
   register_callbacks("func_rotating",func_rotate_create,func_rotate_update,func_rotate_message,NULL);
   register_callbacks("water",water_create,NULL,NULL,NULL);
-  register_callbacks("glass",water_create,NULL,NULL,NULL);
+  register_callbacks("light",light_create,light_update,NULL,NULL);
   register_callbacks("func_breakable",func_break_create,func_break_update,func_break_message,NULL);
 }

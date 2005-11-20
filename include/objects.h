@@ -29,6 +29,7 @@
 #include "objects/func_rotating.h"
 #include "objects/water.h"
 #include "objects/func_breakable.h"
+#include "objects/light.h"
 
 //Initialize the object templates
 void objects_init();

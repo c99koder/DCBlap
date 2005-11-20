@@ -23,19 +23,21 @@
 
 //Point in 3D space
 struct pt {
-        float x;
-        float y;
-        float z;
-				float s;
-				float t;
+	float x;
+	float y;
+	float z;
+	float s;
+	float t;
 };
 
 //Polygon
 struct poly {
-        struct pt point[20];
-        unsigned int vert_count;
-				Texture *tex;
-        struct poly *next;
+	struct pt point[20];
+	unsigned int vert_count;
+	Texture *tex;
+	struct poly *next;
+	float cx,cy,cz;
+	float cs, ct;
 };
 
 //Parameter
@@ -107,11 +109,8 @@ void load_world(const char *filename);
 //Free a world
 void destroy_world();
 
-//Render the translucent polys
-void render_world_trans();
-
-//Render the opaque polys
-void render_world_solid();
+//Render the world
+void render_world(bool solid);
 
 //Run the update functions on all entities
 void update_world(float gt);

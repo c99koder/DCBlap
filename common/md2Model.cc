@@ -494,60 +494,18 @@ int	md2Model::GetNumFrames()
 */
 void md2Model::Draw()
 {
-	//GLfloat	v1[3],v2[3],v3[3];
-	
-
-	/*
-	glCallList(m_listID);
-
-	GLenum ret=glGetError();
-	if (ret!=GL_NO_ERROR)
-		printf("An error has occured\n");
-		*/
 	int index=0;
 	glBegin(GL_TRIANGLES);
-		for (index=0;index< m_header.numTriangles;index++)
-		{
-			// Calculate the two vertex out of 3 by [v1 - v2] & [v2 - v3] (Read Bernard Koleman Elementary Linear Algebra P-193)
-			/*v1[0] = m_glVertexData[m_triData[index].vertexIndices[2]].x - m_glVertexData[m_triData[index].vertexIndices[1]].x;
-			v1[1] = m_glVertexData[m_triData[index].vertexIndices[2]].y - m_glVertexData[m_triData[index].vertexIndices[1]].y;
-			v1[2] = m_glVertexData[m_triData[index].vertexIndices[2]].z - m_glVertexData[m_triData[index].vertexIndices[1]].z;
 
-			v2[0] = m_glVertexData[m_triData[index].vertexIndices[1]].x - m_glVertexData[m_triData[index].vertexIndices[0]].x;
-			v2[1] = m_glVertexData[m_triData[index].vertexIndices[1]].y - m_glVertexData[m_triData[index].vertexIndices[0]].y;
-			v2[2] = m_glVertexData[m_triData[index].vertexIndices[1]].z - m_glVertexData[m_triData[index].vertexIndices[0]].z;
-
-			// Take the Cross Product of v1 x v2
-			v3[0] = v1[1]*v2[2] - v1[2]*v2[1];
-			v3[1] = v1[2]*v2[0] - v1[0]*v2[2];
-			v3[2] = v1[0]*v2[1] - v1[1]*v2[0];*/
-		
-			//glNormal3fv(v3);
-#ifdef WIN32
-      glTexCoord2f((float)m_texData[m_triData[index].textureIndices[2]].s/(float)m_header.skinWidth,1-((float)m_texData[m_triData[index].textureIndices[2]].t/(float)m_header.skinHeight));
-#else
-      glTexCoord2f((float)m_texData[m_triData[index].textureIndices[2]].s/(float)m_header.skinWidth,((float)m_texData[m_triData[index].textureIndices[2]].t/(float)m_header.skinHeight));
-#endif
-			glVertex3f( m_glVertexData[m_triData[index].vertexIndices[2]].x/50.0f,
-						m_glVertexData[m_triData[index].vertexIndices[2]].y/50.0f,
-						m_glVertexData[m_triData[index].vertexIndices[2]].z/50.0f);
-#ifdef WIN32
-      glTexCoord2f((float)m_texData[m_triData[index].textureIndices[1]].s/(float)m_header.skinWidth,1-((float)m_texData[m_triData[index].textureIndices[1]].t/(float)m_header.skinHeight));
-#else
-      glTexCoord2f((float)m_texData[m_triData[index].textureIndices[1]].s/(float)m_header.skinWidth,((float)m_texData[m_triData[index].textureIndices[1]].t/(float)m_header.skinHeight));
-#endif
-			glVertex3f( m_glVertexData[m_triData[index].vertexIndices[1]].x/50.0f,
-						m_glVertexData[m_triData[index].vertexIndices[1]].y/50.0f,
-						m_glVertexData[m_triData[index].vertexIndices[1]].z/50.0f);
-#ifdef WIN32
-      glTexCoord2f((float)m_texData[m_triData[index].textureIndices[0]].s/(float)m_header.skinWidth,1-((float)m_texData[m_triData[index].textureIndices[0]].t/(float)m_header.skinHeight));
-#else
-      glTexCoord2f((float)m_texData[m_triData[index].textureIndices[0]].s/(float)m_header.skinWidth,((float)m_texData[m_triData[index].textureIndices[0]].t/(float)m_header.skinHeight));
-#endif
-      glVertex3f( m_glVertexData[m_triData[index].vertexIndices[0]].x/50.0f,
-						m_glVertexData[m_triData[index].vertexIndices[0]].y/50.0f,
-						m_glVertexData[m_triData[index].vertexIndices[0]].z/50.0f);
+	for (index=0;index< m_header.numTriangles;index++)
+	{
+		for(int i=2; i>=0; i--) {
+			glTexCoord2f((float)m_texData[m_triData[index].textureIndices[i]].s/(float)m_header.skinWidth,((float)m_texData[m_triData[index].textureIndices[i]].t/(float)m_header.skinHeight));
+			glVertex3f( m_glVertexData[m_triData[index].vertexIndices[i]].x/50.0f,
+						m_glVertexData[m_triData[index].vertexIndices[i]].y/50.0f,
+						m_glVertexData[m_triData[index].vertexIndices[i]].z/50.0f);
 		}
+	}
 	glEnd();
 }
 
@@ -567,9 +525,9 @@ int md2Model::anim_end(char *name) {
 		if(!strncmp(name,m_frameData[i].name,strlen(name))) {
       if(i==GetNumFrames()) return i;
 			while(i<GetNumFrames() && !strncmp(name,m_frameData[i].name,strlen(name))) {
-                          i++;
-                        }
-                        return i-1;
+				i++;
+      }
+      return i-1;
 		}
 	}
 	return -1;

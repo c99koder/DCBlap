@@ -17,11 +17,13 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 #include <Tiki/tiki.h>
+#include <Tiki/tikimath.h>
 #include <Tiki/texture.h>
 #include <Tiki/file.h>
 
 using namespace Tiki;
 using namespace Tiki::GL;
+using namespace Tiki::Math;
 
 #include <string.h>
 #include <stdlib.h>
@@ -47,6 +49,76 @@ void free_world_textures() {
 int ent_cnt=0;
 
 struct entity *entity_list=NULL;
+struct entity *light_list=NULL;
+extern struct entity *wld;
+float tint_r=0.0f;
+float tint_g=0.0f;
+float tint_b=0.0f;
+
+void build_light_list() {
+  struct entity *e;
+  struct entity *p=NULL;
+
+  e=entity_list;
+
+  while(e!=NULL) {
+    if(!strcmp(e->type,"light")) {
+      if(p==NULL) {
+        entity_list=e->next;
+      } else {
+        p->next=e->next;
+      }
+      e->next=light_list;
+      light_list=e;
+      if(p!=NULL) {
+        e=p;
+      } else {
+        e=entity_list;
+      }
+    } else {
+      p=e;
+      e=e->next;
+    }
+  }
+}
+
+void compute_light(float px, float py, float pz, float trans) {
+  struct entity *l;
+  float x,y,z,dx,dy,dz,light;
+  float r=0,g=0,b=0,r1,g1,b1;
+
+	if(light_list==NULL) {
+		r1=1;
+		g1=1;
+		b1=1;
+	} else {
+		r1=0;
+		g1=0;
+		b1=0;
+
+		l=light_list;
+		while(l!=NULL) {
+			x=l->x;
+			y=l->y;
+			z=l->z;
+			r=l->arg1/100.0f;
+			g=l->arg2/100.0f;
+			b=l->arg3/100.0f;
+			dx=px-x;
+			dy=py-y;
+			dz=pz-z;
+			light=1.6-(fsqrt(dx*dx+dy*dy+dz*dz)/10.0f)/(l->arg10);
+			if(light>0) {
+				r1+=r*light;
+				g1+=g*light;
+				b1+=b*light;
+			}
+			l=l->next;
+		}
+	}
+
+	glColor4f(tint_r+r1,tint_g+g1,tint_b+b1,trans);
+}
 
 void destroy_param_list(struct param *p) {
   struct param *cur=p;
@@ -164,12 +236,67 @@ void set_world_path(char *path) {
   strcpy(world_path,path);
 }
 
+void load_world_info(char *filename, char *title, char *author, char *rating) {
+  unsigned int texcount;
+  unsigned int entcount;
+  unsigned int paramcount;
+  unsigned int i, k;
+  char name[100],val[100];
+  char texname[100];
+	File worldFile;
+
+  strcpy(title,"No title");
+  strcpy(author,"No author");
+  strcpy(rating,"Not rated");
+
+  worldFile.open(filename,"rb");
+  for(i=0;i<texcount;i++) {
+    k=0;
+    do {
+			worldFile.read(&texname[k],1);
+      k++;
+    } while(texname[k-1]!='\0');
+  }
+	
+	//Load entities
+	worldFile.readle32(&entcount,1);
+		
+	//Load type
+	k=0;
+	do {
+		worldFile.read(&texname[k],1);
+		k++;
+	} while(texname[k-1]!='\0');
+	
+	//Load parameters
+	worldFile.readle32(&paramcount,1);
+		
+  for(i=0;i<paramcount;i++) {
+    k=0;
+    do {
+      worldFile.read(&name[k],sizeof(char));
+	    k++;
+    } while(name[k-1]!='\0');
+    k=0;
+    do {
+	    worldFile.read(&val[k],sizeof(char));
+	    k++;
+    } while(val[k-1]!='\0');
+    if(!strcmp(name,"title")) strcpy(title,val);
+    if(!strcmp(name,"author")) strcpy(author,val);
+    if(!strcmp(name,"rating")) strcpy(rating,val);
+  }
+  worldFile.close();
+}
 
 void load_world(const char *filename) {
-  int i,k,fd;
-  float tmp;
+  unsigned int i,k;
   float xmin=0,ymin=0,zmin=0;
   float xmax=0,ymax=0,zmax=0;
+  float pmaxx=0,pmaxy=0,pmaxz=0;
+  float pminx=0,pminy=0,pminz=0;
+  float smax=0,tmax=0;
+  float smin=0,tmin=0;  
   unsigned int texcount;
   char texname[100];
   unsigned int polycount;
@@ -306,10 +433,8 @@ void load_world(const char *filename) {
 				worldFile.readle32(&cur_poly->point[vert].z,1);
 				worldFile.readle32(&cur_poly->point[vert].s,1);
 				worldFile.readle32(&cur_poly->point[vert].t,1);
-				cur_poly->point[vert].x-=cur_ent->x;
-				cur_poly->point[vert].y-=cur_ent->y;
-				cur_poly->point[vert].z-=cur_ent->z;
-				if(pol==0&&vert==0) {
+
+	      if(pol==0&&vert==0) {
 					xmax=cur_poly->point[vert].x;
 					ymax=cur_poly->point[vert].y;
 					zmax=cur_poly->point[vert].z;
@@ -325,6 +450,7 @@ void load_world(const char *filename) {
 					if(cur_poly->point[vert].z<zmin) zmin=cur_poly->point[vert].z;
 				}  
 			}
+			
       cur_poly->next=NULL;
       prev_poly=cur_poly;
       cur_poly=cur_poly->next;
@@ -348,7 +474,35 @@ void load_world(const char *filename) {
           cur_poly->point[vert].x-=cur_ent->x;
           cur_poly->point[vert].y-=cur_ent->y;
           cur_poly->point[vert].z-=cur_ent->z;
-        }
+					if(vert==0) {
+						pmaxx=cur_poly->point[vert].x;
+						pmaxy=cur_poly->point[vert].y;
+						pmaxz=cur_poly->point[vert].z;
+						pminx=cur_poly->point[vert].x;
+						pminy=cur_poly->point[vert].y;
+						pminz=cur_poly->point[vert].z;
+						smax=cur_poly->point[vert].s;
+						tmax=cur_poly->point[vert].t;
+						smin=cur_poly->point[vert].s;
+						tmin=cur_poly->point[vert].t;
+					} else {
+						if(cur_poly->point[vert].x>pmaxx) pmaxx=cur_poly->point[vert].x;
+						if(cur_poly->point[vert].y>pmaxy) pmaxy=cur_poly->point[vert].y;
+						if(cur_poly->point[vert].z>pmaxz) pmaxz=cur_poly->point[vert].z;
+						if(cur_poly->point[vert].s>smax) smax=cur_poly->point[vert].s;
+						if(cur_poly->point[vert].t>tmax) tmax=cur_poly->point[vert].t;
+						if(cur_poly->point[vert].x<pminx) pminx=cur_poly->point[vert].x;
+						if(cur_poly->point[vert].y<pminy) pminy=cur_poly->point[vert].y;
+						if(cur_poly->point[vert].z<pminz) pminz=cur_poly->point[vert].z;
+						if(cur_poly->point[vert].s<smin) smin=cur_poly->point[vert].s;
+						if(cur_poly->point[vert].t<tmin) tmin=cur_poly->point[vert].t;
+					}  
+				}
+				cur_poly->cx=pminx+((pmaxx-pminx)/2.0f);
+				cur_poly->cy=pminy+((pmaxy-pminy)/2.0f);
+				cur_poly->cz=pminz+((pmaxz-pminz)/2.0f);
+				cur_poly->cs=smin+(smax-smin)/2.0f;
+				cur_poly->ct=tmin+(tmax-tmin)/2.0f;
         cur_poly=cur_poly->next;
       }
       //printf("Done!\n");
@@ -394,6 +548,8 @@ void load_world(const char *filename) {
   }
   printf("World load complete.\n");
 	worldFile.close();
+	
+	build_light_list();
 }
 
 void pause_world(bool mode) {
@@ -523,9 +679,7 @@ void make_coordinates(char *text,float *x, float *y, float *z) {
 void update_world(float gt) {
   struct entity *cur_ent=entity_list;
   struct entity *ent2;
-  char buf[100];
 	float ox,oy,oz;
-  static int cnt=1;
   //printf("++Begin update cycle\n");
 
   while(cur_ent!=NULL) {
@@ -568,22 +722,35 @@ void update_world(float gt) {
 			}
 			do_collide(cur_ent);
 		}
+
+    //bounds checking
+    if(cur_ent->xmin+cur_ent->x/100.0f>wld->xmax+wld->x/100.0f||cur_ent->xmax+cur_ent->x/100.0f<wld->xmin+wld->x/100.0f) {
+      send_message(cur_ent,wld,"out");
+    }
+    if(cur_ent->zmin+cur_ent->z/100.0f>wld->zmax+wld->z/100.0f||cur_ent->zmax+cur_ent->z/100.0f<wld->zmin+wld->z/100.0f) {
+      send_message(cur_ent,wld,"out");
+    }
     cur_ent=cur_ent->next;
   }
+  
+  cur_ent=light_list;
+  while(cur_ent!=NULL) {
+    cur_ent->update(cur_ent, gt);
+    cur_ent=cur_ent->next;
+  }
+  
   //printf("--End update cycle\n");	
 }
 
-void render_world_solid() {
-  int i,j,frame1,frame2;
-  float x,y,z,light,dz,dy,dx;
+void render_world(bool solid) {
+  unsigned int i,j,frame1,frame2;
   struct entity *cur_ent=entity_list;
-  struct entity *other_ent=NULL;
   struct poly *cur_pol=NULL;
 
 	//printf("+++render_world()\n");
   
   while(cur_ent!=NULL) {
-    if(cur_ent->model==NULL && cur_ent->poly_list!=NULL&&cur_ent->alpha==1.0f) {
+    if(cur_ent->model==NULL && cur_ent->poly_list!=NULL&&( (solid && cur_ent->alpha==1.0f) || (!solid && cur_ent->alpha<1.0f) )) {
       glLoadIdentity();
       glRotatef(camera_xrot,1.0f,0.0f,0.0f);
       glRotatef(camera_zrot,0.0f,0.0f,1.0f);
@@ -610,137 +777,62 @@ void render_world_solid() {
 						break;
 				}
 
+				//glBegin(GL_TRIANGLE_FAN);
+
+				//compute_light(cur_ent->x+cur_pol->cx,cur_ent->y+cur_pol->cy,cur_ent->z+cur_pol->cz,cur_ent->alpha);
+				//glTexCoord2f(cur_pol->cs,cur_pol->ct);
+				//glVertex3f(cur_pol->cx/100.0f, cur_pol->cy/100.0f, -cur_pol->cz/100.0f);
+				
 				for(j=0;j<cur_pol->vert_count;j++) {
+					compute_light(cur_ent->x+(cur_pol->point[j].x),cur_ent->y+(cur_pol->point[j].y),cur_ent->z+(cur_pol->point[j].z),cur_ent->alpha);
 					glTexCoord2f(cur_pol->point[j].s,cur_pol->point[j].t);
 					glVertex3f(cur_pol->point[j].x/100.0f, cur_pol->point[j].y/100.0f, -cur_pol->point[j].z/100.0f);
 				}
+				
+				//compute_light(cur_ent->x+(cur_pol->point[0].x),cur_ent->y+(cur_pol->point[0].y),cur_ent->z+(cur_pol->point[0].z),cur_ent->alpha);
+				//glTexCoord2f(cur_pol->point[0].s,cur_pol->point[0].t);
+				//glVertex3f(cur_pol->point[0].x/100.0f, cur_pol->point[0].y/100.0f, -cur_pol->point[0].z/100.0f);
+
 				glEnd();
         cur_pol=cur_pol->next;
       }
-    } else {
-      if(cur_ent->model!=NULL&&cur_ent->alpha==1) {
-        if(cur_ent->framenum<cur_ent->anim_start) {
-          cur_ent->framenum=cur_ent->anim_start;
-        }
-        frame1=cur_ent->framenum;
-        if(cur_ent->framenum==cur_ent->anim_end) {
-          frame2=cur_ent->anim_start;
-        } else {
-          frame2=cur_ent->framenum+1;
-        }
-        if(frame2>cur_ent->anim_end) { frame2=cur_ent->anim_end; }
+    } else if(cur_ent->model!=NULL&&( (solid && cur_ent->alpha==1.0f) || (!solid && cur_ent->alpha<1.0f) )) {
+			if(cur_ent->framenum<cur_ent->anim_start) {
+				cur_ent->framenum=cur_ent->anim_start;
+			}
+			frame1=cur_ent->framenum;
+			if(cur_ent->framenum==cur_ent->anim_end) {
+				frame2=cur_ent->anim_start;
+			} else {
+				frame2=cur_ent->framenum+1;
+			}
+			if(frame2>cur_ent->anim_end) { frame2=cur_ent->anim_end; }
 
-				glLoadIdentity();
-				glRotatef(camera_xrot,1.0f,0.0f,0.0f);
-				glRotatef(camera_zrot,0.0f,0.0f,1.0f);
-				glRotatef(camera_yrot,0.0f,1.0f,0.0f);
-				glTranslatef(-camera_x/100.0f,-camera_y/100.0f,camera_z/100.0f);
-				glTranslatef(cur_ent->x/100.0f,cur_ent->y/100.0f,-cur_ent->z/100.0f);
-				glTranslatef(0,.16,0);
-				glRotatef(cur_ent->xrot,1.0f,0.0f,0.0f);
-				glRotatef(cur_ent->zrot,0.0f,0.0f,1.0f);
-				glRotatef(cur_ent->yrot,0.0f,1.0f,0.0f);
-				glRotatef(-90,1.0f,0.0f,0.0f);
-				cur_ent->tex->select();
-				if(cur_ent->anim_start!=cur_ent->anim_end)
-					cur_ent->model->SetFrame(frame1,frame2,cur_ent->blendpos,cur_ent->blendcount);
-        cur_ent->model->Draw();
-        cur_ent->blendpos++;
-        if(cur_ent->blendpos>cur_ent->blendcount) {
-          cur_ent->blendpos=0;
-          cur_ent->framenum++;
-        }
+			glLoadIdentity();
+			glRotatef(camera_xrot,1.0f,0.0f,0.0f);
+			glRotatef(camera_zrot,0.0f,0.0f,1.0f);
+			glRotatef(camera_yrot,0.0f,1.0f,0.0f);
+			glTranslatef(-camera_x/100.0f,-camera_y/100.0f,camera_z/100.0f);
+			glTranslatef(cur_ent->x/100.0f,cur_ent->y/100.0f,-cur_ent->z/100.0f);
+			glTranslatef(0,.16,0);
+			glRotatef(cur_ent->xrot,1.0f,0.0f,0.0f);
+			glRotatef(cur_ent->zrot,0.0f,0.0f,1.0f);
+			glRotatef(cur_ent->yrot,0.0f,1.0f,0.0f);
+			glRotatef(-90,1.0f,0.0f,0.0f);
+			cur_ent->tex->select();
+			if(cur_ent->anim_start!=cur_ent->anim_end)
+				cur_ent->model->SetFrame(frame1,frame2,cur_ent->blendpos,cur_ent->blendcount);
+			compute_light(cur_ent->x,cur_ent->y,cur_ent->z,cur_ent->alpha);
+			cur_ent->model->Draw();
+			cur_ent->blendpos++;
+			if(cur_ent->blendpos>cur_ent->blendcount) {
+				cur_ent->blendpos=0;
+				cur_ent->framenum++;
+			}
 
-        if(cur_ent->framenum>cur_ent->anim_end) { cur_ent->framenum=cur_ent->anim_start; }
-      }
+			if(cur_ent->framenum>cur_ent->anim_end) { cur_ent->framenum=cur_ent->anim_start; }
     }
     cur_ent=cur_ent->next;
   }
 	//printf("--render_world()\n");
-}
-
-void render_world_trans() {
-  int i,j,frame1,frame2;
-  float x,y,z,light,dz,dy,dx;
-  struct entity *cur_ent=entity_list;
-  struct entity *other_ent=NULL;
-  struct poly *cur_pol=NULL;
-	//printf("+++render_world()\n");
-
-  while(cur_ent!=NULL) {
-    if(cur_ent->poly_list!=NULL&&cur_ent->alpha!=1.0f) {
-      glLoadIdentity();
-      glRotatef(camera_xrot,1.0f,0.0f,0.0f);
-      glRotatef(camera_zrot,0.0f,0.0f,1.0f);
-      glRotatef(camera_yrot,0.0f,1.0f,0.0f);
-      glTranslatef(-camera_x/100.0f,-camera_y/100.0f,camera_z/100.0f);
-      glTranslatef(cur_ent->x/100.0f,cur_ent->y/100.0f,-cur_ent->z/100.0f);
-			glRotatef(cur_ent->yrot,0.0f,1.0f,0.0f);
-			glRotatef(cur_ent->xrot,1.0f,0.0f,0.0f);
-			glRotatef(cur_ent->zrot,0.0f,0.0f,1.0f);
-      cur_pol=cur_ent->poly_list;
-      i=0;
-    	glColor4f(1.0f,1.0f,1.0f,cur_ent->alpha);
-
-      while(cur_pol!=NULL) {
-        i++;
-        cur_pol->tex->select();
-        switch(cur_pol->vert_count) {
-        case 3:
-          glBegin(GL_TRIANGLES);
-          break;
-        case 4:
-          glBegin(GL_QUADS);
-          break;
-        default:
-	        glBegin(GL_POLYGON);
-          break;
-				}
-				for(j=0;j<cur_pol->vert_count;j++) {
-					glTexCoord2f(cur_pol->point[j].s,cur_pol->point[j].t);
-					glVertex3f(cur_pol->point[j].x/100.0f, cur_pol->point[j].y/100.0f, -cur_pol->point[j].z/100.0f);
-				}
-				glEnd();
-				cur_pol=cur_pol->next;
-			}
-    } else {
-			if(cur_ent->model!=NULL&&cur_ent->alpha!=1) {
-				if(cur_ent->framenum<cur_ent->anim_start) {
-					cur_ent->framenum=cur_ent->anim_start;
-				}
-				frame1=cur_ent->framenum;
-				if(cur_ent->framenum==cur_ent->anim_end) {
-					frame2=cur_ent->anim_start;
-				} else {
-					frame2=cur_ent->framenum+1;
-				}
-				if(frame2>cur_ent->anim_end) { frame2=cur_ent->anim_end; }
-
-				glLoadIdentity();
-				glRotatef(camera_xrot,1.0f,0.0f,0.0f);
-				glRotatef(camera_zrot,0.0f,0.0f,1.0f);
-				glRotatef(camera_yrot,0.0f,1.0f,0.0f);
-				glTranslatef(-camera_x/100.0f,-camera_y/100.0f,camera_z/100.0f);
-				glTranslatef(cur_ent->x/100.0f,cur_ent->y/100.0f,-cur_ent->z/100.0f);
-				glTranslatef(0,.16,0);
-				glRotatef(cur_ent->xrot,1.0f,0.0f,0.0f);
-				glRotatef(cur_ent->zrot,0.0f,0.0f,1.0f);
-				glRotatef(cur_ent->yrot,0.0f,1.0f,0.0f);
-				glRotatef(-90,1.0f,0.0f,0.0f);
-				cur_ent->tex->select();
-				if(cur_ent->anim_start!=cur_ent->anim_end)
-					cur_ent->model->SetFrame(frame1,frame2,cur_ent->blendpos,cur_ent->blendcount);
-
-				glColor4f(1.0f,1.0f,1.0f,cur_ent->alpha);
-				cur_ent->model->Draw();
-				cur_ent->blendpos++;
-				if(cur_ent->blendpos>cur_ent->blendcount) {
-					cur_ent->blendpos=0;
-					cur_ent->framenum++;
-				}
-				if(cur_ent->framenum>cur_ent->anim_end) { cur_ent->framenum=cur_ent->anim_start; }
-			}
-		}
-		cur_ent=cur_ent->next;
-  }
 }
