@@ -17,20 +17,16 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
+#include <vector>
+
 //Pause for x seconds
 void delay(float seconds);
 
 //Toggle whether to update twice per frame
 void set_doublespeed(int speed);
 
-#ifdef WIN32
-void audio_init();
-void play_bgm(LPCWSTR fn);
-void stop_bgm();
-void audio_shutdown();
-void c99_net_init();
-void socket_write_line(SOCKET socket, char *text);
-void socket_read_line(SOCKET socket, char *return_text);
-SOCKET connect_to_host(char *ip, int port);
-SOCKET wait_for_connect(int port);
-#endif
+//Scan a directory
+void scan_directory(char *path, std::vector<std::string> *s, std::vector<bool> *d, int &count);
+
+//Whether a file exists
+bool file_exists(char *path);

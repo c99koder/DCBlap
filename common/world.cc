@@ -249,7 +249,12 @@ void load_world_info(char *filename, char *title, char *author, char *rating) {
   strcpy(author,"No author");
   strcpy(rating,"Not rated");
 
+	assert(file_exists(filename));
+	
   worldFile.open(filename,"rb");
+	
+	//Load textures
+	worldFile.readle32(&texcount,1);
   for(i=0;i<texcount;i++) {
     k=0;
     do {
@@ -313,10 +318,9 @@ void load_world(const char *filename) {
 	RefPtr<Texture> tex;
 	File worldFile;
   
-	sprintf(texname,"maps/%s",filename);
-	printf("Loading: %s\n",texname);
-	worldFile.open(texname,"rb");
-	assert(worldFile.isValid());
+	assert(file_exists((char *)filename));
+	printf("Loading: %s\n",filename);
+	worldFile.open(filename,"rb");
 
 	//Load textures
 	worldFile.readle32(&texcount,1);

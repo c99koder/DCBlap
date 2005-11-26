@@ -28,10 +28,15 @@ using namespace Tiki;
 using namespace Tiki::GL;
 
 #include "LevelSelect.h"
+#include "utils.h"
 
 extern RefPtr<Font> fnt;
 
-LevelSelect::LevelSelect() {
+LevelSelect::LevelSelect(char *path) {
+	std::vector<std::string> files;
+	std::vector<bool> is_dir;
+	int count=0;
+	char tmp[100];
 	GenericMenu::GenericMenu();
 	
 	m_scene->setTranslate(Vector(0,0,0));
@@ -59,37 +64,30 @@ LevelSelect::LevelSelect() {
 	ml->setTextColor(Color(0,0,0));
 	is->setTranslate(Vector(-2,-2,1));
 	ml->setTranslate(Vector(-2,-2,1));
-	is->addTexture(new Texture("maps/BlapOut/classic.png",1));
-	ml->addItem("Classic");
-	m_levelList.push_back(*new string("BlapOut/classic.wld"));
-	is->addTexture(new Texture("maps/BlapOut/swirl.png",1));
-	ml->addItem("Swirl");
-	m_levelList.push_back(*new string("BlapOut/swirl.wld"));
-	is->addTexture(new Texture("maps/MultiBlapOut/m1.png",1));
-	ml->addItem("m1");
-	m_levelList.push_back(*new string("MultiBlapOut/m1.wld"));
-	is->addTexture(new Texture("maps/Traditional/classic.png",1));
-	ml->addItem("Classic");
-	m_levelList.push_back(*new string("Traditional/classic.wld"));
-	is->addTexture(new Texture("maps/Traditional/beamride.png",1));
-	ml->addItem("BeamRide");
-	m_levelList.push_back(*new string("Traditional/beamride.wld"));
-	is->addTexture(new Texture("maps/Traditional/plasma.png",1));
-	ml->addItem("Plasma");
-	m_levelList.push_back(*new string("Traditional/plasma.wld"));
-	is->addTexture(new Texture("maps/Traditional/lake.png",1));
-	ml->addItem("Lake");
-	m_levelList.push_back(*new string("Traditional/lake.wld"));
-	is->addTexture(new Texture("maps/Other/airhockey1.png",1));
-	ml->addItem("AirHockey1");
-	m_levelList.push_back(*new string("Other/airhockey1.wld"));
+	scan_directory(path,&files,&is_dir,count);
+	
+	for(int x=0; x<count; x++) {
+		if((int)files[x].find(".wld") > 0) {
+			files[x].resize(files[x].find_last_of("."));
+			sprintf(tmp,"%s/%s.png",path,files[x].c_str());
+			if(file_exists(tmp)) {
+				is->addTexture(new Texture(tmp,1));
+			} else {
+				is->addTexture(new Texture("tex/noprev.png",1));
+			}
+			ml->addItem((char *)files[x].c_str());
+			sprintf(tmp,"%s/%s.wld",path,files[x].c_str());
+			m_levelList.push_back(tmp);
+			m_menuItems++;
+		}
+	}
+	
 	is->selectTexture(0);
 	ml->selectItem(0);
 	b1->subAdd(is);
 	b2->subAdd(ml);
 	
 	m_selection=0;
-	m_menuItems=8;
 	m_repeatDelay=0;
 }
 

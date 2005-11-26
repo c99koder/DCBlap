@@ -28,10 +28,16 @@ using namespace Tiki;
 using namespace Tiki::GL;
 
 #include "GameSelect.h"
+#include "utils.h"
 
 extern RefPtr<Font> fnt;
 
 GameSelect::GameSelect() {
+	std::vector<std::string> files;
+	std::vector<bool> is_dir;
+	int count=0;
+	char tmp[100];
+	
 	GenericMenu::GenericMenu();
 	
 	m_scene->setTranslate(Vector(0,0,0));
@@ -49,10 +55,24 @@ GameSelect::GameSelect() {
 	is = new imageSet;
 	is->setSize(305,200);
 	is->setTranslate(Vector(-2,-2,1));
-	is->addTexture(new Texture("maps/BlapOut.png",1));
-	m_gameList.push_back(*new string("BlapOut"));
-	is->addTexture(new Texture("maps/Traditional.png",1));
-	m_gameList.push_back(*new string("Traditional"));
+	
+	m_menuItems=0;
+
+	scan_directory("maps",&files,&is_dir,count);
+	
+	for(int x=0; x<count; x++) {
+		if(is_dir[x]) {
+			sprintf(tmp,"maps/%s.png",files[x].c_str());
+			if(file_exists(tmp)) {
+				is->addTexture(new Texture(tmp,1));
+			} else {
+				is->addTexture(new Texture("tex/noprev.png",1));
+			}
+			m_gameList.push_back(files[x]);
+			m_menuItems++;
+		}
+	}
+	
 	is->selectTexture(0);
 	b1->subAdd(is);
 
@@ -67,7 +87,6 @@ GameSelect::GameSelect() {
 	b1->subAdd(a2);
 	
 	m_selection=0;
-	m_menuItems=2;
 	m_repeatDelay=0;
 }
 

@@ -23,7 +23,7 @@
 
 class LevelSelect : public GenericMenu {
 public:
-	LevelSelect();
+	LevelSelect(char *path);
 	void FadeIn();
 	string getSelection() { return m_levelList[m_selection]; }
 protected:

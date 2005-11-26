@@ -37,6 +37,7 @@ using namespace Tiki::Time;
 #include "objects.h"
 #include "menus/TitleScreen.h"
 #include "menus/GameSelect.h"
+#include "menus/LevelSelect.h"
 
 bool quitting = false;
 bool playing = false;
@@ -118,8 +119,10 @@ extern "C" int tiki_main(int argc, char **argv) {
 	uint64 st=0;
 	TitleScreen *ts;
 	GameSelect *gs;
+	LevelSelect *ls;
 	Banner *loading;
 	VorbisStream bgm;
+	char tmp[100];
 	
 	// Init Tiki
 	Tiki::init(argc, argv);
@@ -157,14 +160,18 @@ extern "C" int tiki_main(int argc, char **argv) {
 				gs->FadeIn();
 				gs->doMenu();
 				if(quitting) break;
-
+				sprintf(tmp,"maps/%s",gs->getSelection().c_str());
+				ls=new LevelSelect(tmp);
+				ls->FadeIn();
+				ls->doMenu();
 				//bgm.stop();
 				for(int i=0; i<3; i++) {
 					Frame::begin();
 					loading->draw(Drawable::Opaque);
 					Frame::finish();
 				}				
-				game_init(gs->getSelection().c_str());
+				game_init(ls->getSelection().c_str());
+				delete ls;
 				//bgm.load("game.ogg",1);
 				//bgm.start();
 
