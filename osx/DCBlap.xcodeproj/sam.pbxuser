@@ -4051,6 +4051,36 @@
 		vrLen = 391;
 		vrLoc = 4788;
 	};
+	224784B20938F4CD0070BB68 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 22752C7B08F02BC400DCB98C /* paddle.cc */;
+		name = "paddle.cc: 192";
+		rLen = 0;
+		rLoc = 5050;
+		rType = 0;
+		vrLen = 391;
+		vrLoc = 4788;
+	};
+	224784B40938F4D30070BB68 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 22752C7B08F02BC400DCB98C /* paddle.cc */;
+		name = "paddle.cc: 192";
+		rLen = 0;
+		rLoc = 5050;
+		rType = 0;
+		vrLen = 961;
+		vrLoc = 4596;
+	};
+	224784B50938F4D30070BB68 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 22752C7B08F02BC400DCB98C /* paddle.cc */;
+		name = "paddle.cc: 192";
+		rLen = 0;
+		rLoc = 5050;
+		rType = 0;
+		vrLen = 470;
+		vrLoc = 4820;
+	};
 	22690B840911210C0026D5BC /* imageSet.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {776, 616}}";
@@ -4313,9 +4343,9 @@
 	};
 	22752C7B08F02BC400DCB98C /* paddle.cc */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {777, 3010}}";
+			sepNavIntBoundsRect = "{{0, 0}, {776, 3010}}";
 			sepNavSelRange = "{5050, 0}";
-			sepNavVisRect = "{{0, 2525}, {777, 247}}";
+			sepNavVisRect = "{{0, 2402}, {776, 558}}";
 			sepNavWindowFrame = "{{15, 183}, {750, 558}}";
 		};
 	};
@@ -6031,6 +6061,9 @@
 			224784AD0938F2320070BB68 /* PBXTextBookmark */ = 224784AD0938F2320070BB68 /* PBXTextBookmark */;
 			224784B00938F25F0070BB68 /* PBXTextBookmark */ = 224784B00938F25F0070BB68 /* PBXTextBookmark */;
 			224784B10938F25F0070BB68 /* PBXTextBookmark */ = 224784B10938F25F0070BB68 /* PBXTextBookmark */;
+			224784B20938F4CD0070BB68 /* PBXTextBookmark */ = 224784B20938F4CD0070BB68 /* PBXTextBookmark */;
+			224784B40938F4D30070BB68 /* PBXTextBookmark */ = 224784B40938F4D30070BB68 /* PBXTextBookmark */;
+			224784B50938F4D30070BB68 /* PBXTextBookmark */ = 224784B50938F4D30070BB68 /* PBXTextBookmark */;
 			22690B90091170860026D5BC = 22690B90091170860026D5BC /* PBXTextBookmark */;
 			22690B91091170860026D5BC = 22690B91091170860026D5BC /* PBXTextBookmark */;
 			22690CD30912E1790026D5BC = 22690CD30912E1790026D5BC /* PBXTextBookmark */;
