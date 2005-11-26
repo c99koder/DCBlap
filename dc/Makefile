@@ -27,6 +27,7 @@ OBJS = main.o ../common/callback.o \
 ../common/objects/slowdown.o \
 ../common/objects/speedup.o \
 ../common/objects/water.o \
+../common/utils.o \
 ../common/word.o \
 ../common/world.o
 
