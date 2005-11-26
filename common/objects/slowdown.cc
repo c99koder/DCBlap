@@ -47,8 +47,8 @@ void slowdown_reset() {
 
 void slowdown_create(struct entity *me) {
   me->model=new md2Model;
-  me->model->Load("slowdown.md2");
-  if(slowdown_tex==NULL) slowdown_tex = new Texture("slowdown.png",0);
+  me->model->Load("model/slowdown.md2");
+  if(slowdown_tex==NULL) slowdown_tex = new Texture("tex/slowdown.png",0);
 	me->tex=slowdown_tex;
   me->anim_start=me->model->anim_start("stand");
   me->anim_end=me->model->anim_end("stand");
@@ -60,7 +60,7 @@ void slowdown_create(struct entity *me) {
 		me->arg2=-2+(rand()%5);
 	} while(me->arg1==0 || me->arg2==0);
   me->arg3=1+rand()%3;
-	if(sfx_slowdown==NULL) sfx_slowdown = new Sound("slowdown.wav");
+	if(sfx_slowdown==NULL) sfx_slowdown = new Sound("sound/slowdown.wav");
 }
 
 void slowdown_update(struct entity *me, float gt) {

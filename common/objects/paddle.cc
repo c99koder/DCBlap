@@ -183,13 +183,13 @@ void paddle_update(struct entity *me, float gt) {
   me->alpha=1.0f;
 	switch((int)me->arg5) {
   case 0:
-		me->z+=thinker[(int)me->arg1-1] * gt * 40;
+		me->z+=thinker[(int)me->arg1-1] * gt * 30;
     break;
   case 1:
-		me->y+=thinker[(int)me->arg1-1] * gt * 40;
+		me->y+=thinker[(int)me->arg1-1] * gt * 30;
     break;
   case 2:
-    me->x+=thinker[(int)me->arg1-1] * gt * 40;
+    me->x+=thinker[(int)me->arg1-1] * gt * 30;
     break;
 	}
 }

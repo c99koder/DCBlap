@@ -47,8 +47,8 @@ void speedup_reset() {
 
 void speedup_create(struct entity *me) {
   me->model=new md2Model;
-  me->model->Load("speedup.md2");
-	if(speedup_tex==NULL) speedup_tex=new Texture("speedup.png",0);
+  me->model->Load("model/speedup.md2");
+	if(speedup_tex==NULL) speedup_tex=new Texture("tex/speedup.png",0);
   me->tex=speedup_tex;
   me->anim_start=me->model->anim_start("stand");
   me->anim_end=me->model->anim_end("stand");
@@ -60,7 +60,7 @@ void speedup_create(struct entity *me) {
 		me->arg2=-2+(rand()%5);
 	} while(me->arg1==0 || me->arg2==0);
   me->arg3=1+rand()%3;
-	if(sfx_speedup==NULL) sfx_speedup=new Sound("speedup.wav");
+	if(sfx_speedup==NULL) sfx_speedup=new Sound("sound/speedup.wav");
 }
 
 void speedup_update(struct entity *me, float gt) {

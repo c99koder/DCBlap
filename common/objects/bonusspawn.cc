@@ -49,9 +49,9 @@ void bonus_create(struct entity *me) {
 	
 	if(enable_powerups) {
 		//Cache the powerup resources
-		if(sfx_speedup==NULL) sfx_speedup=new Sound("speedup.wav");
-		if(sfx_slowdown==NULL) sfx_speedup=new Sound("slowdown.wav");
-		if(sfx_hyper==NULL) sfx_speedup=new Sound("hyper.wav");
+		if(sfx_speedup==NULL) sfx_speedup=new Sound("sound/speedup.wav");
+		if(sfx_slowdown==NULL) sfx_speedup=new Sound("sound/slowdown.wav");
+		if(sfx_hyper==NULL) sfx_speedup=new Sound("sound/hyper.wav");
 		
 		if(speedup_tex==NULL) speedup_tex = new Texture("tex/speedup.png",0);
 		if(slowdown_tex==NULL) slowdown_tex = new Texture("tex/slowdown.png",0);

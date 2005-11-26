@@ -48,8 +48,8 @@ void hyper_reset() {
 
 void hyper_create(struct entity *me) {
   me->model=new md2Model;
-  me->model->Load("hyper.md2");
-  if(hyper_tex==NULL) hyper_tex=new Texture("hyper.png",0);
+  me->model->Load("model/hyper.md2");
+  if(hyper_tex==NULL) hyper_tex=new Texture("tex/hyper.png",0);
 	me->tex=hyper_tex;
   me->anim_start=me->model->anim_start("stand");
   me->anim_end=me->model->anim_end("stand");
@@ -61,7 +61,7 @@ void hyper_create(struct entity *me) {
 		me->arg2=-2+(rand()%5);
 	} while(me->arg1==0 || me->arg2==0);
   me->arg3=1+rand()%3;
-	if(sfx_hyper==NULL) sfx_hyper=new Sound("hyper.wav");
+	if(sfx_hyper==NULL) sfx_hyper=new Sound("sound/hyper.wav");
 }
 
 void hyper_update(struct entity *me, float gt) {

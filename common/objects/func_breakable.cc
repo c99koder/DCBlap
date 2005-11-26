@@ -52,13 +52,15 @@ void func_break_create(struct entity *me) {
   if(me->arg4>50) me->arg4=50;
   me->arg5=me->y;
 
-	//if(sfx_speedup==NULL) sfx_speedup=new Sound("speedup.wav");
-	//if(sfx_slowdown==NULL) sfx_speedup=new Sound("slowdown.wav");
-	//if(sfx_hyper==NULL) sfx_speedup=new Sound("hyper.wav");
-	
-	if(speedup_tex==NULL) speedup_tex = new Texture("tex/speedup.png",0);
-	if(slowdown_tex==NULL) slowdown_tex = new Texture("tex/slowdown.png",0);
-	if(hyper_tex==NULL) hyper_tex = new Texture("tex/hyper.png",0);	
+	if(enable_powerups) {	
+		if(sfx_speedup==NULL) sfx_speedup=new Sound("sound/speedup.wav");
+		if(sfx_slowdown==NULL) sfx_slowdown=new Sound("sound/slowdown.wav");
+		if(sfx_hyper==NULL) sfx_hyper=new Sound("sound/hyper.wav");
+		
+		if(speedup_tex==NULL) speedup_tex = new Texture("tex/speedup.png",0);
+		if(slowdown_tex==NULL) slowdown_tex = new Texture("tex/slowdown.png",0);
+		if(hyper_tex==NULL) hyper_tex = new Texture("tex/hyper.png",0);	
+	}
 }
 
 extern struct entity *g1;

@@ -149,9 +149,9 @@ extern "C" int tiki_main(int argc, char **argv) {
 	gs=new GameSelect;
 	
 	while(quitting==false) {
-		//bgm.stop();
-		//bgm.load("menu.ogg",1);
-		//bgm.start();
+		bgm.stop();
+		bgm.load("sound/menu.ogg",1);
+		bgm.start();
 		ts->FadeIn();
 		ts->doMenu();
 		if(quitting) break;
@@ -164,7 +164,7 @@ extern "C" int tiki_main(int argc, char **argv) {
 				ls=new LevelSelect(tmp);
 				ls->FadeIn();
 				ls->doMenu();
-				//bgm.stop();
+				bgm.stop();
 				for(int i=0; i<3; i++) {
 					Frame::begin();
 					loading->draw(Drawable::Opaque);
@@ -172,8 +172,8 @@ extern "C" int tiki_main(int argc, char **argv) {
 				}				
 				game_init(ls->getSelection().c_str());
 				delete ls;
-				//bgm.load("game.ogg",1);
-				//bgm.start();
+				bgm.load("sound/game.ogg",1);
+				bgm.start();
 
 				playing=true;
 				
@@ -205,7 +205,7 @@ extern "C" int tiki_main(int argc, char **argv) {
 		}
 	}
 	
-	//bgm.stop();
+	bgm.stop();
 	
 	delete gs;
 	delete ts;

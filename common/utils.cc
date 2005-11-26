@@ -17,11 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
-#if TIKI_PLAT == TIKI_WIN32
-#include <windows.h>
-#endif
-
 #include <Tiki/tiki.h>
+#include <Tiki/gl.h>
 #include <ctype.h>
 #include <string.h>
 #include <vector>

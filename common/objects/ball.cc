@@ -99,8 +99,8 @@ void ball_create(struct entity *me) {
     break;
   }
 
-	//if(sfx_bounce==NULL) sfx_bounce = new Sound("bounce.wav");
-	//if(sfx_score==NULL) sfx_score = new Sound("score.wav");
+	if(sfx_bounce==NULL) sfx_bounce = new Sound("sound/bounce.wav");
+	if(sfx_score==NULL) sfx_score = new Sound("sound/score.wav");
 }
 
 void ball_update(struct entity *me, float gt) {
@@ -128,6 +128,9 @@ void ball_message(struct entity *me, struct entity *them, char *message) {
   int x,y;
   if(!strcmp(message,"win")) {
     me->deleted=1;
+  } else if(!strcmp(message,"out")) {
+    set_status_text("Out of bounds",1,1,1);
+    broadcast_message(me,"reset");
   } else if(!strcmp(message,"reset")) {
 		if(me->arg6==1) me->deleted=1;
     make_coordinates(get_prop(me,"origin"),&me->x,&me->y,&me->z); //reset position
