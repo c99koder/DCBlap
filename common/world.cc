@@ -299,6 +299,7 @@ void load_world(const char *filename) {
   float smin=0,tmin=0;  
   unsigned int texcount;
   char texname[100];
+	char texname2[100];
   unsigned int polycount;
   unsigned int entcount;
   unsigned int paramcount;
@@ -315,9 +316,7 @@ void load_world(const char *filename) {
 	sprintf(texname,"maps/%s",filename);
 	printf("Loading: %s\n",texname);
 	worldFile.open(texname,"rb");
-	/*
-	 * TODO: Check isValid plzkthx!
-	 */
+	assert(worldFile.isValid());
 
 	//Load textures
 	worldFile.readle32(&texcount,1);
@@ -330,8 +329,8 @@ void load_world(const char *filename) {
 			if(texname[k] >= 'A' && texname[k] <= 'Z') texname[k] += 32;
       k++;
     } while(texname[k-1]!='\0');
-		strcat(texname,".png");
-		tex=new Texture(texname,0);
+		sprintf(texname2,"tex/%s.png",texname);
+		tex=new Texture(texname2,0);
 		texture_list.push_back(tex);
   }
 	
@@ -765,6 +764,7 @@ void render_world(bool solid) {
       while(cur_pol!=NULL) {
         i++;
         cur_pol->tex->select();
+				//glDisable(GL_TEXTURE_2D);
         switch(cur_pol->vert_count) {
 					case 3:
 						glBegin(GL_TRIANGLES);
@@ -778,6 +778,7 @@ void render_world(bool solid) {
 				}
 
 				//glBegin(GL_TRIANGLE_FAN);
+				//glBegin(GL_LINE_LOOP);
 
 				//compute_light(cur_ent->x+cur_pol->cx,cur_ent->y+cur_pol->cy,cur_ent->z+cur_pol->cz,cur_ent->alpha);
 				//glTexCoord2f(cur_pol->cs,cur_pol->ct);

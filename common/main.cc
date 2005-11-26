@@ -49,7 +49,6 @@ extern bool lose_flag;
 extern bool game_paused;
 
 void tkCallback(const Hid::Event & evt, void * data) {
-	printf("Event from %s\n",evt.dev->getName().c_str());
 	if (evt.type == Hid::Event::EvtQuit) {
 		quitting = true;
 		playing=false;
@@ -107,6 +106,10 @@ void tkCallback(const Hid::Event & evt, void * data) {
 			player_axis_y[0]=0;
 		}
 	}
+#if TIKI_PLAT == TIKI_DC
+	if(evt.type == Hid::Event::EvtBtnRelease && evt.btn == Hid::Event::BtnY)
+		vid_screen_shot("/pc/Users/sam/sshot.ppm");
+#endif
 }
 		
 extern "C" int tiki_main(int argc, char **argv) {
@@ -121,8 +124,9 @@ extern "C" int tiki_main(int argc, char **argv) {
 	// Init Tiki
 	Tiki::init(argc, argv);
 	Hid::callbackReg(tkCallback, NULL);
+	Tiki::GL::showCursor(false);
 	
-	loading = new Banner(Drawable::Opaque,new Texture("loading.png",0));
+	loading = new Banner(Drawable::Opaque,new Texture("tex/loading.png",0));
 	loading->setSize(640,480);
 	loading->setTranslate(Vector(320,240,10));
 	
@@ -163,7 +167,6 @@ extern "C" int tiki_main(int argc, char **argv) {
 				game_init(gs->getSelection().c_str());
 				//bgm.load("game.ogg",1);
 				//bgm.start();
-				update_world(0);
 
 				playing=true;
 				
@@ -195,7 +198,7 @@ extern "C" int tiki_main(int argc, char **argv) {
 		}
 	}
 	
-	bgm.stop();
+	//bgm.stop();
 	
 	delete gs;
 	delete ts;
