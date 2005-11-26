@@ -53,9 +53,9 @@ void bonus_create(struct entity *me) {
 		if(sfx_slowdown==NULL) sfx_speedup=new Sound("slowdown.wav");
 		if(sfx_hyper==NULL) sfx_speedup=new Sound("hyper.wav");
 		
-		if(speedup_tex==NULL) speedup_tex = new Texture("speedup.png",0);
-		if(slowdown_tex==NULL) slowdown_tex = new Texture("slowdown.png",0);
-		if(hyper_tex==NULL) hyper_tex = new Texture("hyper.png",0);
+		if(speedup_tex==NULL) speedup_tex = new Texture("tex/speedup.png",0);
+		if(slowdown_tex==NULL) slowdown_tex = new Texture("tex/slowdown.png",0);
+		if(hyper_tex==NULL) hyper_tex = new Texture("tex/hyper.png",0);
 	}
 }
 

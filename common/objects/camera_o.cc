@@ -33,6 +33,12 @@ int cam_no_move=0;
 void camera_create(struct entity *me) {
   me->arg1=2;
   set_status_text("Ready?",1.0f,1.0f,1.0f);
+	camera_x=me->x;
+	camera_y=me->y;
+	camera_z=me->z;
+	camera_xrot=me->xrot;
+	camera_yrot=me->yrot-90;
+	camera_zrot=me->zrot;	
 }
 
 void camera_callback(struct entity *me, float gt) {

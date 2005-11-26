@@ -53,12 +53,12 @@ void ball_reset() {
 
 void ball_create(struct entity *me) {
   me->model=new md2Model;
-	if(get_prop(me,"model")!=NULL) {
-		me->model->Load(get_prop(me,"model"));
-	} else {
-		me->model->Load("ball.md2");
-	}
-	if(ball_tex==NULL) ball_tex= new Texture("ball.png",0);
+	//if(get_prop(me,"model")!=NULL) {
+	//	me->model->Load(get_prop(me,"model"));
+	//} else {
+		me->model->Load("model/ball.md2");
+	//}
+	if(ball_tex==NULL) ball_tex= new Texture("tex/ball.png",0);
 	me->tex=ball_tex;
 	me->blendcount=1;
   me->anim_start=me->model->anim_start("stand");
