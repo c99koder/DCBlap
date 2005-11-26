@@ -17,13 +17,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
-#ifdef TIKI
-#ifdef MACOS
-#include <OpenGL/gl.h>
-#else
-#include <GL/gl.h>
-#endif
-#endif
+#include <Tiki/tiki.h>
+#include <Tiki/gl.h>
 #include <string.h>
 #include <stdlib.h>
 #include "md2Model.h"

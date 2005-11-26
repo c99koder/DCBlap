@@ -17,12 +17,16 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
+#if TIKI_PLAT == TIKI_WIN32
+#include <windows.h>
+#endif
+
 #include <Tiki/tiki.h>
 #include <ctype.h>
 #include <string.h>
 #include <vector>
-#if TIKI_PLAT != TIKI_DC
 #include <sys/stat.h>
+#if (TIKI_PLAT == TIKI_OSX || TIKI_PLAT == TIKI_SDL)
 #include <dirent.h>
 #endif
 
@@ -75,14 +79,12 @@ void scan_directory(char *path, std::vector<std::string> *s, std::vector<bool> *
 			while (!fFinished)
 			{
 				// Check the object is a directory or not
-				if (FileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+				if ((strcmp(FileData.cFileName, ".") != 0) &&
+						(strcmp(FileData.cFileName, "..") != 0))
 				{
-					if ((strcmp(FileData.cFileName, ".") != 0) &&
-							(strcmp(FileData.cFileName, "..") != 0))
-					{
-						s.push_back(FileData.cFileName);
-						x++;
-					}
+					s->push_back(FileData.cFileName);
+					d->push_back(FileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY);
+					x++;
 				}
 				
 				if (!FindNextFile(hList, &FileData))
@@ -97,7 +99,7 @@ void scan_directory(char *path, std::vector<std::string> *s, std::vector<bool> *
 		
     FindClose(hList);
 		count=x;
-#endif
+#else
 #if TIKI_PLAT == TIKI_DC
 		dirent_t *de;
 		uint32 fd;
@@ -137,5 +139,6 @@ void scan_directory(char *path, std::vector<std::string> *s, std::vector<bool> *
     }
     closedir(dp);
 		count=x;
+#endif
 #endif
 }

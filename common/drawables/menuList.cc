@@ -31,7 +31,7 @@ menuList::menuList(Texture *bg, Texture *bar, Font *fnt) {
 	m_bg=new Banner(Banner::Trans,bg);
 	subAdd(m_bg);
 	m_bar=new Banner(Banner::Trans,bar);
-	m_bar->animAdd(new AlphaRotate(1.0f/60.0f,0.4));
+	//m_bar->animAdd(new AlphaRotate(1.0f/60.0f,0.4));
 	subAdd(m_bar);
 	m_fnt=fnt;
 	m_textColor=Color(1,1,1,1);

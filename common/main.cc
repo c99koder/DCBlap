@@ -127,7 +127,7 @@ extern "C" int tiki_main(int argc, char **argv) {
 	// Init Tiki
 	Tiki::init(argc, argv);
 	Hid::callbackReg(tkCallback, NULL);
-	Tiki::GL::showCursor(false);
+	//Tiki::GL::showCursor(false);
 	
 	loading = new Banner(Drawable::Opaque,new Texture("tex/loading.png",0));
 	loading->setSize(640,480);
@@ -143,7 +143,7 @@ extern "C" int tiki_main(int argc, char **argv) {
 	hud_init();
 	player_axis_x[0]=0;
 
-	srand(time(0));
+	srand(gettime());
 	
 	ts=new TitleScreen;
 	gs=new GameSelect;
