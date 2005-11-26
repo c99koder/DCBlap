@@ -32,6 +32,7 @@ public:
 	void addItem(char *text);        //Add an item to the list
 	void selectItem(int num);        //Select an item
 	void setSize(float w, float h);  //Set the size of the menu
+	void setTextColor(Color c);
 	
 	//Overloaded functions
 	void draw(ObjType list);
@@ -43,6 +44,7 @@ private:
 	RefPtr<Banner> m_bar;						//Highlight bar banner
 	RefPtr<Font> m_fnt;							//Font to draw with
 	float	m_w, m_h;									//Width and height of menu
+	Color m_textColor;							//Color of text
 };
 
 #endif

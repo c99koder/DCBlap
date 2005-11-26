@@ -29,13 +29,12 @@ using namespace Tiki::GL;
 
 menuList::menuList(Texture *bg, Texture *bar, Font *fnt) {
 	m_bg=new Banner(Banner::Trans,bg);
-	m_bg->setAlpha(0.4f);
 	subAdd(m_bg);
 	m_bar=new Banner(Banner::Trans,bar);
-	m_bar->setAlpha(0.4f);
 	m_bar->animAdd(new AlphaRotate(1.0f/60.0f,0.4));
 	subAdd(m_bar);
 	m_fnt=fnt;
+	m_textColor=Color(1,1,1,1);
 }
 
 menuList::~menuList() {
@@ -48,8 +47,13 @@ void menuList::setSize(float w, float h) {
 	m_w=w;
 	m_h=h;
 	m_bg->setSize(m_w,m_h);
-	m_bar->setSize(m_w,22);
-	m_bar->setTranslate(Vector(0,-m_h/2 - 11 + 22,0));
+	m_bg->setTranslate(Vector(0,0,-0.02));
+	m_bar->setSize(m_w,24);
+	m_bar->setTranslate(Vector(0,-m_h/2 - 11 + 24,-0.01));
+}
+
+void menuList::setTextColor(Color c) {
+	m_textColor = c;
 }
 
 void menuList::addItem(char *text) {
@@ -60,21 +64,21 @@ void menuList::addItem(char *text) {
 void menuList::selectItem(int num) {
 	m_currentItem=num;
 	m_bar->animRemoveAll();
-	m_bar->animAdd(new LogXYMover(0,-m_h/2 - 11 + ((m_currentItem+1)*22)));
+	m_bar->animAdd(new LogXYMover(0,-m_h/2 - 11 + ((m_currentItem+1)*24)));
 }
 
 void menuList::draw(ObjType list) {
 	std::vector<string>::iterator item_iter;
 	int i=0;
 	
-	Drawable::draw(list);
-	
 	if(list==Trans) {
+		Drawable::draw(list);	
+		
 		m_fnt->setSize(20);
-		m_fnt->setColor(getTint());
+		m_fnt->setColor(getTint() * m_textColor);
 		if(m_itemList.size() > 0) {
 			for(item_iter = m_itemList.begin(); item_iter != m_itemList.end(); item_iter++) {
-				m_fnt->draw(getTranslate() + Vector(-m_w/2,-m_h/2 - 4 + ((i+1)*22),0.1),*(item_iter));
+				m_fnt->draw(getPosition() + Vector((-m_w/2)+4,-m_h/2 - 4 + ((i+1)*24),0),*(item_iter));
 				i++;
 			}
 		}

@@ -52,7 +52,7 @@ void imageSet::selectTexture(int num) {
 void imageSet::draw(ObjType list) {
 	if(list==Trans) {
 		if(m_currentTexture>=0) {
-			setAlpha(1.0);
+			setAlpha((m_blend > 0)?m_blend:1.0f);
 			setTexture(m_textureList[m_currentTexture]);
 			Banner::draw(list);
 		}
