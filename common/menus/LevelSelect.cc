@@ -64,6 +64,9 @@ LevelSelect::LevelSelect(char *path) {
 	ml->setTextColor(Color(0,0,0));
 	is->setTranslate(Vector(-2,-2,1));
 	ml->setTranslate(Vector(-2,-2,1));
+
+	m_menuItems=0;
+
 	scan_directory(path,&files,&is_dir,count);
 	
 	for(int x=0; x<count; x++) {
