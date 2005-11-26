@@ -36,69 +36,52 @@ GameSelect::GameSelect() {
 	
 	m_scene->setTranslate(Vector(0,0,0));
 	
-	bg = new Banner(Drawable::Trans,new Texture("game_bg.png",0));
-	is = new imageSet;
-	ml = new menuList(new Texture("game_box.png",0), new Texture("game_bar.png",0), fnt);
+	bg = new Banner(Drawable::Trans,new Texture("tex/menu/game/bg.png",0));
 	bg->setSize(640,480);
 	bg->setTranslate(Vector(320,240,0));
 	m_scene->subAdd(bg);
+
+	b1 = new Banner(Drawable::Trans,new Texture("tex/menu/game/round_box.png",1));
+	b1->setSize(320,260);
+	b1->setTranslate(Vector(320,222,0));
+	m_scene->subAdd(b1);
 	
-	is->setSize(240,200);
-	ml->setSize(240,240);
-	is->setTranslate(Vector(160,200,0));
-	ml->setTranslate(Vector(480,220,0));
-	is->addTexture(new Texture("maps/BlapOut/classic.png",0));
-	ml->addItem("Classic");
-	m_levelList.push_back(*new string("BlapOut/classic.wld"));
-	is->addTexture(new Texture("maps/BlapOut/swirl.png",0));
-	ml->addItem("Swirl");
-	m_levelList.push_back(*new string("BlapOut/swirl.wld"));
-	is->addTexture(new Texture("maps/MultiBlapOut/m1.png",0));
-	ml->addItem("m1");
-	m_levelList.push_back(*new string("MultiBlapOut/m1.wld"));
-	is->addTexture(new Texture("maps/Traditional/classic.png",0));
-	ml->addItem("Classic");
-	m_levelList.push_back(*new string("Traditional/classic.wld"));
-	is->addTexture(new Texture("maps/Traditional/beamride.png",0));
-	ml->addItem("BeamRide");
-	m_levelList.push_back(*new string("Traditional/beamride.wld"));
-	is->addTexture(new Texture("maps/Traditional/plasma.png",0));
-	ml->addItem("Plasma");
-	m_levelList.push_back(*new string("Traditional/plasma.wld"));
-	is->addTexture(new Texture("maps/Traditional/lake.png",0));
-	ml->addItem("Lake");
-	m_levelList.push_back(*new string("Traditional/lake.wld"));
-	is->addTexture(new Texture("maps/Other/airhockey1.png",0));
-	ml->addItem("AirHockey1");
-	m_levelList.push_back(*new string("Other/airhockey1.wld"));
+	is = new imageSet;
+	is->setSize(305,200);
+	is->setTranslate(Vector(-2,-2,1));
+	is->addTexture(new Texture("maps/BlapOut.png",1));
+	m_gameList.push_back(*new string("BlapOut"));
+	is->addTexture(new Texture("maps/Traditional.png",1));
+	m_gameList.push_back(*new string("Traditional"));
 	is->selectTexture(0);
-	ml->selectItem(0);
-	m_scene->subAdd(is);
-	m_scene->subAdd(ml);
+	b1->subAdd(is);
+
+	a1 = new Banner(Drawable::Trans,new Texture("tex/menu/game/arrow.png",1));
+	a1->setSize(-32,64);
+	a1->setTranslate(Vector(-200,0,0));
+	b1->subAdd(a1);
+	
+	a2 = new Banner(Drawable::Trans,new Texture("tex/menu/game/arrow.png",1));
+	a2->setSize(32,64);
+	a2->setTranslate(Vector(200,0,0));
+	b1->subAdd(a2);
 	
 	m_selection=0;
-	m_menuItems=8;
+	m_menuItems=2;
 	m_repeatDelay=0;
 }
 
 void GameSelect::FadeIn() {
 	bg->animRemoveAll();
-	ml->animRemoveAll();
-	is->animRemoveAll();
+	b1->animRemoveAll();
 	
 	bg->setTint(Color(0,0,0));
 	bg->animAdd(new TintFader(Color(1,1,1),Color(1.0f/20.0f,1.0f/20.0f,1.0f/20.0f)));
-	ml->setTint(Color(0,0,0,0));
-	ml->setTranslate(Vector(640+240,220,0));
-	ml->animAdd(new LogXYMover(480,220,8));
-	ml->animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/20.0f,1.0f/20.0f,1.0f/20.0f,1.0f/20.0f)));
-	is->setTint(Color(0,0,0,0));
-	is->setTranslate(Vector(-240,200,0));
-	is->animAdd(new LogXYMover(160,200,8));
-	is->animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/20.0f,1.0f/20.0f,1.0f/20.0f,1.0f/20.0f)));
+	b1->setTint(Color(0,0,0,0));
+	b1->animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/20.0f,1.0f/20.0f,1.0f/20.0f,1.0f/20.0f)));
+	a1->setAlpha(0.4); 
 	m_selection=0;
 	is->selectTexture(0);
-	ml->selectItem(0);
 }
 
 void GameSelect::inputEvent(const Event & evt) {
@@ -112,36 +95,36 @@ void GameSelect::inputEvent(const Event & evt) {
 		case Event::EvtKeypress:
 			switch(evt.key) {
 				case Event::KeySelect:
-					bg->animAdd(new TintFader(Color(0,0,0),Color(-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f)));
-					ml->animAdd(new TintFader(Color(0,0,0,0),Color(-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f)));
-					ml->animAdd(new LogXYMover(640+240,220,10));
-					is->animAdd(new TintFader(Color(0,0,0,0),Color(-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f)));
-					is->animAdd(new LogXYMover(-240,220,10));
+					/*bg->animAdd(new TintFader(Color(0,0,0),Color(-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f)));
+					b2->animAdd(new TintFader(Color(0,0,0,0),Color(-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f)));
+					b2->animAdd(new LogXYMover(640+280,224,10));
+					b1->animAdd(new TintFader(Color(0,0,0,0),Color(-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f)));
+					b1->animAdd(new LogXYMover(-280,224,10));*/
 					startExit();
 					m_exitSpeed=1.0f/20.0f;
 					break;
-				case Event::KeyUp:
+				case Event::KeyLeft:
 					if(m_repeatDelay==0) {
 						m_selection--;
 						if(m_selection<0) {
 							m_selection=0;
 						} else {
 							is->selectTexture(m_selection);
-							ml->selectItem(m_selection);
+							//ml->selectItem(m_selection);
 							m_repeatDelay=2;
 						}
 					} else {
 						m_repeatDelay--;
 					}
 					break;
-				case Event::KeyDown:
+				case Event::KeyRight:
 					if(m_repeatDelay==0) {
 						m_selection++;
 						if(m_selection>=m_menuItems) {
 							m_selection=m_menuItems-1;
 						} else {
 							is->selectTexture(m_selection);
-							ml->selectItem(m_selection);
+							//ml->selectItem(m_selection);
 							m_repeatDelay=2;
 						}
 					} else {
@@ -151,4 +134,12 @@ void GameSelect::inputEvent(const Event & evt) {
 			}
 			break;
 	}
+	if(m_selection==0) 
+		a1->setAlpha(0.4); 
+	else
+		a1->setAlpha(1.0); 
+	if(m_selection==m_menuItems-1) 
+		a2->setAlpha(0.4); 
+	else
+		a2->setAlpha(1.0); 							
 }

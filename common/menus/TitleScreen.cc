@@ -34,10 +34,10 @@ extern RefPtr<Font> fnt;
 TitleScreen::TitleScreen() {
 	GenericMenu::GenericMenu();
 
-	m_scene->setTranslate(Vector(0,0,0));
+	//m_scene->setTranslate(Vector(320,240,0));
 	
 	bg = new imageSet;
-	bg->addTexture(new Texture("title.png",0));
+	bg->addTexture(new Texture("tex/menu/title/bg.png",0));
 	/*bg->addTexture(new Texture("rt/1.png",0));
 	bg->addTexture(new Texture("rt/2.png",0));
 	bg->addTexture(new Texture("rt/3.png",0));
@@ -56,9 +56,10 @@ TitleScreen::TitleScreen() {
 	bg->setTranslate(Vector(320,240,0));
 	m_scene->subAdd(bg);
 	
-	ml = new menuList(new Texture("title_box.png",0), new Texture("title_bar.png",0), fnt);
-	ml->setSize(120,88);
-	ml->setTranslate(Vector(320,240,0));
+	ml = new menuList(new Texture("tex/menu/title/box.png",1), new Texture("tex/menu/title/bar.png",1), fnt);
+	ml->setSize(124,94);
+	ml->setTranslate(Vector(320,240,1));
+	ml->setTextColor(Color(0,0,0));
 	ml->addItem("New Game");
 	ml->addItem("Addons");
 	ml->addItem("Options");
@@ -66,7 +67,7 @@ TitleScreen::TitleScreen() {
 	ml->selectItem(0);
 	m_scene->subAdd(ml);
 	
-	m_scene->subAdd(new TikiCursor);
+	//m_scene->subAdd(new TikiCursor);
 	
 	m_selection=0;
 	m_menuItems=4;

@@ -25,14 +25,13 @@ class GameSelect : public GenericMenu {
 public:
 	GameSelect();
 	void FadeIn();
-	string getSelection() { return m_levelList[m_selection]; }
+	string getSelection() { return m_gameList[m_selection]; }
 protected:
 	void inputEvent(const Event & evt);
 private:
-	std::vector<string> m_levelList;
-	RefPtr<Banner> bg;
+	std::vector<string> m_gameList;
+	RefPtr<Banner> bg,a1,a2,b1;
 	RefPtr<imageSet> is;
-	RefPtr<menuList> ml;
 	int m_selection;
 	int m_menuItems;
 	int m_repeatDelay;
