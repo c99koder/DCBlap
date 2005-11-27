@@ -133,7 +133,7 @@
 		22752CF408F032AE00DCB98C /* word.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = word.h; path = ../include/word.h; sourceTree = SOURCE_ROOT; };
 		22752CFA08F0336500DCB98C /* game.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = game.cc; path = ../common/game.cc; sourceTree = SOURCE_ROOT; };
 		22752D6208F0364A00DCB98C /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../data; sourceTree = SOURCE_ROOT; };
-		2290999C092C250200B7D80C /* Tiki.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Tiki.framework; path = ../../../tiki/osx/build/Development/Tiki.framework; sourceTree = SOURCE_ROOT; };
+		2290999C092C250200B7D80C /* Tiki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Tiki.framework; path = ../../../tiki/osx/build/Development/Tiki.framework; sourceTree = SOURCE_ROOT; };
 		22909A89092F712100B7D80C /* light.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = light.cc; path = ../common/objects/light.cc; sourceTree = SOURCE_ROOT; };
 		22909A91092F722600B7D80C /* light.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = light.h; path = ../common/objects/light.h; sourceTree = SOURCE_ROOT; };
 		22C6211808F0608B008BCA18 /* game.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = game.h; path = ../include/game.h; sourceTree = SOURCE_ROOT; };
@@ -635,7 +635,10 @@
 		22752C3108F01F7500DCB98C /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = ppc;
+				ARCHS = (
+					ppc,
+					i386,
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = TIKI;
 				GCC_USE_GCC3_PFE_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = (
