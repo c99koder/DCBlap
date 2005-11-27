@@ -10,7 +10,7 @@
 #include "pch.h"
 
 // Windows globals
-static char szAppName[] = "TikiTest";
+static char szAppName[] = "DCBlap";
 
 ////////////////////////////////////
 // WinMain
