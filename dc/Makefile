@@ -12,6 +12,7 @@ OBJS = main.o ../common/callback.o \
 ../common/main.o \
 ../common/md2Model.o \
 ../common/menus/GameSelect.o \
+../common/menus/LevelSelect.o \
 ../common/menus/TitleScreen.o \
 ../common/objects/ball.o \
 ../common/objects/bonusspawn.o \
@@ -32,8 +33,8 @@ OBJS = main.o ../common/callback.o \
 ../common/world.o
 
 all: $(OBJS)
-	kos-c++ -L../ $(OBJS) $(TIKI_BASE_LIBS) -o tikitest.elf
-	sh-elf-objcopy -R .stack -O binary tikitest.elf tikitest.bin
+	kos-c++ -L../ $(OBJS) $(TIKI_BASE_LIBS) -o dcblap.elf
+	sh-elf-objcopy -R .stack -O binary dcblap.elf dcblap.bin
 
 clean:
 	-rm -f $(OBJS) tikitest
