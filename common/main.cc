@@ -178,6 +178,7 @@ extern "C" int tiki_main(int argc, char **argv) {
 				playing=true;
 				
 				st = gettime();
+				ogt=0;
 				
 				while (playing==true) {
 					gt=gettime() - st;

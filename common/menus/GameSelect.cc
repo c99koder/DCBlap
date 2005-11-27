@@ -114,11 +114,8 @@ void GameSelect::inputEvent(const Event & evt) {
 		case Event::EvtKeypress:
 			switch(evt.key) {
 				case Event::KeySelect:
-					/*bg->animAdd(new TintFader(Color(0,0,0),Color(-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f)));
-					b2->animAdd(new TintFader(Color(0,0,0,0),Color(-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f)));
-					b2->animAdd(new LogXYMover(640+280,224,10));
+					bg->animAdd(new TintFader(Color(0,0,0),Color(-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f)));
 					b1->animAdd(new TintFader(Color(0,0,0,0),Color(-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f)));
-					b1->animAdd(new LogXYMover(-280,224,10));*/
 					startExit();
 					m_exitSpeed=1.0f/20.0f;
 					break;
