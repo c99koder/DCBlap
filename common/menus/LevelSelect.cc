@@ -41,23 +41,23 @@ LevelSelect::LevelSelect(char *path) {
 	
 	m_scene->setTranslate(Vector(0,0,0));
 	
-	bg = new Banner(Drawable::Trans,new Texture("tex/menu/game/bg.png",0));
+	bg = new Banner(Drawable::Trans,new Texture("tex/menu/level/bg.png",0));
 	bg->setSize(640,480);
 	bg->setTranslate(Vector(320,240,0));
 	m_scene->subAdd(bg);
 
-	b1 = new Banner(Drawable::Trans,new Texture("tex/menu/game/round_box.png",1));
+	b1 = new Banner(Drawable::Trans,new Texture("tex/menu/level/round_box.png",1));
 	b1->setSize(280,260);
 	b1->setTranslate(Vector(162,222,0));
 	m_scene->subAdd(b1);
 
-	b2 = new Banner(Drawable::Trans,new Texture("tex/menu/game/round_box.png",1));
+	b2 = new Banner(Drawable::Trans,new Texture("tex/menu/level/round_box.png",1));
 	b2->setSize(280,260);
 	b2->setTranslate(Vector(482,222,0));
 	m_scene->subAdd(b2);
 	
 	is = new imageSet;
-	ml = new menuList(new Texture("tex/menu/game/box.png",1), new Texture("tex/menu/game/bar.png",1), fnt);
+	ml = new menuList(new Texture("tex/menu/level/box.png",1), new Texture("tex/menu/level/bar.png",1), fnt);
 	
 	is->setSize(240,200);
 	ml->setSize(240,240);

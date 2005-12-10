@@ -18,8 +18,12 @@
  */
 
 #include <vector> 
+#include <Tiki/drawables/label.h>
+#include <Tiki/drawables/banner.h>
 #include "drawables/imageSet.h"
 #include "drawables/menuList.h"
+#include "drawables/ShadowBox.h"
+
 
 class GameSelect : public GenericMenu {
 public:
@@ -31,7 +35,9 @@ protected:
 private:
 	std::vector<string> m_gameList;
 	RefPtr<Banner> bg,a1,a2,b1;
+	RefPtr<ShadowBox> h1;
 	RefPtr<imageSet> is;
+	RefPtr<Label> title;
 	int m_selection;
 	int m_menuItems;
 	int m_repeatDelay;

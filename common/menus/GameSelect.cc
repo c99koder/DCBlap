@@ -21,6 +21,7 @@
 #include "Tiki/genmenu.h"
 #include "Tiki/texture.h"
 #include "Tiki/drawables/banner.h"
+#include "Tiki/drawables/label.h"
 #include "Tiki/anims/tintfader.h"
 #include "Tiki/anims/logxymover.h"
 
@@ -31,12 +32,22 @@ using namespace Tiki::GL;
 #include "utils.h"
 
 extern RefPtr<Font> fnt;
+extern RefPtr<Font> fntBold;
+
+extern RefPtr<Texture> platDirection;
+extern RefPtr<Texture> platConfirm;
+extern RefPtr<Texture> platSelect;
+extern RefPtr<Texture> platBack;
 
 GameSelect::GameSelect() {
 	std::vector<std::string> files;
 	std::vector<bool> is_dir;
 	int count=0;
 	char tmp[100];
+	RefPtr<Label> shadow;
+	RefPtr<Label> helpText;
+	RefPtr<Banner> Direction, Confirm, Select, Back;
+	RefPtr<Texture> boxTex=new Texture("tex/menu/game/round_box.png",1);
 	
 	GenericMenu::GenericMenu();
 	
@@ -46,12 +57,50 @@ GameSelect::GameSelect() {
 	bg->setSize(640,480);
 	bg->setTranslate(Vector(320,240,0));
 	m_scene->subAdd(bg);
+	
+	title = new Label(fntBold,"Game Selection",28,false,false);
+	title->setTranslate(Vector(10,40,2));
+	m_scene->subAdd(title);
+	
+	shadow = new Label(fntBold,"Game Selection",28,false,false);
+	shadow->setTranslate(Vector(3,3,-0.1));
+	shadow->setTint(Color(0.4,0,0,0));
+	title->subAdd(shadow);
 
-	b1 = new Banner(Drawable::Trans,new Texture("tex/menu/game/round_box.png",1));
+	h1 = new ShadowBox(528,46);
+	h1->setTranslate(Vector(320,400,0));
+	h1->setTint(Color(1,1,1));
+	m_scene->subAdd(h1);
+	
+	helpText = new Label(fnt,"Use    to select a game to play, then press    to continue.",14,true,false);
+	helpText->setTint(Color(0,0,0));
+	helpText->setTranslate(Vector(0,-12,0));
+	h1->subAdd(helpText);
+	helpText = new Label(fnt,"Press    to return to the previous menu.",14,true,false);
+	helpText->setTint(Color(0,0,0));
+	helpText->setTranslate(Vector(0,9,0));
+	h1->subAdd(helpText);
+	
+	Direction = new Banner(Drawable::Trans,platDirection);
+	Direction->setTranslate(Vector(-197,-10,0));
+	Direction->setSize(24,24);
+	h1->subAdd(Direction);
+
+	Select = new Banner(Drawable::Trans,platSelect);
+	Select->setTranslate(Vector(129,-10,0));
+	Select->setSize(24,24);
+	h1->subAdd(Select);
+
+	Back = new Banner(Drawable::Trans,platBack);
+	Back->setTranslate(Vector(-111,11,0));
+	Back->setSize(24,24);
+	h1->subAdd(Back);
+	
+	b1 = new Banner(Drawable::Trans,boxTex);
 	b1->setSize(320,260);
 	b1->setTranslate(Vector(320,222,0));
 	m_scene->subAdd(b1);
-	
+
 	is = new imageSet;
 	is->setSize(305,200);
 	is->setTranslate(Vector(-2,-2,1));
@@ -88,16 +137,21 @@ GameSelect::GameSelect() {
 	
 	m_selection=0;
 	m_repeatDelay=0;
+	
+	FadeIn();
 }
 
 void GameSelect::FadeIn() {
-	bg->animRemoveAll();
-	b1->animRemoveAll();
+	m_scene->animRemoveAll();
+	//b1->animRemoveAll();
+	h1->animRemoveAll();
+	h1->setTranslate(Vector(320,500,0));
 	
-	bg->setTint(Color(0,0,0));
-	bg->animAdd(new TintFader(Color(1,1,1),Color(1.0f/20.0f,1.0f/20.0f,1.0f/20.0f)));
-	b1->setTint(Color(0,0,0,0));
-	b1->animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/20.0f,1.0f/20.0f,1.0f/20.0f,1.0f/20.0f)));
+	m_scene->setTint(Color(0,0,0,0));
+	m_scene->animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/20.0f,1.0f/20.0f,1.0f/20.0f,1.0f/20.0f)));
+	h1->setTint(Color(0,0,0,0));
+	h1->animAdd(new TintFader(Color(1,1,1,1),Color(1.0f/20.0f,1.0f/20.0f,1.0f/20.0f,1.0f/20.0f)));
+	h1->animAdd(new LogXYMover(320,400,8));
 	a1->setAlpha(0.4); 
 	m_selection=0;
 	is->selectTexture(0);
@@ -114,8 +168,8 @@ void GameSelect::inputEvent(const Event & evt) {
 		case Event::EvtKeypress:
 			switch(evt.key) {
 				case Event::KeySelect:
-					bg->animAdd(new TintFader(Color(0,0,0),Color(-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f)));
-					b1->animAdd(new TintFader(Color(0,0,0,0),Color(-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f)));
+					m_scene->animAdd(new TintFader(Color(0,0,0,0),Color(-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f,-1.0f/20.0f)));
+					h1->animAdd(new LogXYMover(320,500,8));
 					startExit();
 					m_exitSpeed=1.0f/20.0f;
 					break;

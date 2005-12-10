@@ -13,35 +13,35 @@
 		22343EA5091A84CA00245FC3 /* menuList.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22343EA3091A84CA00245FC3 /* menuList.cc */; };
 		22477E760937F9C10070BB68 /* LevelSelect.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22477E740937F9C10070BB68 /* LevelSelect.cc */; };
 		22477E770937F9C20070BB68 /* LevelSelect.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22477E750937F9C10070BB68 /* LevelSelect.h */; };
+		224786B5093A6F100070BB68 /* ShadowBox.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 224786B3093A6F100070BB68 /* ShadowBox.h */; };
+		224786B6093A6F100070BB68 /* ShadowBox.cc in Sources */ = {isa = PBXBuildFile; fileRef = 224786B4093A6F100070BB68 /* ShadowBox.cc */; };
 		22690B870911210C0026D5BC /* imageSet.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22690B850911210C0026D5BC /* imageSet.cc */; };
-		22752C5D08F02BA800DCB98C /* callback.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C5208F02BA800DCB98C /* callback.cc */; };
 		22752C5E08F02BA800DCB98C /* camera.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C5308F02BA800DCB98C /* camera.cc */; };
-		22752C5F08F02BA800DCB98C /* collide.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C5408F02BA800DCB98C /* collide.cc */; };
 		22752C6008F02BA800DCB98C /* hud.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C5508F02BA800DCB98C /* hud.cc */; };
 		22752C6108F02BA800DCB98C /* md2Model.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C5608F02BA800DCB98C /* md2Model.cc */; };
 		22752C6508F02BA800DCB98C /* utils.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C5A08F02BA800DCB98C /* utils.cc */; };
 		22752C6608F02BA800DCB98C /* word.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C5B08F02BA800DCB98C /* word.cc */; };
 		22752C6708F02BA800DCB98C /* world.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C5C08F02BA800DCB98C /* world.cc */; };
-		22752C8C08F02BC400DCB98C /* ball.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C6808F02BC400DCB98C /* ball.cc */; };
-		22752C8D08F02BC400DCB98C /* bonusspawn.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C6A08F02BC400DCB98C /* bonusspawn.cc */; };
 		22752C8F08F02BC400DCB98C /* camera_o.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C6E08F02BC400DCB98C /* camera_o.cc */; };
-		22752C9108F02BC400DCB98C /* func_rotating.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C7208F02BC400DCB98C /* func_rotating.cc */; };
-		22752C9208F02BC400DCB98C /* goal.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C7408F02BC400DCB98C /* goal.cc */; };
-		22752C9308F02BC400DCB98C /* hyper.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C7608F02BC400DCB98C /* hyper.cc */; };
-		22752C9408F02BC400DCB98C /* init.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C7808F02BC400DCB98C /* init.cc */; };
-		22752C9508F02BC400DCB98C /* paddle_md2.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C7908F02BC400DCB98C /* paddle_md2.cc */; };
-		22752C9608F02BC400DCB98C /* paddle.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C7B08F02BC400DCB98C /* paddle.cc */; };
-		22752C9A08F02BC400DCB98C /* slowdown.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C8208F02BC400DCB98C /* slowdown.cc */; };
-		22752C9B08F02BC400DCB98C /* speedup.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C8408F02BC400DCB98C /* speedup.cc */; };
-		22752C9D08F02BC400DCB98C /* water.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C8808F02BC400DCB98C /* water.cc */; };
-		22752CFB08F0336500DCB98C /* game.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752CFA08F0336500DCB98C /* game.cc */; };
 		22752F4208F0364B00DCB98C /* data in Resources */ = {isa = PBXBuildFile; fileRef = 22752D6208F0364A00DCB98C /* data */; };
 		2290999D092C250200B7D80C /* Tiki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2290999C092C250200B7D80C /* Tiki.framework */; };
-		22909A8A092F712100B7D80C /* light.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22909A89092F712100B7D80C /* light.cc */; };
 		22909B2C092F787A00B7D80C /* Tiki.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2290999C092C250200B7D80C /* Tiki.framework */; };
-		22C6219C08F06BCE008BCA18 /* func_breakable.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22C6219B08F06BCE008BCA18 /* func_breakable.cc */; };
 		22DDC2E7091D1875008067D8 /* GameSelect.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22DDC2E3091D1875008067D8 /* GameSelect.cc */; };
 		22DDC2E9091D1875008067D8 /* TitleScreen.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22DDC2E5091D1875008067D8 /* TitleScreen.cc */; };
+		22F3DFD20941D77C0013CE12 /* SolidClass.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22F3DFD00941D77C0013CE12 /* SolidClass.h */; };
+		22F3DFD30941D77C0013CE12 /* SolidClass.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22F3DFD10941D77C0013CE12 /* SolidClass.cc */; };
+		22F3E0390941E4E90013CE12 /* Entity.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22F3E0370941E4E90013CE12 /* Entity.cc */; };
+		22F3E1DB094209190013CE12 /* world.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22F3E1DA094209190013CE12 /* world.h */; };
+		22F3E4BE094231820013CE12 /* player_1st.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22F3E4BD094231820013CE12 /* player_1st.cc */; };
+		22F3E4C3094232000013CE12 /* player.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22F3E4C2094232000013CE12 /* player.h */; };
+		22F3E633094240190013CE12 /* light.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22F3E632094240190013CE12 /* light.cc */; };
+		22F3E7AD094292EC0013CE12 /* bouncer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22F3E7AB094292EC0013CE12 /* bouncer.h */; };
+		22F3E7AE094292EC0013CE12 /* bouncer.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22F3E7AC094292EC0013CE12 /* bouncer.cc */; };
+		22F3E7C60942961A0013CE12 /* ball.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22F3E7C50942961A0013CE12 /* ball.cc */; };
+		22F3E7EE09429C770013CE12 /* Entity.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22F3E7ED09429C770013CE12 /* Entity.h */; };
+		22F3E8680942A3FE0013CE12 /* unknown.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22F3E8660942A3FE0013CE12 /* unknown.h */; };
+		22F3E91A0942AED10013CE12 /* paddle.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22F3E9190942AED10013CE12 /* paddle.cc */; };
+		22F3EA4F0942C1750013CE12 /* unknown.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22F3EA4E0942C1750013CE12 /* unknown.cc */; };
 		565FEC4F07B179CA00C4E23A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565FEC3907B179A100C4E23A /* Cocoa.framework */; };
 		565FEC5207B179D400C4E23A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565FEC3B07B179A100C4E23A /* OpenGL.framework */; };
 		565FEC6407B17BE200C4E23A /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 565FEC3407B1797F00C4E23A /* MainMenu.nib */; };
@@ -73,6 +73,13 @@
 			files = (
 				22909B2C092F787A00B7D80C /* Tiki.framework in CopyFiles */,
 				22477E770937F9C20070BB68 /* LevelSelect.h in CopyFiles */,
+				224786B5093A6F100070BB68 /* ShadowBox.h in CopyFiles */,
+				22F3DFD20941D77C0013CE12 /* SolidClass.h in CopyFiles */,
+				22F3E1DB094209190013CE12 /* world.h in CopyFiles */,
+				22F3E4C3094232000013CE12 /* player.h in CopyFiles */,
+				22F3E7AD094292EC0013CE12 /* bouncer.h in CopyFiles */,
+				22F3E7EE09429C770013CE12 /* Entity.h in CopyFiles */,
+				22F3E8680942A3FE0013CE12 /* unknown.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,61 +94,57 @@
 		22343EA3091A84CA00245FC3 /* menuList.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = menuList.cc; path = ../common/drawables/menuList.cc; sourceTree = SOURCE_ROOT; };
 		22477E740937F9C10070BB68 /* LevelSelect.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = LevelSelect.cc; path = ../common/menus/LevelSelect.cc; sourceTree = SOURCE_ROOT; };
 		22477E750937F9C10070BB68 /* LevelSelect.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = LevelSelect.h; path = ../common/menus/LevelSelect.h; sourceTree = SOURCE_ROOT; };
+		224786B3093A6F100070BB68 /* ShadowBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShadowBox.h; path = ../common/drawables/ShadowBox.h; sourceTree = SOURCE_ROOT; };
+		224786B4093A6F100070BB68 /* ShadowBox.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ShadowBox.cc; path = ../common/drawables/ShadowBox.cc; sourceTree = SOURCE_ROOT; };
 		22690B840911210C0026D5BC /* imageSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imageSet.h; path = ../common/drawables/imageSet.h; sourceTree = SOURCE_ROOT; };
 		22690B850911210C0026D5BC /* imageSet.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imageSet.cc; path = ../common/drawables/imageSet.cc; sourceTree = SOURCE_ROOT; };
-		22752C5208F02BA800DCB98C /* callback.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = callback.cc; path = ../common/callback.cc; sourceTree = SOURCE_ROOT; };
 		22752C5308F02BA800DCB98C /* camera.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = camera.cc; path = ../common/camera.cc; sourceTree = SOURCE_ROOT; };
-		22752C5408F02BA800DCB98C /* collide.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = collide.cc; path = ../common/collide.cc; sourceTree = SOURCE_ROOT; };
 		22752C5508F02BA800DCB98C /* hud.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = hud.cc; path = ../common/hud.cc; sourceTree = SOURCE_ROOT; };
 		22752C5608F02BA800DCB98C /* md2Model.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = md2Model.cc; path = ../common/md2Model.cc; sourceTree = SOURCE_ROOT; };
 		22752C5A08F02BA800DCB98C /* utils.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = utils.cc; path = ../common/utils.cc; sourceTree = SOURCE_ROOT; };
 		22752C5B08F02BA800DCB98C /* word.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = word.cc; path = ../common/word.cc; sourceTree = SOURCE_ROOT; };
 		22752C5C08F02BA800DCB98C /* world.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = world.cc; path = ../common/world.cc; sourceTree = SOURCE_ROOT; };
-		22752C6808F02BC400DCB98C /* ball.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = ball.cc; path = ../common/objects/ball.cc; sourceTree = SOURCE_ROOT; };
 		22752C6908F02BC400DCB98C /* ball.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ball.h; path = ../common/objects/ball.h; sourceTree = SOURCE_ROOT; };
-		22752C6A08F02BC400DCB98C /* bonusspawn.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = bonusspawn.cc; path = ../common/objects/bonusspawn.cc; sourceTree = SOURCE_ROOT; };
 		22752C6B08F02BC400DCB98C /* bonusspawn.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = bonusspawn.h; path = ../common/objects/bonusspawn.h; sourceTree = SOURCE_ROOT; };
 		22752C6E08F02BC400DCB98C /* camera_o.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = camera_o.cc; path = ../common/objects/camera_o.cc; sourceTree = SOURCE_ROOT; };
 		22752C6F08F02BC400DCB98C /* camera_o.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = camera_o.h; path = ../common/objects/camera_o.h; sourceTree = SOURCE_ROOT; };
 		22752C7108F02BC400DCB98C /* func_breakable.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = func_breakable.h; path = ../common/objects/func_breakable.h; sourceTree = SOURCE_ROOT; };
-		22752C7208F02BC400DCB98C /* func_rotating.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = func_rotating.cc; path = ../common/objects/func_rotating.cc; sourceTree = SOURCE_ROOT; };
 		22752C7308F02BC400DCB98C /* func_rotating.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = func_rotating.h; path = ../common/objects/func_rotating.h; sourceTree = SOURCE_ROOT; };
-		22752C7408F02BC400DCB98C /* goal.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = goal.cc; path = ../common/objects/goal.cc; sourceTree = SOURCE_ROOT; };
 		22752C7508F02BC400DCB98C /* goal.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = goal.h; path = ../common/objects/goal.h; sourceTree = SOURCE_ROOT; };
-		22752C7608F02BC400DCB98C /* hyper.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = hyper.cc; path = ../common/objects/hyper.cc; sourceTree = SOURCE_ROOT; };
 		22752C7708F02BC400DCB98C /* hyper.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = hyper.h; path = ../common/objects/hyper.h; sourceTree = SOURCE_ROOT; };
-		22752C7808F02BC400DCB98C /* init.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = init.cc; path = ../common/objects/init.cc; sourceTree = SOURCE_ROOT; };
-		22752C7908F02BC400DCB98C /* paddle_md2.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = paddle_md2.cc; path = ../common/objects/paddle_md2.cc; sourceTree = SOURCE_ROOT; };
 		22752C7A08F02BC400DCB98C /* paddle_md2.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = paddle_md2.h; path = ../common/objects/paddle_md2.h; sourceTree = SOURCE_ROOT; };
-		22752C7B08F02BC400DCB98C /* paddle.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = paddle.cc; path = ../common/objects/paddle.cc; sourceTree = SOURCE_ROOT; };
 		22752C7C08F02BC400DCB98C /* paddle.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = paddle.h; path = ../common/objects/paddle.h; sourceTree = SOURCE_ROOT; };
-		22752C8208F02BC400DCB98C /* slowdown.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = slowdown.cc; path = ../common/objects/slowdown.cc; sourceTree = SOURCE_ROOT; };
 		22752C8308F02BC400DCB98C /* slowdown.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = slowdown.h; path = ../common/objects/slowdown.h; sourceTree = SOURCE_ROOT; };
-		22752C8408F02BC400DCB98C /* speedup.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = speedup.cc; path = ../common/objects/speedup.cc; sourceTree = SOURCE_ROOT; };
 		22752C8508F02BC400DCB98C /* speedup.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = speedup.h; path = ../common/objects/speedup.h; sourceTree = SOURCE_ROOT; };
-		22752C8808F02BC400DCB98C /* water.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = water.cc; path = ../common/objects/water.cc; sourceTree = SOURCE_ROOT; };
 		22752C8908F02BC400DCB98C /* water.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = water.h; path = ../common/objects/water.h; sourceTree = SOURCE_ROOT; };
-		22752CE508F032AE00DCB98C /* callback.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = callback.h; path = ../include/callback.h; sourceTree = SOURCE_ROOT; };
 		22752CE608F032AE00DCB98C /* camera.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = camera.h; path = ../include/camera.h; sourceTree = SOURCE_ROOT; };
-		22752CE708F032AE00DCB98C /* collide.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = collide.h; path = ../include/collide.h; sourceTree = SOURCE_ROOT; };
-		22752CE908F032AE00DCB98C /* dirwin32.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = dirwin32.h; path = ../include/dirwin32.h; sourceTree = SOURCE_ROOT; };
-		22752CEA08F032AE00DCB98C /* entity.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = entity.h; path = ../include/entity.h; sourceTree = SOURCE_ROOT; };
 		22752CEB08F032AE00DCB98C /* hud.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = hud.h; path = ../include/hud.h; sourceTree = SOURCE_ROOT; };
 		22752CED08F032AE00DCB98C /* md2Model.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = md2Model.h; path = ../include/md2Model.h; sourceTree = SOURCE_ROOT; };
 		22752CEE08F032AE00DCB98C /* objects.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = objects.h; path = ../include/objects.h; sourceTree = SOURCE_ROOT; };
 		22752CF308F032AE00DCB98C /* utils.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = utils.h; path = ../include/utils.h; sourceTree = SOURCE_ROOT; };
 		22752CF408F032AE00DCB98C /* word.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = word.h; path = ../include/word.h; sourceTree = SOURCE_ROOT; };
-		22752CFA08F0336500DCB98C /* game.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = game.cc; path = ../common/game.cc; sourceTree = SOURCE_ROOT; };
 		22752D6208F0364A00DCB98C /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../data; sourceTree = SOURCE_ROOT; };
 		2290999C092C250200B7D80C /* Tiki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Tiki.framework; path = ../../../tiki/osx/build/Development/Tiki.framework; sourceTree = SOURCE_ROOT; };
-		22909A89092F712100B7D80C /* light.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = light.cc; path = ../common/objects/light.cc; sourceTree = SOURCE_ROOT; };
 		22909A91092F722600B7D80C /* light.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = light.h; path = ../common/objects/light.h; sourceTree = SOURCE_ROOT; };
 		22C6211808F0608B008BCA18 /* game.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = game.h; path = ../include/game.h; sourceTree = SOURCE_ROOT; };
-		22C6219B08F06BCE008BCA18 /* func_breakable.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = func_breakable.cc; path = ../common/objects/func_breakable.cc; sourceTree = SOURCE_ROOT; };
 		22DDC2E3091D1875008067D8 /* GameSelect.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = GameSelect.cc; path = ../common/menus/GameSelect.cc; sourceTree = SOURCE_ROOT; };
 		22DDC2E4091D1875008067D8 /* GameSelect.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = GameSelect.h; path = ../common/menus/GameSelect.h; sourceTree = SOURCE_ROOT; };
 		22DDC2E5091D1875008067D8 /* TitleScreen.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = TitleScreen.cc; path = ../common/menus/TitleScreen.cc; sourceTree = SOURCE_ROOT; };
 		22DDC2E6091D1875008067D8 /* TitleScreen.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = TitleScreen.h; path = ../common/menus/TitleScreen.h; sourceTree = SOURCE_ROOT; };
+		22F3DFD00941D77C0013CE12 /* SolidClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SolidClass.h; path = ../common/drawables/SolidClass.h; sourceTree = SOURCE_ROOT; };
+		22F3DFD10941D77C0013CE12 /* SolidClass.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SolidClass.cc; path = ../common/drawables/SolidClass.cc; sourceTree = SOURCE_ROOT; };
+		22F3E0370941E4E90013CE12 /* Entity.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Entity.cc; path = ../common/drawables/Entity.cc; sourceTree = SOURCE_ROOT; };
+		22F3E1DA094209190013CE12 /* world.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = world.h; path = ../include/world.h; sourceTree = SOURCE_ROOT; };
+		22F3E4BD094231820013CE12 /* player_1st.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = player_1st.cc; path = ../common/objects/player_1st.cc; sourceTree = SOURCE_ROOT; };
+		22F3E4C2094232000013CE12 /* player.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = player.h; path = ../common/objects/player.h; sourceTree = SOURCE_ROOT; };
+		22F3E632094240190013CE12 /* light.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = light.cc; path = ../common/objects/light.cc; sourceTree = SOURCE_ROOT; };
+		22F3E7AB094292EC0013CE12 /* bouncer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bouncer.h; path = ../common/objects/bouncer.h; sourceTree = SOURCE_ROOT; };
+		22F3E7AC094292EC0013CE12 /* bouncer.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bouncer.cc; path = ../common/objects/bouncer.cc; sourceTree = SOURCE_ROOT; };
+		22F3E7C50942961A0013CE12 /* ball.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = ball.cc; path = ../common/objects/ball.cc; sourceTree = SOURCE_ROOT; };
+		22F3E7ED09429C770013CE12 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = Entity.h; path = ../common/drawables/Entity.h; sourceTree = SOURCE_ROOT; };
+		22F3E8660942A3FE0013CE12 /* unknown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unknown.h; path = ../common/objects/unknown.h; sourceTree = "<group>"; };
+		22F3E9190942AED10013CE12 /* paddle.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = paddle.cc; path = ../common/objects/paddle.cc; sourceTree = SOURCE_ROOT; };
+		22F3EA4E0942C1750013CE12 /* unknown.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = unknown.cc; path = ../common/objects/unknown.cc; sourceTree = SOURCE_ROOT; };
 		565FEC3507B1797F00C4E23A /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		565FEC3907B179A100C4E23A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		565FEC3B07B179A100C4E23A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
@@ -168,6 +171,8 @@
 			children = (
 				22690B850911210C0026D5BC /* imageSet.cc */,
 				22343EA3091A84CA00245FC3 /* menuList.cc */,
+				224786B4093A6F100070BB68 /* ShadowBox.cc */,
+				22752C5108F02B8A00DCB98C /* Objects */,
 			);
 			name = Drawables;
 			sourceTree = "<group>";
@@ -178,16 +183,12 @@
 				22DDC2E2091D185B008067D8 /* Menus */,
 				22690B830911206A0026D5BC /* Drawables */,
 				22171F310902C9C1001663B0 /* main.cc */,
-				22752C5208F02BA800DCB98C /* callback.cc */,
 				22752C5308F02BA800DCB98C /* camera.cc */,
-				22752C5408F02BA800DCB98C /* collide.cc */,
 				22752C5508F02BA800DCB98C /* hud.cc */,
 				22752C5608F02BA800DCB98C /* md2Model.cc */,
 				22752C5A08F02BA800DCB98C /* utils.cc */,
 				22752C5B08F02BA800DCB98C /* word.cc */,
 				22752C5C08F02BA800DCB98C /* world.cc */,
-				22752CFA08F0336500DCB98C /* game.cc */,
-				22752C5108F02B8A00DCB98C /* Objects */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -199,16 +200,13 @@
 				22DDC33E091D1C77008067D8 /* Drawables */,
 				22DDC33D091D1C71008067D8 /* Menus */,
 				22C6211808F0608B008BCA18 /* game.h */,
-				22752CE508F032AE00DCB98C /* callback.h */,
 				22752CE608F032AE00DCB98C /* camera.h */,
-				22752CE708F032AE00DCB98C /* collide.h */,
-				22752CE908F032AE00DCB98C /* dirwin32.h */,
-				22752CEA08F032AE00DCB98C /* entity.h */,
 				22752CEB08F032AE00DCB98C /* hud.h */,
 				22752CED08F032AE00DCB98C /* md2Model.h */,
 				22752CEE08F032AE00DCB98C /* objects.h */,
 				22752CF308F032AE00DCB98C /* utils.h */,
 				22752CF408F032AE00DCB98C /* word.h */,
+				22F3E1DA094209190013CE12 /* world.h */,
 			);
 			name = Include;
 			sourceTree = "<group>";
@@ -216,20 +214,15 @@
 		22752C5108F02B8A00DCB98C /* Objects */ = {
 			isa = PBXGroup;
 			children = (
-				22752C6808F02BC400DCB98C /* ball.cc */,
-				22752C6A08F02BC400DCB98C /* bonusspawn.cc */,
+				22F3DFD10941D77C0013CE12 /* SolidClass.cc */,
+				22F3E0370941E4E90013CE12 /* Entity.cc */,
+				22F3E9190942AED10013CE12 /* paddle.cc */,
+				22F3E7C50942961A0013CE12 /* ball.cc */,
+				22F3E632094240190013CE12 /* light.cc */,
+				22F3E4BD094231820013CE12 /* player_1st.cc */,
 				22752C6E08F02BC400DCB98C /* camera_o.cc */,
-				22C6219B08F06BCE008BCA18 /* func_breakable.cc */,
-				22752C7208F02BC400DCB98C /* func_rotating.cc */,
-				22752C7408F02BC400DCB98C /* goal.cc */,
-				22752C7608F02BC400DCB98C /* hyper.cc */,
-				22752C7808F02BC400DCB98C /* init.cc */,
-				22909A89092F712100B7D80C /* light.cc */,
-				22752C7908F02BC400DCB98C /* paddle_md2.cc */,
-				22752C7B08F02BC400DCB98C /* paddle.cc */,
-				22752C8208F02BC400DCB98C /* slowdown.cc */,
-				22752C8408F02BC400DCB98C /* speedup.cc */,
-				22752C8808F02BC400DCB98C /* water.cc */,
+				22F3E7AC094292EC0013CE12 /* bouncer.cc */,
+				22F3EA4E0942C1750013CE12 /* unknown.cc */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -257,8 +250,11 @@
 		22DDC33E091D1C77008067D8 /* Drawables */ = {
 			isa = PBXGroup;
 			children = (
+				22F3E7ED09429C770013CE12 /* Entity.h */,
 				22690B840911210C0026D5BC /* imageSet.h */,
 				22343EA2091A84CA00245FC3 /* menuList.h */,
+				224786B3093A6F100070BB68 /* ShadowBox.h */,
+				22F3DFD00941D77C0013CE12 /* SolidClass.h */,
 			);
 			name = Drawables;
 			sourceTree = "<group>";
@@ -266,6 +262,9 @@
 		22DDC345091D1C8C008067D8 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				22F3E7AB094292EC0013CE12 /* bouncer.h */,
+				22F3E8660942A3FE0013CE12 /* unknown.h */,
+				22F3E4C2094232000013CE12 /* player.h */,
 				22752C6908F02BC400DCB98C /* ball.h */,
 				22752C6B08F02BC400DCB98C /* bonusspawn.h */,
 				22752C6F08F02BC400DCB98C /* camera_o.h */,
@@ -450,28 +449,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22752C5D08F02BA800DCB98C /* callback.cc in Sources */,
 				22752C5E08F02BA800DCB98C /* camera.cc in Sources */,
-				22752C5F08F02BA800DCB98C /* collide.cc in Sources */,
 				22752C6008F02BA800DCB98C /* hud.cc in Sources */,
 				22752C6108F02BA800DCB98C /* md2Model.cc in Sources */,
 				22752C6508F02BA800DCB98C /* utils.cc in Sources */,
 				22752C6608F02BA800DCB98C /* word.cc in Sources */,
 				22752C6708F02BA800DCB98C /* world.cc in Sources */,
-				22752C8C08F02BC400DCB98C /* ball.cc in Sources */,
-				22752C8D08F02BC400DCB98C /* bonusspawn.cc in Sources */,
 				22752C8F08F02BC400DCB98C /* camera_o.cc in Sources */,
-				22752C9108F02BC400DCB98C /* func_rotating.cc in Sources */,
-				22752C9208F02BC400DCB98C /* goal.cc in Sources */,
-				22752C9308F02BC400DCB98C /* hyper.cc in Sources */,
-				22752C9408F02BC400DCB98C /* init.cc in Sources */,
-				22752C9508F02BC400DCB98C /* paddle_md2.cc in Sources */,
-				22752C9608F02BC400DCB98C /* paddle.cc in Sources */,
-				22752C9A08F02BC400DCB98C /* slowdown.cc in Sources */,
-				22752C9B08F02BC400DCB98C /* speedup.cc in Sources */,
-				22752C9D08F02BC400DCB98C /* water.cc in Sources */,
-				22752CFB08F0336500DCB98C /* game.cc in Sources */,
-				22C6219C08F06BCE008BCA18 /* func_breakable.cc in Sources */,
 				22171EAA0902C763001663B0 /* main.m in Sources */,
 				22171EAE0902C77E001663B0 /* Controller.m in Sources */,
 				22171F320902C9C1001663B0 /* main.cc in Sources */,
@@ -479,8 +463,16 @@
 				22343EA5091A84CA00245FC3 /* menuList.cc in Sources */,
 				22DDC2E7091D1875008067D8 /* GameSelect.cc in Sources */,
 				22DDC2E9091D1875008067D8 /* TitleScreen.cc in Sources */,
-				22909A8A092F712100B7D80C /* light.cc in Sources */,
 				22477E760937F9C10070BB68 /* LevelSelect.cc in Sources */,
+				224786B6093A6F100070BB68 /* ShadowBox.cc in Sources */,
+				22F3DFD30941D77C0013CE12 /* SolidClass.cc in Sources */,
+				22F3E0390941E4E90013CE12 /* Entity.cc in Sources */,
+				22F3E4BE094231820013CE12 /* player_1st.cc in Sources */,
+				22F3E633094240190013CE12 /* light.cc in Sources */,
+				22F3E7AE094292EC0013CE12 /* bouncer.cc in Sources */,
+				22F3E7C60942961A0013CE12 /* ball.cc in Sources */,
+				22F3E91A0942AED10013CE12 /* paddle.cc in Sources */,
+				22F3EA4F0942C1750013CE12 /* unknown.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

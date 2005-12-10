@@ -31,13 +31,19 @@ using namespace Tiki::Hid;
 using namespace Tiki::Audio;
 using namespace Tiki::Time;
 
-#include "entity.h"
-#include "game.h"
 #include "hud.h"
 #include "objects.h"
 #include "menus/TitleScreen.h"
 #include "menus/GameSelect.h"
 #include "menus/LevelSelect.h"
+
+bool win_flag=0;
+bool lose_flag=0;
+bool game_paused=0;
+int doublespeed=0;
+bool enable_sound=1;
+bool enable_music=0;
+bool enable_powerups=0;
 
 bool quitting = false;
 bool playing = false;
@@ -48,6 +54,8 @@ int player_axis_y[4];
 extern bool win_flag;
 extern bool lose_flag;
 extern bool game_paused;
+
+World *wld=NULL;
 
 void tkCallback(const Hid::Event & evt, void * data) {
 	if (evt.type == Hid::Event::EvtQuit) {
@@ -88,11 +96,11 @@ void tkCallback(const Hid::Event & evt, void * data) {
 				playing = false;
 			} else {
 				if(game_paused) {
-					pause_world(0);
+					//pause_world(0);
 					set_hud(3,320-(txt_width("Paused")/2),240-16,"",1,1,1);
 					game_paused=0;
 				} else {
-					pause_world(1);
+					//pause_world(1);
 					set_hud(3,320-(txt_width("Paused")/2),240-16,"Paused",1,1,1);
 					game_paused=1;
 				}
@@ -139,21 +147,28 @@ extern "C" int tiki_main(int argc, char **argv) {
 		Frame::finish();
 	}
 
-	objects_init();
 	hud_init();
 	player_axis_x[0]=0;
 
 	srand(gettime());
+
+	gs=new GameSelect;
+	gs->doMenu();
 	
-	ts=new TitleScreen;
+//	wld = new World("maps/Traditional/classic.wld");
+	wld = new World("maps/BlapOut/classic.wld");
+	wld->doMenu();
+	return 0;
+	
+/*	ts=new TitleScreen;
 	gs=new GameSelect;
 	
 	while(quitting==false) {
 		bgm.stop();
 		bgm.load("sound/menu.ogg",1);
-		bgm.start();
-		ts->FadeIn();
-		ts->doMenu();
+		//bgm.start();
+		gs->FadeIn();
+		gs->doMenu();
 		if(quitting) break;
 		switch(ts->getSelection()) {
 			case 0:
@@ -209,7 +224,7 @@ extern "C" int tiki_main(int argc, char **argv) {
 	bgm.stop();
 	
 	delete gs;
-	delete ts;
+	delete ts;*/
 	
 	// Shut down Tiki
 	Tiki::shutdown();

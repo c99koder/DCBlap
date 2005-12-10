@@ -19,15 +19,20 @@
 
 #include <Tiki/tiki.h>
 #include <Tiki/font.h>
+#include <Tiki/texture.h>
 
 using namespace Tiki;
 using namespace Tiki::GL;
 
 #include <string.h>
-#include "entity.h"
-#include "objects.h"
 
 RefPtr<Font> fnt;
+RefPtr<Font> fntBold;
+
+RefPtr<Texture> platDirection;
+RefPtr<Texture> platConfirm;
+RefPtr<Texture> platSelect;
+RefPtr<Texture> platBack;
 
 int inout=0;
 char status_text[256];
@@ -55,9 +60,22 @@ void reset_HUD() {
 }
 
 void hud_init() {
-	fnt=new Font("font/helvetica_bold.txf");
+	fnt=new Font("font/Vera.txf");//helvetica_bold.txf");
+	fntBold=new Font("font/VeraBd.txf");//helvetica_bold.txf");
 	
 	fnt->setSize(24);
+	fntBold->setSize(24);
+#if TIKI_PLAT == TIKI_DC	
+	platDirection = new Texture("tex/menu/dc/direction.png",1);
+	platSelect = new Texture("tex/menu/dc/select.png",1);
+	platConfirm = new Texture("tex/menu/dc/confirm.png",1);
+	platBack = new Texture("tex/menu/dc/back.png",1);
+#else
+	platDirection = new Texture("tex/menu/pc/direction.png",1);
+	platSelect = new Texture("tex/menu/dc/select.png",1);
+	platConfirm = new Texture("tex/menu/dc/confirm.png",1);
+	platBack = new Texture("tex/menu/pc/back.png",1);
+#endif
 }
 
 void set_hud(int num, int x, int y, char *label, float r, float g, float b) {
