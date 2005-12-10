@@ -1,4 +1,4 @@
-/* camera_o.h - DCBlap camera object
+/* bouncer.h - DCBlap bouncer object
  * Copyright (c) 2001-2005 Sam Steele
  *
  * This file is part of DCBlap.
@@ -11,22 +11,32 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
-#ifndef __OBJ_CAMERA_H
-#define __OBJ_CAMERA_H
+#ifndef __OBJ_BOUNCER_H
+#define __OBJ_BOUNCER_H
 
-class Camera : public Entity {
+class Bouncer : public Entity {
 public:
-	TIKI_OBJECT_NAME(Camera);
-	Camera();
+	Bouncer();
 	
+	int Bouncer::thud(Entity * sender, Object * arg);	
+
 	//Overloaded functions
 	void nextFrame(uint64 tm);
+protected:
+	enum Orientation {
+		XZ, XY, ZX
+	};
+	Orientation m_orientation;
+	Vector m_velocity;
+	float m_speed;
+private:
+	Vector m_oldPos;
 };
 
 #endif

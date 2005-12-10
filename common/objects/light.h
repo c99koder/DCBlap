@@ -17,5 +17,22 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
-void light_create(struct entity *me);
-void light_update(struct entity *me, float gt);
+#ifndef __OBJ_LIGHT_H
+#define __OBJ_LIGHT_H
+
+class Light : public Entity {
+public:
+	Light();
+	Light(Tiki::File f);
+	
+	//Overloaded functions
+	void nextFrame(uint64 tm);
+	void setProperty(std::string name, std::string value);
+private:
+	lightNode *m_light;
+	float m_count, m_rate;
+	int m_effect;
+	float m_r, m_g, m_b;
+};
+
+#endif

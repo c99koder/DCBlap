@@ -23,52 +23,69 @@
 using namespace Tiki;
 using namespace Tiki::GL;
 
+#include "objects.h"
 #include <stdlib.h>
-#include "entity.h"
 
-void light_create(struct entity *me) {
-  if(get_prop(me,"red")!=NULL) me->arg1=atoi(get_prop(me,"red"));
-  if(get_prop(me,"green")!=NULL) me->arg2=atoi(get_prop(me,"green"));
-  if(get_prop(me,"blue")!=NULL) me->arg3=atoi(get_prop(me,"blue"));
-  if(get_prop(me,"radius")!=NULL) me->arg10=atoi(get_prop(me,"radius"));
-  if(get_prop(me,"effect")!=NULL) {
-    me->arg4=atoi(get_prop(me,"effect"));
-    me->arg5=100;
-    me->arg6=1;
-    me->arg7=me->arg1;
-    me->arg8=me->arg2;
-    me->arg9=me->arg3;
-  }
+Light::Light() {
+	m_effect=0;
+	m_light=add_light();
 }
 
-void light_update(struct entity *me, float gt) {
-  switch((int)me->arg4) {
+void Light::setProperty(std::string name, std::string value) {
+	printf("Light: %s = %s\n",name.c_str(),value.c_str());
+
+	if(name=="red") {
+		m_r=m_light->r=atoi(value.c_str())/100.0f;
+	} else if(name=="green") {
+		m_g=m_light->g=atoi(value.c_str())/100.0f;
+	} else if(name=="blue") {
+		m_b=m_light->b=atoi(value.c_str())/100.0f;
+	} else if(name=="radius") {
+		m_light->i=atoi(value.c_str())/100.0f;
+	} else if(name=="effect") {
+		m_effect = atoi(value.c_str());
+		m_count=100;
+		m_rate=1;
+	} else {
+		Entity::setProperty(name,value);
+	}
+}
+
+void Light::nextFrame(uint64 tm) {
+	float gt=tm/1000000.0f;
+	Vector p=getPosition();
+	
+	m_light->x=p.x;
+	m_light->y=p.y;
+	m_light->z=p.z;
+	
+  switch(m_effect) {
   case 0:
     break;
   case 1: //pulse
-    if(me->arg5>=100) {
-      me->arg6=-1;
-    } else if (me->arg5<=0) { 
-      me->arg6=1;
+    if(m_count>=100) {
+      m_rate=-1;
+    } else if (m_count<=0) { 
+      m_rate=1;
     }
-    me->arg5+=(me->arg6 * gt);
-    me->arg1=me->arg7*(float(me->arg5)/100.0f);
-    me->arg2=me->arg8*(float(me->arg5)/100.0f);
-    me->arg3=me->arg9*(float(me->arg5)/100.0f);
+    m_count += (m_rate * gt);
+		m_light->r = m_r * (m_count / 100.0f); 
+		m_light->g = m_g * (m_count / 100.0f); 
+		m_light->b = m_b * (m_count / 100.0f); 
     break;
   case 2: //flicker
-    if(me->arg5>=100) {
-      me->arg5=0;
+    if(m_count>=100) {
+      m_count=0;
     }
-    me->arg5+=me->arg6;
-    if(me->arg5>10) {
-      me->arg1=me->arg7;
-      me->arg2=me->arg8;
-      me->arg3=me->arg9;
+    m_count += m_rate * gt;
+    if(m_count>10) {
+      m_light->r = m_r;
+      m_light->g = m_g;
+      m_light->b = m_b;
     } else {
-      me->arg1=0;
-      me->arg2=0;
-      me->arg3=0;
+      m_light->r = 0;
+      m_light->g = 0;
+      m_light->b = 0;
     }
     break;
   }

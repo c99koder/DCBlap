@@ -16,7 +16,64 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
+#include <Tiki/tiki.h>
+#include <Tiki/hid.h>
+#include <Tiki/tikimath.h>
+#include <Tiki/texture.h>
 
+using namespace Tiki;
+using namespace Tiki::Math;
+using namespace Tiki::GL;
+using namespace Tiki::Hid;
+
+#include "objects.h"
+#include <iostream>
+TIKI_OBJECT_NAME(Ball);
+TIKI_OBJECT_BEGIN(Object, Ball)
+TIKI_OBJECT_RECEIVER("thud", Ball::thud)
+TIKI_OBJECT_END(Ball)
+
+Texture *ball_tex=NULL;
+
+Ball::Ball() {
+}
+
+int Ball::thud(Entity * sender, Object * arg) {
+	if(sender->getClassName() == "Paddle") {
+		m_lastTouched = ((Paddle *)sender)->getNum();
+		printf("I touched paddle number %i\n",m_lastTouched);
+	}
+	Bouncer::thud(sender,arg);
+}
+
+void Ball::setProperty(std::string name, std::string value) {
+	Entity::setProperty(name,value);
+	std::cout << name << " " << value << std::endl;
+	if(name=="angles") {
+		Vector r=getRotate();
+		m_velocity=Vector(fcos(r.y-1*(M_PI/180)),0,fsin(r.y*(M_PI/180)));
+	}
+	if(name=="speed") {
+		m_speed=atoi(value.c_str());
+	}
+	if(name=="orientation") {
+		m_orientation=(Orientation)atoi(value.c_str());
+	}
+	if(name=="model") {
+		m_model = new md2Model;
+		m_model->Load(("model/" + value).c_str());
+	}
+	if(name=="texture") {
+		if(ball_tex==NULL) ball_tex= new Texture(("tex/"+value+".png").c_str(),0);
+		m_texture=ball_tex;
+	}
+}
+
+void Ball::draw(ObjType list) {
+	Entity::drawModel(list);
+}
+
+#if 0
 #include <Tiki/tiki.h>
 #include <Tiki/texture.h>
 #include <Tiki/sound.h>
@@ -42,7 +99,7 @@ extern bool lose_flag;
 extern int doublespeed;
 bool ball_spin=1;
 
-Texture *ball_tex=NULL;
+
 
 void ball_reset() {
 	if(ball_tex!=NULL) {
@@ -228,3 +285,4 @@ void ball_message(struct entity *me, struct entity *them, char *message) {
     }
   }
 }
+#endif

@@ -22,27 +22,20 @@
 using namespace Tiki;
 using namespace Tiki::GL;
 
-#include "entity.h"
-#include "callback.h"
 #include "objects.h"
 #include "camera.h"
-#include "hud.h"
 
 int cam_no_move=0;
 
-void camera_create(struct entity *me) {
-  me->arg1=2;
-  set_status_text("Ready?",1.0f,1.0f,1.0f);
-	camera_x=me->x;
-	camera_y=me->y;
-	camera_z=me->z;
-	camera_xrot=me->xrot;
-	camera_yrot=me->yrot-90;
-	camera_zrot=me->zrot;	
+Camera::Camera() {
 }
 
-void camera_callback(struct entity *me, float gt) {
-  if(me->arg1>0) {
+void Camera::nextFrame(uint64 tm) {
+	float gt=tm/1000000.0f;
+	Vector p=getPosition();
+	Vector r=getRotate();
+
+/*  if(me->arg1>0) {
 		me->arg1-=gt;
 		if(me->arg1<=0) {
 			set_status_text("Go!",1.0f,1.0f,1.0f);
@@ -57,15 +50,15 @@ void camera_callback(struct entity *me, float gt) {
       camera_xrot=me->xrot;//-me->arg1*((float)me->xrot/60.0f);
       camera_yrot=me->yrot-90;
       camera_zrot=me->zrot;
-    } else {
-      camera_x=me->x;
-      camera_y=me->y;
-      camera_z=me->z;
-      camera_xrot=me->xrot;
-      camera_yrot=me->yrot-90;
-      camera_zrot=me->zrot;
-    }
-  }
+    } else {*/
+      camera_x=p.x;
+      camera_y=p.y;
+      camera_z=p.z;
+      camera_xrot=r.x;
+      camera_yrot=r.y-90;
+      camera_zrot=r.z;
+/*    }
+  }*/
 }
 
 void no_move_camera(int mode) {

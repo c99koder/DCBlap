@@ -16,20 +16,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
-#include "callback.h"
-#include "objects/camera_o.h"
-#include "objects/goal.h"
-#include "objects/paddle.h"
-#include "objects/paddle_md2.h"
-#include "objects/ball.h"
-#include "objects/speedup.h"
-#include "objects/slowdown.h"
-#include "objects/bonusspawn.h"
-#include "objects/hyper.h"
-#include "objects/func_rotating.h"
-#include "objects/water.h"
-#include "objects/func_breakable.h"
-#include "objects/light.h"
 
-//Initialize the object templates
-void objects_init();
+#include "drawables/Entity.h"
+#include "world.h"
+#include "objects/camera_o.h"
+#include "objects/player.h"
+#include "objects/light.h"
+#include "objects/bouncer.h"
+#include "objects/ball.h"
+#include "drawables/SolidClass.h"
+#include "objects/unknown.h"
+#include "objects/paddle.h"

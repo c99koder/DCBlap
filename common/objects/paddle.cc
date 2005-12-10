@@ -17,6 +17,90 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 #include <Tiki/tiki.h>
+#include <Tiki/hid.h>
+#include <Tiki/tikimath.h>
+#include <Tiki/texture.h>
+#include <Tiki/drawables/label.h>
+
+using namespace Tiki;
+using namespace Tiki::Math;
+using namespace Tiki::GL;
+using namespace Tiki::Hid;
+
+#include "objects.h"
+
+Paddle::Paddle() {
+	// Register us for HID input callbacks.
+	m_hidCookie = callbackReg(hidCallback, this);
+	assert( m_hidCookie >= 0 );
+	m_orientation=XZ;
+}
+
+extern RefPtr<Font> fnt;
+
+void Paddle::setProperty(std::string name, std::string value) {
+	if(name=="num")
+		m_num=atoi(value.c_str());
+	if(name=="orientation")
+		m_orientation=(Orientation)atoi(value.c_str());
+	SolidClass::setProperty(name,value);
+}
+
+void Paddle::hidCallback(const Event & evt, void * data) {
+	assert( data );
+	((Paddle *)data)->processHidEvent(evt);
+}
+
+void Paddle::processHidEvent(const Event & evt) {
+	Vector p=getTranslate();
+	
+	if(evt.dev == NULL) {
+		return;
+	}
+
+	if (evt.type==Event::EvtKeypress ) {
+		switch(evt.key) {
+			case Event::KeyUp:
+				switch(m_orientation) {
+					case XZ:
+						p.z+=0.2;
+						break;
+					case XY:
+						p.y-=0.2;
+						break;
+					case ZX:
+						p.x+=0.2;
+						break;
+				}
+				break;
+			case Event::KeyDown:
+				switch(m_orientation) {
+					case XZ:
+						p.z-=0.2;
+						break;
+					case XY:
+						p.y-=0.2;
+						break;
+					case ZX:
+						p.x+=0.2;
+						break;						
+				}
+				break;
+			case Event::KeyLeft:
+				break;
+			case Event::KeyRight:
+				break;
+		}
+		setTranslate(p);
+	}
+}
+
+void Paddle::nextFrame(uint64 tm) {
+	float gt=tm/1000000.0f;
+}
+
+#if 0
+#include <Tiki/tiki.h>
 #include <Tiki/texture.h>
 
 using namespace Tiki;
@@ -212,3 +296,4 @@ void paddle_message(struct entity *me, struct entity *them, char *message) {
     me->arg9=1;
   }
 }
+#endif

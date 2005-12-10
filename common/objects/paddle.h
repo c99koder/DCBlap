@@ -16,8 +16,31 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
-void paddle_create(struct entity *me);
-void paddle_update(struct entity *me,float gt);
-void paddle_message(struct entity *me, struct entity *them, char *message);
-void paddle_reset();
-void set_player_map(int pos, int val);
+
+#ifndef __OBJ_PADDLE_H
+#define __OBJ_PADDLE_H
+
+#include <Tiki/hid.h>
+
+class Paddle : public SolidClass {
+public:
+	TIKI_OBJECT_NAME(Paddle);
+	Paddle();
+	int getNum() { return m_num; }
+
+	//Overloaded functions
+	void nextFrame(uint64 tm);
+	void setProperty(std::string name, std::string value);
+protected:
+	// HID input callback.
+	static void hidCallback(const Tiki::Hid::Event & evt, void * data);
+	virtual void processHidEvent(const Tiki::Hid::Event & evt);	
+	
+private:
+	int m_hidCookie;	
+	int m_num;
+	enum Orientation { XZ, XY, ZX };
+	Orientation m_orientation;
+};
+
+#endif

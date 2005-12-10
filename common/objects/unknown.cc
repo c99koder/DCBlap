@@ -1,4 +1,4 @@
-/* camera_o.h - DCBlap camera object
+/* unknown.cc - DCBlap unknown object
  * Copyright (c) 2001-2005 Sam Steele
  *
  * This file is part of DCBlap.
@@ -11,22 +11,20 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
-#ifndef __OBJ_CAMERA_H
-#define __OBJ_CAMERA_H
+#include <Tiki/tiki.h>
+#include <Tiki/texture.h>
 
-class Camera : public Entity {
-public:
-	TIKI_OBJECT_NAME(Camera);
-	Camera();
-	
-	//Overloaded functions
-	void nextFrame(uint64 tm);
-};
+using namespace Tiki;
+using namespace Tiki::GL;
 
-#endif
+#include "objects.h"
+
+TIKI_OBJECT_BEGIN(Object, Unknown)
+TIKI_OBJECT_RECEIVER("thud", Unknown::thud)
+TIKI_OBJECT_END(Unknown)

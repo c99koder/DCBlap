@@ -16,7 +16,23 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
-void ball_create(struct entity *me);
-void ball_update(struct entity *me, float gt);
-void ball_message(struct entity *me, struct entity *them, char *message);
-void ball_reset();
+
+#ifndef __OBJ_BALL_H
+#define __OBJ_BALL_H
+
+class Ball : public Bouncer {
+public:
+	Ball();
+	
+	int Ball::thud(Entity * sender, Object * arg);	
+	
+	//Overloaded functions
+	void draw(ObjType list);
+	void setProperty(std::string name, std::string value);
+protected:
+	TIKI_OBJECT_DECLS(Ball)
+private:
+		int m_lastTouched;
+};
+
+#endif

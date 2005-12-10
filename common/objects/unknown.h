@@ -1,4 +1,4 @@
-/* camera_o.h - DCBlap camera object
+/* unknown.h - DCBlap unknown object
  * Copyright (c) 2001-2005 Sam Steele
  *
  * This file is part of DCBlap.
@@ -11,22 +11,24 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
-#ifndef __OBJ_CAMERA_H
-#define __OBJ_CAMERA_H
+#ifndef __OBJ_UNKNOWN_H
+#define __OBJ_UNKNOWN_H
 
-class Camera : public Entity {
+class Unknown : public SolidClass {
 public:
-	TIKI_OBJECT_NAME(Camera);
-	Camera();
-	
-	//Overloaded functions
-	void nextFrame(uint64 tm);
+	Unknown(std::string type) { m_type=type; };
+
+	void Unknown::setupName(const char *) { Object::setupName(m_type.c_str()); }
+	int Unknown::thud(Object * sender, Object * arg) { };	
+private:
+	void setupEvents(bool);
+	std::string m_type;
 };
 
 #endif
