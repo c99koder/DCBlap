@@ -52,7 +52,7 @@ private:
 
 RefPtr<DCBlapEntityList> EntityList;
 	
-//Check for collisions
+//Check for collisions and remove finished entities
 void DCBlapEntityList::nextFrame(uint64 tm) {
 	std::list<Entity *>::iterator ent1;
 	std::list<Entity *>::iterator ent2;
@@ -60,6 +60,11 @@ void DCBlapEntityList::nextFrame(uint64 tm) {
 	sgBox b1,b2;
 	
 	for(ent1 = m_entityList.begin(); ent1 != m_entityList.end(); ent1++) {
+		if((*ent1)->isFinished()) {
+			ent1=m_entityList.erase(ent1);
+			continue;
+		}
+		
 		if((*ent1)->getClassName()=="worldspawn") continue;
 		
 		for(ent2 = m_entityList.begin(); ent2 != m_entityList.end(); ent2++) {
@@ -77,6 +82,7 @@ void DCBlapEntityList::nextFrame(uint64 tm) {
 				
 				if(b1.intersects(&b2)) {
 					(*ent1)->perform("thud",(*ent2),NULL);
+					(*ent2)->perform("thud",(*ent1),NULL);
 				}
 			}
 		}
@@ -98,6 +104,8 @@ Entity *create_object(std::string type) {
 		e=new Ball;
 	} else if(type=="paddle") {
 		e=new Paddle;
+	} else if(type=="func_breakable") {
+		e=new Breakable;
 	} else {
 		e=new Unknown(type);
 	}
@@ -273,7 +281,8 @@ World::World(const char *filename) {
 }
 
 void World::visualPerFrame() {
-	uint64 frameTime;
+	uint64 frameTime;	
+	std::list<Entity *>::iterator ent1;
 	
 	m_scene->subRemoveFinished();
 	m_scene->createSceneList();
