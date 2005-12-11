@@ -27,3 +27,4 @@
 #include "drawables/SolidClass.h"
 #include "objects/unknown.h"
 #include "objects/paddle.h"
+#include "objects/breakable.h"
