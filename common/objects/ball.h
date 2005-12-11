@@ -24,7 +24,7 @@ class Ball : public Bouncer {
 public:
 	Ball();
 	
-	int Ball::thud(Entity * sender, Object * arg);	
+	int thud(Entity * sender, Object * arg);	
 	
 	//Overloaded functions
 	void draw(ObjType list);
@@ -32,7 +32,7 @@ public:
 protected:
 	TIKI_OBJECT_DECLS(Ball)
 private:
-		int m_lastTouched;
+	int m_lastTouched;
 };
 
 #endif
