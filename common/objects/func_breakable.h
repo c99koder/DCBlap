@@ -16,6 +16,20 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
-void func_break_create(struct entity *me);
-void func_break_update(struct entity *me, float gt);
-void func_break_message(struct entity *me, struct entity *them, char *message);
+
+#ifndef __OBJ_BREAKABLE_H
+#define __OBJ_BREAKABLE_H
+
+class Breakable : public SolidClass {
+public:
+	Breakable();
+	
+	int thud(Entity * sender, Object * arg);	
+	
+	//Overloaded functions
+	void setProperty(std::string name, std::string value);
+protected:
+		TIKI_OBJECT_DECLS(Breakable)
+};
+
+#endif

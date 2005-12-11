@@ -17,6 +17,42 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 #include <Tiki/tiki.h>
+#include <Tiki/hid.h>
+#include <Tiki/tikimath.h>
+#include <Tiki/texture.h>
+
+using namespace Tiki;
+using namespace Tiki::Math;
+using namespace Tiki::GL;
+using namespace Tiki::Hid;
+
+#include "objects.h"
+#include <iostream>
+
+TIKI_OBJECT_NAME(Breakable);
+TIKI_OBJECT_BEGIN(Object, Breakable)
+TIKI_OBJECT_RECEIVER("thud", Breakable::thud)
+TIKI_OBJECT_END(Breakable)
+
+//extern Goal *goals[];
+
+Breakable::Breakable() {
+}
+
+int Breakable::thud(Entity * sender, Object * arg) {
+	if(sender->getClassName() == "Ball") {
+		//goals[((Ball *)sender)->getLastTouched()]->giveScore(1);
+		setFinished();
+	}
+}
+
+void Breakable::setProperty(std::string name, std::string value) {
+	SolidClass::setProperty(name,value);
+}
+
+#if 0
+
+#include <Tiki/tiki.h>
 #include <Tiki/texture.h>
 #include <Tiki/sound.h>
 
@@ -140,3 +176,4 @@ void func_break_message(struct entity *me, struct entity *them, char *message) {
     }
   }
 }
+#endif
