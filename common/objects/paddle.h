@@ -24,21 +24,24 @@
 
 class Paddle : public SolidClass {
 public:
-	TIKI_OBJECT_NAME(Paddle);
 	Paddle();
 	int getNum() { return m_num; }
 
 	//Overloaded functions
 	void nextFrame(uint64 tm);
 	void setProperty(std::string name, std::string value);
+	int thud(Entity *sender, Object *arg) {}
 protected:
 	// HID input callback.
 	static void hidCallback(const Tiki::Hid::Event & evt, void * data);
 	virtual void processHidEvent(const Tiki::Hid::Event & evt);	
+	TIKI_OBJECT_DECLS(Paddle)
 	
 private:
 	int m_hidCookie;	
 	int m_num;
+	int m_xaxis,m_yaxis;
+	int m_speed;
 	enum Orientation { XZ, XY, ZX };
 	Orientation m_orientation;
 };

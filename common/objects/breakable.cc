@@ -34,14 +34,14 @@ TIKI_OBJECT_BEGIN(Object, Breakable)
 TIKI_OBJECT_RECEIVER("thud", Breakable::thud)
 TIKI_OBJECT_END(Breakable)
 
-//extern Goal *goals[];
+extern Goal *goals[];
 
 Breakable::Breakable() {
 }
 
 int Breakable::thud(Entity * sender, Object * arg) {
 	if(sender->getClassName() == "Ball") {
-		//goals[((Ball *)sender)->getLastTouched()]->giveScore(1);
+		goals[((Ball *)sender)->getLastTouched()-1]->giveScore(1);
 		setFinished();
 	}
 }

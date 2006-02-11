@@ -22,25 +22,27 @@
 		22752C6508F02BA800DCB98C /* utils.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C5A08F02BA800DCB98C /* utils.cc */; };
 		22752C6608F02BA800DCB98C /* word.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C5B08F02BA800DCB98C /* word.cc */; };
 		22752C6708F02BA800DCB98C /* world.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C5C08F02BA800DCB98C /* world.cc */; };
-		22752C8F08F02BC400DCB98C /* camera_o.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C6E08F02BC400DCB98C /* camera_o.cc */; };
 		22752F4208F0364B00DCB98C /* data in Resources */ = {isa = PBXBuildFile; fileRef = 22752D6208F0364A00DCB98C /* data */; };
 		2290999D092C250200B7D80C /* Tiki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2290999C092C250200B7D80C /* Tiki.framework */; };
 		22909B2C092F787A00B7D80C /* Tiki.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2290999C092C250200B7D80C /* Tiki.framework */; };
+		22CF6CD3094B810000733F87 /* camera_o.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C6E08F02BC400DCB98C /* camera_o.cc */; };
+		22CF6CD4094B810100733F87 /* paddle.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22F3E9190942AED10013CE12 /* paddle.cc */; };
+		22CF6CD5094B810200733F87 /* light.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22F3E632094240190013CE12 /* light.cc */; };
+		22CF6CD6094B810300733F87 /* ball.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22F3E7C50942961A0013CE12 /* ball.cc */; };
+		22CF6CD7094B810300733F87 /* player_1st.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22F3E4BD094231820013CE12 /* player_1st.cc */; };
+		22CF6CEC094BA6C900733F87 /* breakable.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22CF6CEB094BA6C900733F87 /* breakable.cc */; };
+		22CF6EFA094BC4A700733F87 /* goal.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22CF6EF9094BC4A600733F87 /* goal.cc */; };
 		22DDC2E7091D1875008067D8 /* GameSelect.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22DDC2E3091D1875008067D8 /* GameSelect.cc */; };
 		22DDC2E9091D1875008067D8 /* TitleScreen.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22DDC2E5091D1875008067D8 /* TitleScreen.cc */; };
 		22F3DFD20941D77C0013CE12 /* SolidClass.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22F3DFD00941D77C0013CE12 /* SolidClass.h */; };
 		22F3DFD30941D77C0013CE12 /* SolidClass.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22F3DFD10941D77C0013CE12 /* SolidClass.cc */; };
 		22F3E0390941E4E90013CE12 /* Entity.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22F3E0370941E4E90013CE12 /* Entity.cc */; };
 		22F3E1DB094209190013CE12 /* world.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22F3E1DA094209190013CE12 /* world.h */; };
-		22F3E4BE094231820013CE12 /* player_1st.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22F3E4BD094231820013CE12 /* player_1st.cc */; };
 		22F3E4C3094232000013CE12 /* player.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22F3E4C2094232000013CE12 /* player.h */; };
-		22F3E633094240190013CE12 /* light.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22F3E632094240190013CE12 /* light.cc */; };
 		22F3E7AD094292EC0013CE12 /* bouncer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22F3E7AB094292EC0013CE12 /* bouncer.h */; };
 		22F3E7AE094292EC0013CE12 /* bouncer.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22F3E7AC094292EC0013CE12 /* bouncer.cc */; };
-		22F3E7C60942961A0013CE12 /* ball.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22F3E7C50942961A0013CE12 /* ball.cc */; };
 		22F3E7EE09429C770013CE12 /* Entity.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22F3E7ED09429C770013CE12 /* Entity.h */; };
 		22F3E8680942A3FE0013CE12 /* unknown.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22F3E8660942A3FE0013CE12 /* unknown.h */; };
-		22F3E91A0942AED10013CE12 /* paddle.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22F3E9190942AED10013CE12 /* paddle.cc */; };
 		22F3EA4F0942C1750013CE12 /* unknown.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22F3EA4E0942C1750013CE12 /* unknown.cc */; };
 		565FEC4F07B179CA00C4E23A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565FEC3907B179A100C4E23A /* Cocoa.framework */; };
 		565FEC5207B179D400C4E23A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565FEC3B07B179A100C4E23A /* OpenGL.framework */; };
@@ -108,7 +110,7 @@
 		22752C6B08F02BC400DCB98C /* bonusspawn.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = bonusspawn.h; path = ../common/objects/bonusspawn.h; sourceTree = SOURCE_ROOT; };
 		22752C6E08F02BC400DCB98C /* camera_o.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = camera_o.cc; path = ../common/objects/camera_o.cc; sourceTree = SOURCE_ROOT; };
 		22752C6F08F02BC400DCB98C /* camera_o.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = camera_o.h; path = ../common/objects/camera_o.h; sourceTree = SOURCE_ROOT; };
-		22752C7108F02BC400DCB98C /* func_breakable.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = func_breakable.h; path = ../common/objects/func_breakable.h; sourceTree = SOURCE_ROOT; };
+		22752C7108F02BC400DCB98C /* breakable.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = breakable.h; path = ../common/objects/breakable.h; sourceTree = SOURCE_ROOT; };
 		22752C7308F02BC400DCB98C /* func_rotating.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = func_rotating.h; path = ../common/objects/func_rotating.h; sourceTree = SOURCE_ROOT; };
 		22752C7508F02BC400DCB98C /* goal.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = goal.h; path = ../common/objects/goal.h; sourceTree = SOURCE_ROOT; };
 		22752C7708F02BC400DCB98C /* hyper.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = hyper.h; path = ../common/objects/hyper.h; sourceTree = SOURCE_ROOT; };
@@ -127,6 +129,8 @@
 		2290999C092C250200B7D80C /* Tiki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Tiki.framework; path = ../../../tiki/osx/build/Development/Tiki.framework; sourceTree = SOURCE_ROOT; };
 		22909A91092F722600B7D80C /* light.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = light.h; path = ../common/objects/light.h; sourceTree = SOURCE_ROOT; };
 		22C6211808F0608B008BCA18 /* game.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = game.h; path = ../include/game.h; sourceTree = SOURCE_ROOT; };
+		22CF6CEB094BA6C900733F87 /* breakable.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = breakable.cc; path = ../common/objects/breakable.cc; sourceTree = SOURCE_ROOT; };
+		22CF6EF9094BC4A600733F87 /* goal.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = goal.cc; path = ../common/objects/goal.cc; sourceTree = SOURCE_ROOT; };
 		22DDC2E3091D1875008067D8 /* GameSelect.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = GameSelect.cc; path = ../common/menus/GameSelect.cc; sourceTree = SOURCE_ROOT; };
 		22DDC2E4091D1875008067D8 /* GameSelect.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = GameSelect.h; path = ../common/menus/GameSelect.h; sourceTree = SOURCE_ROOT; };
 		22DDC2E5091D1875008067D8 /* TitleScreen.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = TitleScreen.cc; path = ../common/menus/TitleScreen.cc; sourceTree = SOURCE_ROOT; };
@@ -216,12 +220,14 @@
 			children = (
 				22F3DFD10941D77C0013CE12 /* SolidClass.cc */,
 				22F3E0370941E4E90013CE12 /* Entity.cc */,
-				22F3E9190942AED10013CE12 /* paddle.cc */,
 				22F3E7C50942961A0013CE12 /* ball.cc */,
-				22F3E632094240190013CE12 /* light.cc */,
-				22F3E4BD094231820013CE12 /* player_1st.cc */,
-				22752C6E08F02BC400DCB98C /* camera_o.cc */,
 				22F3E7AC094292EC0013CE12 /* bouncer.cc */,
+				22CF6CEB094BA6C900733F87 /* breakable.cc */,
+				22752C6E08F02BC400DCB98C /* camera_o.cc */,
+				22CF6EF9094BC4A600733F87 /* goal.cc */,
+				22F3E632094240190013CE12 /* light.cc */,
+				22F3E9190942AED10013CE12 /* paddle.cc */,
+				22F3E4BD094231820013CE12 /* player_1st.cc */,
 				22F3EA4E0942C1750013CE12 /* unknown.cc */,
 			);
 			name = Objects;
@@ -268,7 +274,7 @@
 				22752C6908F02BC400DCB98C /* ball.h */,
 				22752C6B08F02BC400DCB98C /* bonusspawn.h */,
 				22752C6F08F02BC400DCB98C /* camera_o.h */,
-				22752C7108F02BC400DCB98C /* func_breakable.h */,
+				22752C7108F02BC400DCB98C /* breakable.h */,
 				22752C7308F02BC400DCB98C /* func_rotating.h */,
 				22752C7508F02BC400DCB98C /* goal.h */,
 				22752C7708F02BC400DCB98C /* hyper.h */,
@@ -455,7 +461,6 @@
 				22752C6508F02BA800DCB98C /* utils.cc in Sources */,
 				22752C6608F02BA800DCB98C /* word.cc in Sources */,
 				22752C6708F02BA800DCB98C /* world.cc in Sources */,
-				22752C8F08F02BC400DCB98C /* camera_o.cc in Sources */,
 				22171EAA0902C763001663B0 /* main.m in Sources */,
 				22171EAE0902C77E001663B0 /* Controller.m in Sources */,
 				22171F320902C9C1001663B0 /* main.cc in Sources */,
@@ -467,12 +472,15 @@
 				224786B6093A6F100070BB68 /* ShadowBox.cc in Sources */,
 				22F3DFD30941D77C0013CE12 /* SolidClass.cc in Sources */,
 				22F3E0390941E4E90013CE12 /* Entity.cc in Sources */,
-				22F3E4BE094231820013CE12 /* player_1st.cc in Sources */,
-				22F3E633094240190013CE12 /* light.cc in Sources */,
 				22F3E7AE094292EC0013CE12 /* bouncer.cc in Sources */,
-				22F3E7C60942961A0013CE12 /* ball.cc in Sources */,
-				22F3E91A0942AED10013CE12 /* paddle.cc in Sources */,
 				22F3EA4F0942C1750013CE12 /* unknown.cc in Sources */,
+				22CF6CD3094B810000733F87 /* camera_o.cc in Sources */,
+				22CF6CD4094B810100733F87 /* paddle.cc in Sources */,
+				22CF6CD5094B810200733F87 /* light.cc in Sources */,
+				22CF6CD6094B810300733F87 /* ball.cc in Sources */,
+				22CF6CD7094B810300733F87 /* player_1st.cc in Sources */,
+				22CF6CEC094BA6C900733F87 /* breakable.cc in Sources */,
+				22CF6EFA094BC4A700733F87 /* goal.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,7 +525,7 @@
 				);
 				OTHER_REZFLAGS = "";
 				PREBINDING = NO;
-				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_NAME = DCBlap;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
@@ -536,8 +544,10 @@
 					"$(SRCROOT)/../../../tiki/osx/build/Default",
 					"$(SRCROOT)/../../../tiki/osx/build/Development",
 				);
+				GCC_FAST_OBJC_DISPATCH = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "DCBlap-Info.plist";
@@ -554,7 +564,7 @@
 				);
 				OTHER_REZFLAGS = "";
 				PREBINDING = NO;
-				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_NAME = DCBlap;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
@@ -590,7 +600,7 @@
 				);
 				OTHER_REZFLAGS = "";
 				PREBINDING = NO;
-				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_NAME = DCBlap;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
@@ -610,16 +620,14 @@
 				HEADER_SEARCH_PATHS = (
 					.,
 					../include,
-					/sw/include/plib,
 					../common,
 				);
-				LIBRARY_SEARCH_PATHS = /sw/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				OTHER_CFLAGS = (
 					"-DUNIX",
 					"-DMACOS",
 				);
-				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
 			name = Development;
@@ -636,16 +644,14 @@
 				HEADER_SEARCH_PATHS = (
 					.,
 					../include,
-					/sw/include/plib,
 					../common,
 				);
-				LIBRARY_SEARCH_PATHS = /sw/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				OTHER_CFLAGS = (
 					"-DUNIX",
 					"-DMACOS",
 				);
-				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
 			name = Deployment;
@@ -659,16 +665,14 @@
 				HEADER_SEARCH_PATHS = (
 					.,
 					../include,
-					/sw/include/plib,
 					../common,
 				);
-				LIBRARY_SEARCH_PATHS = /sw/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				OTHER_CFLAGS = (
 					"-DUNIX",
 					"-DMACOS",
 				);
-				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
 			name = Default;

@@ -14,7 +14,7 @@
    id="svg2"
    sodipodi:version="0.32"
    inkscape:version="0.42"
-   sodipodi:docbase="/Users/sam"
+   sodipodi:docbase="/Users/sam/Projects/DCBlap/svg"
    sodipodi:docname="blapgame.svg"
    inkscape:export-filename="/Users/sam/Projects/DCBlap/data/tex/menu/game/bg.png"
    inkscape:export-xdpi="90.000000"
@@ -455,5 +455,30 @@
            id="tspan6734"
            sodipodi:role="line">Game Selection</tspan></text>
     </g>
+    <rect
+       style="opacity:0.59119499;fill:#000000;fill-opacity:0.26582280;stroke:#000000;stroke-width:1.7222261;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-opacity:1.0000000"
+       id="rect1371"
+       width="31.643021"
+       height="21.761425"
+       x="0.44718352"
+       y="565.03516"
+       rx="2.0000007"
+       ry="1.9999996"
+       inkscape:export-filename="/Users/sam/Projects/DCBlap/data/tex/menu/pc/back.png"
+       inkscape:export-xdpi="172.63472"
+       inkscape:export-ydpi="172.63472" />
+    <text
+       xml:space="preserve"
+       style="font-size:12.000000px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
+       x="5.8390064"
+       y="580.20496"
+       id="text2100"
+       inkscape:export-filename="/Users/sam/Projects/DCBlap/data/tex/menu/pc/back.png"
+       inkscape:export-xdpi="172.63472"
+       inkscape:export-ydpi="172.63472"><tspan
+         sodipodi:role="line"
+         id="tspan2102"
+         x="5.8390064"
+         y="580.20496">Esc</tspan></text>
   </g>
 </svg>

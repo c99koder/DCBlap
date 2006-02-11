@@ -28,3 +28,4 @@
 #include "objects/unknown.h"
 #include "objects/paddle.h"
 #include "objects/breakable.h"
+#include "objects/goal.h"

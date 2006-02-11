@@ -27,7 +27,6 @@ using namespace Tiki;
 using namespace Tiki::GL;
 using namespace Tiki::Math;
 
-#include <sg.h>
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
@@ -57,36 +56,29 @@ void DCBlapEntityList::nextFrame(uint64 tm) {
 	std::list<Entity *>::iterator ent1;
 	std::list<Entity *>::iterator ent2;
 	Vector p;
-	sgBox b1,b2;
+	char txt[100];
 	
 	for(ent1 = m_entityList.begin(); ent1 != m_entityList.end(); ent1++) {
 		if((*ent1)->isFinished()) {
 			ent1=m_entityList.erase(ent1);
 			continue;
 		}
-		
+
 		if((*ent1)->getClassName()=="worldspawn") continue;
 		
 		for(ent2 = m_entityList.begin(); ent2 != m_entityList.end(); ent2++) {
 			if((*ent2)->getClassName()=="worldspawn") continue;
-			if(ent1 != ent2) {
-				p=(*ent1)->getMin() + (*ent1)->getTranslate();
-				b1.setMin(p.x,p.y,p.z);
-				p=(*ent1)->getMax() + (*ent1)->getTranslate();
-				b1.setMax(p.x,p.y,p.z);
-				
-				p=(*ent2)->getMin() + (*ent2)->getTranslate();
-				b2.setMin(p.x,p.y,p.z);
-				p=(*ent2)->getMax() + (*ent2)->getTranslate();
-				b2.setMax(p.x,p.y,p.z);
-				
-				if(b1.intersects(&b2)) {
+			if(ent1 != ent2) {	
+				if((*ent1)->intersects(*ent2)) {
 					(*ent1)->perform("thud",(*ent2),NULL);
 					(*ent2)->perform("thud",(*ent1),NULL);
 				}
 			}
 		}
 	}
+	
+	sprintf(txt,"FPS: %.2f",Frame::getFrameRate());
+	set_hud(4,0,480,txt,0.6,0.6,0.6);
 	
 	Drawable::nextFrame(tm);
 	subRemoveFinished();
@@ -106,6 +98,8 @@ Entity *create_object(std::string type) {
 		e=new Paddle;
 	} else if(type=="func_breakable") {
 		e=new Breakable;
+	} else if(type=="goal") {
+		e=new Goal;
 	} else {
 		e=new Unknown(type);
 	}
@@ -236,12 +230,10 @@ World::World(const char *filename) {
 	m_scene->subAdd(EntityList);
 	
 	assert(file_exists((char *)filename));
-	printf("Loading: %s\n",filename);
 	worldFile.open(filename,"rb");
 
 	//Load textures
 	worldFile.readle32(&texcount,1);
-	printf("Textures: %i\n",texcount);
   for(i=0;i<texcount;i++) {
     k=0;
     do {
@@ -257,7 +249,6 @@ World::World(const char *filename) {
 	
 	//Load entities
 	worldFile.readle32(&entcount,1);
-	printf("Entities: %i\n",entcount);
 
   for(i=0;i<entcount;i++) {
     //printf("Loading entity %i...\n",i);
@@ -272,9 +263,7 @@ World::World(const char *filename) {
 		
 		ent=create_object(texname);
 		ent->loadFromFile(worldFile);
-		printf("Added: %s\n",ent->getClassName().c_str());
   }
-  printf("World load complete.\n");
 	worldFile.close();
 	
 	m_startTime=m_lastTime=Time::gettime();

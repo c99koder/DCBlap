@@ -29,11 +29,18 @@ using namespace Tiki::Hid;
 
 #include "objects.h"
 
+TIKI_OBJECT_NAME(Paddle);
+TIKI_OBJECT_BEGIN(Object, Paddle)
+TIKI_OBJECT_RECEIVER("thud", Paddle::thud)
+TIKI_OBJECT_END(Paddle)
+
 Paddle::Paddle() {
 	// Register us for HID input callbacks.
 	m_hidCookie = callbackReg(hidCallback, this);
 	assert( m_hidCookie >= 0 );
 	m_orientation=XZ;
+	m_xaxis=m_yaxis=0;
+	m_speed=8;
 }
 
 extern RefPtr<Font> fnt;
@@ -41,6 +48,8 @@ extern RefPtr<Font> fnt;
 void Paddle::setProperty(std::string name, std::string value) {
 	if(name=="num")
 		m_num=atoi(value.c_str());
+	if(name=="speed")
+		m_speed=atoi(value.c_str());
 	if(name=="orientation")
 		m_orientation=(Orientation)atoi(value.c_str());
 	SolidClass::setProperty(name,value);
@@ -52,51 +61,60 @@ void Paddle::hidCallback(const Event & evt, void * data) {
 }
 
 void Paddle::processHidEvent(const Event & evt) {
-	Vector p=getTranslate();
 	
 	if(evt.dev == NULL) {
 		return;
 	}
 
-	if (evt.type==Event::EvtKeypress ) {
+	if (evt.type==Event::EvtKeyDown ) {
 		switch(evt.key) {
 			case Event::KeyUp:
-				switch(m_orientation) {
-					case XZ:
-						p.z+=0.2;
-						break;
-					case XY:
-						p.y-=0.2;
-						break;
-					case ZX:
-						p.x+=0.2;
-						break;
-				}
+				m_yaxis=-1;
 				break;
 			case Event::KeyDown:
-				switch(m_orientation) {
-					case XZ:
-						p.z-=0.2;
-						break;
-					case XY:
-						p.y-=0.2;
-						break;
-					case ZX:
-						p.x+=0.2;
-						break;						
-				}
+				m_yaxis=1;
 				break;
 			case Event::KeyLeft:
+				m_xaxis=-1;
 				break;
 			case Event::KeyRight:
+				m_xaxis=1;
 				break;
 		}
-		setTranslate(p);
+	}
+	
+	if (evt.type==Event::EvtKeyUp ) {
+		switch(evt.key) {
+			case Event::KeyUp:
+			case Event::KeyDown:
+				m_yaxis=0;
+				break;
+			case Event::KeyLeft:
+			case Event::KeyRight:
+				m_xaxis=0;
+				break;
+		}
 	}
 }
 
 void Paddle::nextFrame(uint64 tm) {
 	float gt=tm/1000000.0f;
+	Vector p=getTranslate();
+
+	if(gt<0) printf("NEG!\n");
+	
+	switch(m_orientation) {
+		case XZ:
+			p.z-=m_speed * gt * m_yaxis;
+			break;
+		case XY:
+			p.y-=m_speed * gt * m_yaxis;
+			break;
+	}
+	
+	p.x += m_speed * gt * m_xaxis;
+	
+	setTranslate(p);
 }
 
 #if 0

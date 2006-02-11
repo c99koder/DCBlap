@@ -16,6 +16,25 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
-void goal_callback(struct entity *me, float gt);
-void goal_create(struct entity *me);
-void goal_message(struct entity *me, struct entity *them, char *message);
+
+#ifndef __OBJ_GOAL_H
+#define __OBJ_GOAL_H
+
+class Goal : public SolidClass {
+public:
+	Goal();
+	
+	int thud(Entity * sender, Object * arg);	
+	void giveScore(int points) { m_score += points; }
+	
+	//Overloaded functions
+	void setProperty(std::string name, std::string value);
+	void nextFrame(uint64 tm);
+protected:
+	TIKI_OBJECT_DECLS(Goal)
+private:
+	int m_num;
+	int m_score;
+};
+
+#endif

@@ -36,19 +36,19 @@ TIKI_OBJECT_END(Ball)
 Texture *ball_tex=NULL;
 
 Ball::Ball() {
+	m_lastTouched=1;
 }
 
 int Ball::thud(Entity * sender, Object * arg) {
 	if(sender->getClassName() == "Paddle") {
 		m_lastTouched = ((Paddle *)sender)->getNum();
-		printf("I touched paddle number %i\n",m_lastTouched);
 	}
 	Bouncer::thud(sender,arg);
 }
 
 void Ball::setProperty(std::string name, std::string value) {
 	Entity::setProperty(name,value);
-	std::cout << name << " " << value << std::endl;
+
 	if(name=="angles") {
 		Vector r=getRotate();
 		m_velocity=Vector(fcos(r.y-1*(M_PI/180)),0,fsin(r.y*(M_PI/180)));

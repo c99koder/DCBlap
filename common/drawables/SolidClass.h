@@ -109,21 +109,21 @@ public:
 				}
 			}
 			
-			void bounds(float &xmin, float &ymin, float &zmin, float &xmax, float &ymax, float &zmax) {
+			void bounds(Vector &min, Vector &max) {
 				std::list<Point>::iterator iter;
 
 				for(iter = m_points.begin(); iter != m_points.end(); iter++) {
 					if(m_num==0 && iter == m_points.begin()) {
-						xmin=xmax=(*iter).getX();
-						ymin=ymax=(*iter).getY();
-						zmin=zmax=(*iter).getZ();
+						min.x=max.x=(*iter).getX();
+						min.y=max.y=(*iter).getY();
+						min.z=max.z=(*iter).getZ();
 					} else {
-						if((*iter).getX() < xmin) xmin=(*iter).getX();
-						if((*iter).getY() < ymin) ymin=(*iter).getY();
-						if((*iter).getZ() < zmin) zmin=(*iter).getZ();
-						if((*iter).getX() > xmax) xmax=(*iter).getX();
-						if((*iter).getY() > ymax) ymax=(*iter).getY();
-						if((*iter).getZ() > zmax) zmax=(*iter).getZ();
+						if((*iter).getX() < min.x) min.x=(*iter).getX();
+						if((*iter).getY() < min.y) min.y=(*iter).getY();
+						if((*iter).getZ() < min.z) min.z=(*iter).getZ();
+						if((*iter).getX() > max.x) max.x=(*iter).getX();
+						if((*iter).getY() > max.y) max.y=(*iter).getY();
+						if((*iter).getZ() > max.z) max.z=(*iter).getZ();
 					}
 				}
 			}

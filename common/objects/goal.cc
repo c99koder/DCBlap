@@ -17,6 +17,57 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 #include <Tiki/tiki.h>
+#include <Tiki/hid.h>
+#include <Tiki/tikimath.h>
+#include <Tiki/texture.h>
+
+using namespace Tiki;
+using namespace Tiki::Math;
+using namespace Tiki::GL;
+using namespace Tiki::Hid;
+
+#include "objects.h"
+#include "hud.h"
+
+TIKI_OBJECT_NAME(Goal);
+TIKI_OBJECT_BEGIN(Object, Goal)
+TIKI_OBJECT_RECEIVER("thud", Goal::thud)
+TIKI_OBJECT_END(Goal)
+
+Goal *goals[4];
+
+Goal::Goal() {
+	m_num=1;
+	m_score=0;
+}
+
+int Goal::thud(Entity * sender, Object * arg) {
+}
+
+void Goal::setProperty(std::string name, std::string value) {
+	SolidClass::setProperty(name,value);
+	if(name=="num") {
+		m_num=atoi(value.c_str());
+		goals[m_num-1]=this;
+	}
+}
+
+void Goal::nextFrame(uint64 tm) {
+	char txt[100];
+	
+  sprintf(txt,"Player %i: %i",m_num,m_score);
+  switch(m_num) {
+		case 1:
+			set_hud(0,30,30,txt,1,1,1);
+			break;
+		case 2:
+			set_hud(1,440,30,txt,1,1,1);
+			break;
+  }
+}
+
+#if 0
+#include <Tiki/tiki.h>
 #include <Tiki/texture.h>
 
 using namespace Tiki;
@@ -78,3 +129,4 @@ void goal_message(struct entity *me, struct entity *them, char *message) {
     pause_world(1);
   }
 }
+#endif

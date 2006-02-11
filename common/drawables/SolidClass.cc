@@ -48,17 +48,13 @@ void SolidClass::loadFromFile(Tiki::File f) {
 		p=new Polygon(i);
 		p->loadFromFile(f);
 		addPoly(*p);
-		p->bounds(m_xmin,m_ymin,m_zmin,m_xmax,m_ymax,m_zmax);
+		p->bounds(m_min,m_max);
 	}
 	
-	v.x=m_xmin+((m_xmax-m_xmin)/2);
-	v.y=m_ymin+((m_ymax-m_ymin)/2);
-	v.z=m_zmin+((m_zmax-m_zmin)/2);
+	v=m_min+((m_max-m_min)*0.5);
 	setTranslate(v);
 	
-	m_xmin-=v.x; m_xmax-=v.x;
-	m_ymin-=v.y; m_ymax-=v.y;
-	m_zmin-=v.z; m_zmax-=v.z;
+	m_min-=v; m_max-=v;
 
 	for(iter = m_polys.begin(); iter != m_polys.end(); iter++) {
 		(*iter).translate(-v);

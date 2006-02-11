@@ -25,6 +25,7 @@ public:
 	Ball();
 	
 	int thud(Entity * sender, Object * arg);	
+	int getLastTouched() { return m_lastTouched; }
 	
 	//Overloaded functions
 	void draw(ObjType list);

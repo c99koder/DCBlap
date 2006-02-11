@@ -51,6 +51,17 @@ std::string Entity::loadString(Tiki::File f) {
 	return s;
 }
 
+bool Entity::intersects(Entity *e) {
+	Vector min1=getMin() + getTranslate();
+	Vector max1=getMax() + getTranslate();
+	Vector min2=e->getMin() + e->getTranslate();
+	Vector max2=e->getMax() + e->getTranslate();
+	
+	return min1.x <= max2.x && max1.x >= min2.x &&
+		min1.y <= max2.y && max1.y >= min2.y &&
+		min1.z <= max2.z && max1.z >= min2.z;
+}
+
 void Entity::loadFromFile(Tiki::File f) {
 	int paramcount=0;
 	
@@ -94,8 +105,8 @@ void Entity::drawModel(ObjType list) {
 		if(m_animStart!=m_animEnd)
 			m_model->SetFrame(frame1,frame2,m_blendPos,m_blendCount);
 				//printf("md2model->draw()!\n");
-		m_model->bound_min(m_xmin,m_ymin,m_zmin);
-		m_model->bound_max(m_xmax,m_ymax,m_zmax);
+		m_model->bound_min(m_min.x,m_min.y,m_min.z);
+		m_model->bound_max(m_max.x,m_max.y,m_max.z);
 
 		m_texture->select();
 		glColor4f(c.r,c.g,c.b,c.a);

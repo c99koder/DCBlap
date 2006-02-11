@@ -36,13 +36,13 @@ public:
 			std::string loadString(Tiki::File f);
 			virtual void setProperty(std::string name, std::string value);
 			void makeCoordinates(const char *text,float *x, float *y, float *z);
-			Vector getMin() { return Vector(m_xmin,m_ymin,m_zmin); }
-			Vector getMax() { return Vector(m_xmax,m_ymax,m_zmax); }
+			Vector getMin() { return m_min; }
+			Vector getMax() { return m_max; }
 			void drawModel(ObjType list);
+			bool intersects(Entity *e);
 protected:
 			int m_polycount;
-			float m_xmin,m_ymin,m_zmin;
-			float m_xmax,m_ymax,m_zmax;
+			Vector m_min,m_max;
 			md2Model *m_model;
 			int m_blendCount, m_blendPos, m_animStart, m_animEnd, m_frameNum;
 			Texture *m_texture;
