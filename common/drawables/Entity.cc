@@ -21,7 +21,7 @@
 #include <Tiki/gl.h>
 #include <Tiki/texture.h>
 #include <Tiki/plxcompat.h>
-#include "Entity.h"
+#include "drawables/entity.h"
 #include "camera.h"
 
 using namespace Tiki;
@@ -64,10 +64,13 @@ bool Entity::intersects(Entity *e) {
 
 void Entity::loadFromFile(Tiki::File f) {
 	int paramcount=0;
+	std::string name,val;
 	
 	f.readle32(&paramcount,1);
 	for(int i=0; i<paramcount; i++) {
-		setProperty(loadString(f),loadString(f));
+		name=loadString(f);
+		val=loadString(f);
+		setProperty(name,val);
 	}
 	f.readle32(&m_polycount,1);
 }

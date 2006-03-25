@@ -55,6 +55,7 @@ int Bouncer::thud(Entity * sender, Object * arg) {
 		m_velocity.y*=-1;
 	
 	setTranslate(m_oldPos);
+	return 0;
 }
 
 void Bouncer::nextFrame(uint64 tm) {

@@ -25,7 +25,7 @@ using namespace Tiki;
 using namespace Tiki::GL;
 using namespace Tiki::Math;
 
-#include "entity.h"
+#include "drawables/entity.h"
 
 void glass_create(struct entity *me) {
   struct poly *p,*prev=NULL,*old;

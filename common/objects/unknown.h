@@ -1,4 +1,4 @@
-/* unknown.h - DCBlap unknown object
+/* UnknownType.h - DCBlap UnknownType object
  * Copyright (c) 2001-2005 Sam Steele
  *
  * This file is part of DCBlap.
@@ -17,15 +17,15 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
-#ifndef __OBJ_UNKNOWN_H
-#define __OBJ_UNKNOWN_H
+#ifndef __OBJ_UnknownType_H
+#define __OBJ_UnknownType_H
 
-class Unknown : public SolidClass {
+class UnknownType : public SolidClass {
 public:
-	Unknown(std::string type) { m_type=type; };
+	UnknownType(std::string type) { m_type=type; };
 
-	void Unknown::setupName(const char *) { Object::setupName(m_type.c_str()); }
-	int Unknown::thud(Object * sender, Object * arg) { };	
+	void UnknownType::setupName(const char *) { Object::setupName(m_type.c_str()); }
+	int UnknownType::thud(Object * sender, Object * arg) { return 0; };	
 private:
 	void setupEvents(bool);
 	std::string m_type;

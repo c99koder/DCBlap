@@ -23,7 +23,7 @@ using namespace Tiki;
 using namespace Tiki::GL;
 
 #include <stdlib.h>
-#include "entity.h"
+#include "drawables/entity.h"
 #include "objects.h"
 
 void func_rotate_create(struct entity *me) {

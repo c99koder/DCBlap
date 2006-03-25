@@ -43,7 +43,7 @@ int Ball::thud(Entity * sender, Object * arg) {
 	if(sender->getClassName() == "Paddle") {
 		m_lastTouched = ((Paddle *)sender)->getNum();
 	}
-	Bouncer::thud(sender,arg);
+	return Bouncer::thud(sender,arg);
 }
 
 void Ball::setProperty(std::string name, std::string value) {
@@ -84,7 +84,7 @@ using namespace Tiki::Audio;
 
 #include <stdlib.h>
 #include <string.h>
-#include "entity.h"
+#include "drawables/entity.h"
 #include "objects.h"
 #include "camera.h"
 #include "utils.h"

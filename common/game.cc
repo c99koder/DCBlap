@@ -25,7 +25,7 @@ using namespace Tiki::GL;
 
 #include <stdlib.h>
 #include "game.h"
-#include "entity.h"
+#include "drawables/entity.h"
 #include "hud.h"
 
 bool win_flag=0;

@@ -152,21 +152,22 @@ extern "C" int tiki_main(int argc, char **argv) {
 
 	srand(gettime());
 
-	gs=new GameSelect;
+/*	gs=new GameSelect;
 	gs->doMenu();
+	delete gs;
 	
 //	wld = new World("maps/Traditional/classic.wld");
 	wld = new World("maps/BlapOut/classic.wld");
 	wld->doMenu();
-	return 0;
+	return 0;*/
 	
-/*	ts=new TitleScreen;
+	ts=new TitleScreen;
 	gs=new GameSelect;
 	
 	while(quitting==false) {
 		bgm.stop();
 		bgm.load("sound/menu.ogg",1);
-		//bgm.start();
+		bgm.start();
 		gs->FadeIn();
 		gs->doMenu();
 		if(quitting) break;
@@ -185,35 +186,15 @@ extern "C" int tiki_main(int argc, char **argv) {
 					loading->draw(Drawable::Opaque);
 					Frame::finish();
 				}				
-				game_init(ls->getSelection().c_str());
+				//game_init(ls->getSelection().c_str());
+				wld = new World(ls->getSelection().c_str());
 				delete ls;
 				bgm.load("sound/game.ogg",1);
 				bgm.start();
 
 				playing=true;
-				
-				st = gettime();
-				ogt=0;
-				
-				while (playing==true) {
-					gt=gettime() - st;
-					update_world(float(gt-ogt)/1000000.0f);
-					Frame::begin();
-					glClearDepth(1.0f);
-					glDepthFunc(GL_LEQUAL);
-					glClear(GL_COLOR_BUFFER_BIT+GL_DEPTH_BUFFER_BIT);
-					glColor4f(1,1,1,1);
-					Frame::set3d();
-					render_world(true);
-					Frame::transEnable();
-					render_world(false);
-					Frame::set2d();
-					render_HUD();
-					Frame::finish();
-					ogt=gt;
-				}
-					
-				destroy_world();
+				wld->doMenu();
+				delete wld;
 				break;
 			case 3:
 				quitting=true;
@@ -224,7 +205,7 @@ extern "C" int tiki_main(int argc, char **argv) {
 	bgm.stop();
 	
 	delete gs;
-	delete ts;*/
+	delete ts;
 	
 	// Shut down Tiki
 	Tiki::shutdown();

@@ -26,7 +26,7 @@ using namespace Tiki::Audio;
 
 #include <stdlib.h>
 #include <string.h>
-#include "entity.h"
+#include "drawables/entity.h"
 #include "objects.h"
 #include "camera.h"
 #include "hud.h"

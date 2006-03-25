@@ -30,7 +30,7 @@ public:
 	//Overloaded functions
 	void nextFrame(uint64 tm);
 	void setProperty(std::string name, std::string value);
-	int thud(Entity *sender, Object *arg) {}
+	int thud(Entity *sender, Object *arg) { return 0; }
 protected:
 	// HID input callback.
 	static void hidCallback(const Tiki::Hid::Event & evt, void * data);

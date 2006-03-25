@@ -126,7 +126,7 @@ using namespace Tiki::GL;
 
 #include <string.h>
 #include <stdlib.h>
-#include "entity.h"
+#include "drawables/entity.h"
 #include "objects.h"
 #include "hud.h"
 #include "utils.h"

@@ -42,6 +42,7 @@ Goal::Goal() {
 }
 
 int Goal::thud(Entity * sender, Object * arg) {
+	return 0;
 }
 
 void Goal::setProperty(std::string name, std::string value) {
@@ -75,7 +76,7 @@ using namespace Tiki::GL;
 
 #include <stdlib.h>
 #include <string.h>
-#include "entity.h"
+#include "drawables/entity.h"
 #include "callback.h"
 #include "objects.h"
 #include "camera.h"

@@ -34,7 +34,7 @@
 				Name="VCLinkerTool"
 				OutputFile="$(OutDir)/DCBlap.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;c:\glut-3.7.6-bin&quot;;&quot;c:\plib-1.8.3&quot;;c:\OpenAL\libs\Win32;&quot;C:\Documents and Settings\Sam\Desktop\tiki\win32\Debug&quot;"
+				AdditionalLibraryDirectories="c:\OpenAL\libs\Win32;&quot;C:\Documents and Settings\Sam\Desktop\tiki\win32\Debug&quot;"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/DCBlap.pdb"
 				SubSystem="2"
@@ -164,16 +164,7 @@
 			Name="common"
 			Filter="">
 			<File
-				RelativePath="..\common\callback.cc">
-			</File>
-			<File
 				RelativePath="..\common\camera.cc">
-			</File>
-			<File
-				RelativePath="..\common\collide.cc">
-			</File>
-			<File
-				RelativePath="..\common\game.cc">
 			</File>
 			<File
 				RelativePath="..\common\hud.cc">
@@ -186,9 +177,6 @@
 			</File>
 			<File
 				RelativePath="..\common\utils.cc">
-			</File>
-			<File
-				RelativePath="..\common\word.cc">
 			</File>
 			<File
 				RelativePath="..\common\world.cc">
@@ -225,10 +213,16 @@
 					RelativePath="..\common\objects\ball.h">
 				</File>
 				<File
-					RelativePath="..\common\objects\bonusspawn.cc">
+					RelativePath="..\common\objects\bouncer.cc">
 				</File>
 				<File
-					RelativePath="..\common\objects\bonusspawn.h">
+					RelativePath="..\common\objects\bouncer.h">
+				</File>
+				<File
+					RelativePath="..\common\objects\breakable.cc">
+				</File>
+				<File
+					RelativePath="..\common\objects\breakable.h">
 				</File>
 				<File
 					RelativePath="..\common\objects\camera_o.cc">
@@ -237,31 +231,10 @@
 					RelativePath="..\common\objects\camera_o.h">
 				</File>
 				<File
-					RelativePath="..\common\objects\func_breakable.cc">
-				</File>
-				<File
-					RelativePath="..\common\objects\func_breakable.h">
-				</File>
-				<File
-					RelativePath="..\common\objects\func_rotating.cc">
-				</File>
-				<File
-					RelativePath="..\common\objects\func_rotating.h">
-				</File>
-				<File
 					RelativePath="..\common\objects\goal.cc">
 				</File>
 				<File
 					RelativePath="..\common\objects\goal.h">
-				</File>
-				<File
-					RelativePath="..\common\objects\hyper.cc">
-				</File>
-				<File
-					RelativePath="..\common\objects\hyper.h">
-				</File>
-				<File
-					RelativePath="..\common\objects\init.cc">
 				</File>
 				<File
 					RelativePath="..\common\objects\light.cc">
@@ -276,33 +249,27 @@
 					RelativePath="..\common\objects\paddle.h">
 				</File>
 				<File
-					RelativePath="..\common\objects\paddle_md2.cc">
+					RelativePath="..\common\objects\player.h">
 				</File>
 				<File
-					RelativePath="..\common\objects\paddle_md2.h">
+					RelativePath="..\common\objects\player_1st.cc">
 				</File>
 				<File
-					RelativePath="..\common\objects\slowdown.cc">
+					RelativePath="..\common\objects\unknown.cc">
 				</File>
 				<File
-					RelativePath="..\common\objects\slowdown.h">
-				</File>
-				<File
-					RelativePath="..\common\objects\speedup.cc">
-				</File>
-				<File
-					RelativePath="..\common\objects\speedup.h">
-				</File>
-				<File
-					RelativePath="..\common\objects\water.cc">
-				</File>
-				<File
-					RelativePath="..\common\objects\water.h">
+					RelativePath="..\common\objects\unknown.h">
 				</File>
 			</Filter>
 			<Filter
 				Name="drawables"
 				Filter="">
+				<File
+					RelativePath="..\common\drawables\Entity.cc">
+				</File>
+				<File
+					RelativePath="..\common\drawables\Entity.h">
+				</File>
 				<File
 					RelativePath="..\common\drawables\imageSet.cc">
 				</File>
@@ -315,16 +282,22 @@
 				<File
 					RelativePath="..\common\drawables\menuList.h">
 				</File>
+				<File
+					RelativePath="..\common\drawables\ShadowBox.cc">
+				</File>
+				<File
+					RelativePath="..\common\drawables\ShadowBox.h">
+				</File>
+				<File
+					RelativePath="..\common\drawables\SolidClass.cc">
+				</File>
+				<File
+					RelativePath="..\common\drawables\SolidClass.h">
+				</File>
 			</Filter>
 		</Filter>
 		<File
 			RelativePath=".\ReadMe.txt">
-		</File>
-		<File
-			RelativePath="..\..\..\..\..\plib-1.8.3\sg.lib">
-		</File>
-		<File
-			RelativePath="..\..\..\..\..\plib-1.8.3\ul.lib">
 		</File>
 	</Files>
 	<Globals>

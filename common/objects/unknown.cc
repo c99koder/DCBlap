@@ -1,4 +1,4 @@
-/* unknown.cc - DCBlap unknown object
+/* UnknownType.cc - DCBlap UnknownType object
  * Copyright (c) 2001-2005 Sam Steele
  *
  * This file is part of DCBlap.
@@ -25,6 +25,6 @@ using namespace Tiki::GL;
 
 #include "objects.h"
 
-TIKI_OBJECT_BEGIN(Object, Unknown)
-TIKI_OBJECT_RECEIVER("thud", Unknown::thud)
-TIKI_OBJECT_END(Unknown)
+TIKI_OBJECT_BEGIN(Object, UnknownType)
+TIKI_OBJECT_RECEIVER("thud", UnknownType::thud)
+TIKI_OBJECT_END(UnknownType)

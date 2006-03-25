@@ -44,6 +44,7 @@ int Breakable::thud(Entity * sender, Object * arg) {
 		goals[((Ball *)sender)->getLastTouched()-1]->giveScore(1);
 		setFinished();
 	}
+	return 0;
 }
 
 void Breakable::setProperty(std::string name, std::string value) {

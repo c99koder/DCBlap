@@ -24,7 +24,7 @@ using namespace Tiki::GL;
 
 #include <string.h>
 
-#include "entity.h"
+#include "drawables/entity.h"
 #include "sg.h"
 
 void do_collide(struct entity *ent1) {

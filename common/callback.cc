@@ -24,7 +24,7 @@ using namespace Tiki::GL;
 
 #include <string.h>
 #include <stdlib.h>
-#include "entity.h"
+#include "drawables/entity.h"
 #include "callback.h"
 
 struct callback_list_node {

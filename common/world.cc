@@ -101,7 +101,7 @@ Entity *create_object(std::string type) {
 	} else if(type=="goal") {
 		e=new Goal;
 	} else {
-		e=new Unknown(type);
+		e=new UnknownType(type);
 	}
 	
 	EntityList->addEntity(e);
