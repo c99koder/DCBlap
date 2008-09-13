@@ -168,8 +168,8 @@ extern "C" int tiki_main(int argc, char **argv) {
 		bgm.stop();
 		bgm.load("sound/menu.ogg",1);
 		bgm.start();
-		gs->FadeIn();
-		gs->doMenu();
+		ts->FadeIn();
+		ts->doMenu();
 		if(quitting) break;
 		switch(ts->getSelection()) {
 			case 0:

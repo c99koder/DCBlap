@@ -20,7 +20,6 @@
 #include <Tiki/tiki.h>
 #include <Tiki/gl.h>
 #include <Tiki/texture.h>
-#include <Tiki/plxcompat.h>
 #include "drawables/entity.h"
 #include "camera.h"
 

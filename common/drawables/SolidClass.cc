@@ -20,7 +20,6 @@
 #include <Tiki/tiki.h>
 #include <Tiki/gl.h>
 #include <Tiki/texture.h>
-#include <Tiki/plxcompat.h>
 
 using namespace Tiki;
 using namespace Tiki::Math;

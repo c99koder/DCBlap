@@ -9,7 +9,6 @@
 #include <Tiki/tiki.h>
 #include <Tiki/gl.h>
 #include <Tiki/texture.h>
-#include <Tiki/plxcompat.h>
 #include "ShadowBox.h"
 
 using namespace Tiki;
@@ -39,27 +38,22 @@ void ShadowBox::setSize(float w, float h) {
 }
 
 void ShadowBox::drawBox(float x, float y, float z, float w, float h, Color c) {
-	Color a=getColor();
-	plx_vertex_t vert;
-	c.a=a.a;
-	vert.argb = c;
-	vert.z = z;
+	const Vector & tv = getPosition();
+	const Vector & rv = getRotate();
 	
 	Texture::deselect();
 	
-	vert.flags = PLX_VERT;
-	vert.x = x-w/2;
-	vert.y = y+h/2;
-	plx_prim(&vert, sizeof(vert));
+	glPushMatrix();
+	glTranslatef(tv.x, tv.y, tv.z/1000.0f);
+	glRotatef(rv.w,rv.x,rv.y,rv.z);
+	glColor4f(c.r,c.g,c.b,c.a);
 	
-	vert.y = y-h/2;
-	plx_prim(&vert, sizeof(vert));
+	glBegin(GL_QUADS);
+	glVertex3f(-w/2.0f,-h/2.0f,0.0f);
+	glVertex3f(w/2.0f,-h/2.0f,0.0f);
+	glVertex3f(w/2.0f,h/2.0f,0.0f);
+	glVertex3f(-w/2.0f,h/2.0f,0.0f);
+	glEnd();
 	
-	vert.x = x+w/2;
-	vert.y = y+h/2;
-	plx_prim(&vert, sizeof(vert));
-	
-	vert.flags = PLX_VERT_EOS;
-	vert.y = y-h/2;
-	plx_prim(&vert, sizeof(vert));	
+	glPopMatrix();
 }
