@@ -23,8 +23,7 @@
 		22752C6608F02BA800DCB98C /* word.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C5B08F02BA800DCB98C /* word.cc */; };
 		22752C6708F02BA800DCB98C /* world.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C5C08F02BA800DCB98C /* world.cc */; };
 		22752F4208F0364B00DCB98C /* data in Resources */ = {isa = PBXBuildFile; fileRef = 22752D6208F0364A00DCB98C /* data */; };
-		2290999D092C250200B7D80C /* Tiki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2290999C092C250200B7D80C /* Tiki.framework */; };
-		22909B2C092F787A00B7D80C /* Tiki.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2290999C092C250200B7D80C /* Tiki.framework */; };
+		22C2EDB70E7C8405004C835F /* Tiki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22C2EDB60E7C8405004C835F /* Tiki.framework */; };
 		22CF6CD3094B810000733F87 /* camera_o.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22752C6E08F02BC400DCB98C /* camera_o.cc */; };
 		22CF6CD4094B810100733F87 /* paddle.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22F3E9190942AED10013CE12 /* paddle.cc */; };
 		22CF6CD5094B810200733F87 /* light.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22F3E632094240190013CE12 /* light.cc */; };
@@ -49,23 +48,6 @@
 		565FEC6407B17BE200C4E23A /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 565FEC3407B1797F00C4E23A /* MainMenu.nib */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXBuildStyle section */
-		565FEC2207B1792E00C4E23A /* Development */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-			};
-			name = Development;
-		};
-		565FEC2307B1792E00C4E23A /* Deployment */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-			};
-			name = Deployment;
-		};
-/* End PBXBuildStyle section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		22171EB80902C7A5001663B0 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -73,7 +55,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				22909B2C092F787A00B7D80C /* Tiki.framework in CopyFiles */,
 				22477E770937F9C20070BB68 /* LevelSelect.h in CopyFiles */,
 				224786B5093A6F100070BB68 /* ShadowBox.h in CopyFiles */,
 				22F3DFD20941D77C0013CE12 /* SolidClass.h in CopyFiles */,
@@ -126,8 +107,8 @@
 		22752CF308F032AE00DCB98C /* utils.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = utils.h; path = ../include/utils.h; sourceTree = SOURCE_ROOT; };
 		22752CF408F032AE00DCB98C /* word.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = word.h; path = ../include/word.h; sourceTree = SOURCE_ROOT; };
 		22752D6208F0364A00DCB98C /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../data; sourceTree = SOURCE_ROOT; };
-		2290999C092C250200B7D80C /* Tiki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Tiki.framework; path = ../../../tiki/osx/build/Development/Tiki.framework; sourceTree = SOURCE_ROOT; };
 		22909A91092F722600B7D80C /* light.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = light.h; path = ../common/objects/light.h; sourceTree = SOURCE_ROOT; };
+		22C2EDB60E7C8405004C835F /* Tiki.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Tiki.framework; path = ../../tiki/osx/build/Deployment/Tiki.framework; sourceTree = SOURCE_ROOT; };
 		22C6211808F0608B008BCA18 /* game.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = game.h; path = ../include/game.h; sourceTree = SOURCE_ROOT; };
 		22CF6CEB094BA6C900733F87 /* breakable.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = breakable.cc; path = ../common/objects/breakable.cc; sourceTree = SOURCE_ROOT; };
 		22CF6EF9094BC4A600733F87 /* goal.cc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = goal.cc; path = ../common/objects/goal.cc; sourceTree = SOURCE_ROOT; };
@@ -153,7 +134,7 @@
 		565FEC3907B179A100C4E23A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		565FEC3B07B179A100C4E23A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		565FEC4B07B179BA00C4E23A /* DCBlap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DCBlap.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		565FEC4E07B179BA00C4E23A /* DCBlap-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "DCBlap-Info.plist"; sourceTree = "<group>"; };
+		565FEC4E07B179BA00C4E23A /* DCBlap-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DCBlap-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,7 +144,7 @@
 			files = (
 				565FEC4F07B179CA00C4E23A /* Cocoa.framework in Frameworks */,
 				565FEC5207B179D400C4E23A /* OpenGL.framework in Frameworks */,
-				2290999D092C250200B7D80C /* Tiki.framework in Frameworks */,
+				22C2EDB70E7C8405004C835F /* Tiki.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,7 +312,7 @@
 		565FEC3007B1794A00C4E23A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2290999C092C250200B7D80C /* Tiki.framework */,
+				22C2EDB60E7C8405004C835F /* Tiki.framework */,
 				565FEC3907B179A100C4E23A /* Cocoa.framework */,
 				565FEC3B07B179A100C4E23A /* OpenGL.framework */,
 			);
@@ -360,60 +341,11 @@
 			);
 			buildRules = (
 			);
-			buildSettings = {
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "CocoaGL-Info.plist";
-				INSTALL_PATH = "$(USER_APPS_DIR)";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
-				PRODUCT_NAME = CocoaGL;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-			};
 			dependencies = (
 			);
 			name = DCBlap;
 			productName = CocoaGL;
 			productReference = 565FEC4B07B179BA00C4E23A /* DCBlap.app */;
-			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
-<plist version=\"1.0\">
-<dict>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
-	<key>CFBundleExecutable</key>
-	<string>CocoaGL</string>
-	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.CocoaGL</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>1.0</string>
-	<key>NSMainNibFile</key>
-	<string>MainMenu</string>
-	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
-</dict>
-</plist>
-";
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -422,16 +354,12 @@
 		565FEC2407B1792E00C4E23A /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 22752C2F08F01F7500DCB98C /* Build configuration list for PBXProject "DCBlap" */;
-			buildSettings = {
-			};
-			buildStyles = (
-				565FEC2207B1792E00C4E23A /* Development */,
-				565FEC2307B1792E00C4E23A /* Deployment */,
-			);
+			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 0;
 			mainGroup = 565FEC2007B1792E00C4E23A;
 			productRefGroup = 565FEC4C07B179BA00C4E23A /* Products */;
 			projectDirPath = "";
+			projectRoot = "";
 			targets = (
 				565FEC4A07B179BA00C4E23A /* DCBlap */,
 			);
@@ -505,7 +433,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/../../../tiki/osx/build/Default",
 					"$(SRCROOT)/../../../tiki/osx/build/Development",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../tiki/osx/build/Deployment\"";
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = G5;
@@ -543,7 +473,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/../../../tiki/osx/build/Default",
 					"$(SRCROOT)/../../../tiki/osx/build/Development",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../tiki/osx/build/Deployment\"";
 				GCC_FAST_OBJC_DISPATCH = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
@@ -581,7 +513,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/../../../tiki/osx/build/Default",
 					"$(SRCROOT)/../../../tiki/osx/build/Development",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../tiki/osx/build/Deployment\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
@@ -615,9 +549,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
+				FRAMEWORK_SEARCH_PATHS = ../../tiki/osx/build/Development/;
 				GCC_PREPROCESSOR_DEFINITIONS = TIKI;
 				GCC_USE_GCC3_PFE_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = (
+					../../tiki/osx/include,
+					../../tiki/include,
 					.,
 					../include,
 					../common,
@@ -639,9 +576,12 @@
 					ppc,
 					i386,
 				);
+				FRAMEWORK_SEARCH_PATHS = ../../tiki/osx/build/Development/;
 				GCC_PREPROCESSOR_DEFINITIONS = TIKI;
 				GCC_USE_GCC3_PFE_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = (
+					../../tiki/osx/include,
+					../../tiki/include,
 					.,
 					../include,
 					../common,
@@ -660,9 +600,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
+				FRAMEWORK_SEARCH_PATHS = ../../tiki/osx/build/Development/;
 				GCC_PREPROCESSOR_DEFINITIONS = TIKI;
 				GCC_USE_GCC3_PFE_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = (
+					../../tiki/osx/include,
+					../../tiki/include,
 					.,
 					../include,
 					../common,
