@@ -1,0 +1,21 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Ball.cs">
+    <Files>
+      <File FileName="Assets/Player.cs" Line="31" Column="62" />
+      <File FileName="Assets/Breakable.cs" Line="27" Column="35" />
+      <File FileName="Assets/Camera.cs" Line="8" Column="1" />
+      <File FileName="Assets/Score.cs" Line="1" Column="1" />
+      <File FileName="Assets/Ball.cs" Line="40" Column="48" />
+      <File FileName="Assets/Menus/TitleMenuBar.cs" Line="10" Column="16" />
+      <File FileName="Assets/Menus/GameSelect.cs" Line="42" Column="1" />
+      <File FileName="Assets/Menus/GameSelectArrow.cs" Line="8" Column="1" />
+      <File FileName="Assets/Music.cs" Line="32" Column="6" />
+      <File FileName="Assets/Menus/TitleCamera.cs" Line="6" Column="27" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
